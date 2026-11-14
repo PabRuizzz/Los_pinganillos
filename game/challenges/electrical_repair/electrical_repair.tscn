@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1lpk2a2310uk" path="res://game/challenges/electrical_repair/PuzzleManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/Board.tscn" id="2"]
-[ext_resource type="Script" path="res://game/challenges/electrical_repair/PuzzleCamera.gd" id="3_camera"]
+[ext_resource type="Script" uid="uid://om8eks2i4k7q" path="res://game/challenges/electrical_repair/PuzzleCamera.gd" id="3_camera"]
 
 [node name="ElectricalRepair" type="Node2D" unique_id=331987606]
 script = ExtResource("1")
@@ -241,6 +241,10 @@ anchors_preset = 0
 
 [node name="NorthWest" parent="Board/PreviewPieces" index="3"]
 anchors_preset = 0
+offset_left = 335.0
+offset_top = 163.0
+offset_right = 405.0
+offset_bottom = 233.0
 
 [node name="SouthEast" parent="Board/PreviewPieces" index="4"]
 anchors_preset = 0
