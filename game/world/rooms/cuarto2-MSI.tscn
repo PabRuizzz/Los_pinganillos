@@ -1,0 +1,56 @@
+[gd_scene format=4 uid="uid://jexu5nqaai6d"]
+
+[ext_resource type="Script" uid="uid://b6iqapk3hy7m1" path="res://game/world/rooms/cuarto.gd" id="1_alyfk"]
+[ext_resource type="PackedScene" uid="uid://c04p72g88ofht" path="res://game/astronaut/astronaut.tscn" id="2_sspw2"]
+[ext_resource type="PackedScene" uid="uid://b6tv63xxtm0pj" path="res://game/world/rooms/puerta.tscn" id="3_di7h7"]
+[ext_resource type="Texture2D" uid="uid://dkuyc8p7r5yt3" path="res://assets/tilesets/tile_pared_01.png" id="4_okskc"]
+[ext_resource type="Texture2D" uid="uid://xai3ugt504du" path="res://assets/tilesets/tile_pared_02.png" id="5_y8g0k"]
+[ext_resource type="Texture2D" uid="uid://dukk1kiu7d4cb" path="res://assets/tilesets/tile_piso_01.png" id="6_ob2ki"]
+[ext_resource type="Texture2D" uid="uid://kv2pnivuuyk2" path="res://assets/tilesets/tile_piso_02.png" id="7_f25fp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ycl18"]
+texture = ExtResource("4_okskc")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yh2x6"]
+texture = ExtResource("5_y8g0k")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7qcvm"]
+texture = ExtResource("6_ob2ki")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3yruu"]
+texture = ExtResource("7_f25fp")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_di7h7"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_ycl18")
+sources/1 = SubResource("TileSetAtlasSource_yh2x6")
+sources/2 = SubResource("TileSetAtlasSource_7qcvm")
+sources/3 = SubResource("TileSetAtlasSource_3yruu")
+
+[node name="cuarto2" type="Node2D" unique_id=1575327074]
+script = ExtResource("1_alyfk")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1542148847]
+tile_map_data = PackedByteArray("AAAJAAMAAgAAAAAAAAAJAAQAAgAAAAAAAAAJAAUAAwAAAAAAAAAJAAYAAgAAAAAAAAAJAAcAAgAAAAAAAAAHAAUAAgAAAAAAAAAIAAUAAgAAAAAAAAAKAAUAAgAAAAAAAAALAAUAAgAAAAAAAAAIAAQAAgAAAAAAAAAKAAQAAgAAAAAAAAAKAAYAAgAAAAAAAAAIAAYAAgAAAAAAAAAHAAYAAwAAAAAAAAAIAAcAAwAAAAAAAAAGAAUAAwAAAAAAAAAHAAQAAwAAAAAAAAAIAAMAAwAAAAAAAAAKAAMAAwAAAAAAAAALAAQAAwAAAAAAAAAMAAUAAwAAAAAAAAALAAYAAwAAAAAAAAAKAAcAAwAAAAAAAAAIAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAQAAAAAAAAAKAAgAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAYAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAQAAAAAAAAAAAALAAMAAAAAAAAAAAAKAAIAAAAAAAAAAAAJAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_di7h7")
+
+[node name="puerta" parent="." unique_id=1532978903 instance=ExtResource("3_di7h7")]
+position = Vector2(568, 110)
+cuarto_destino = "res://game/world/rooms/cuarto1.tscn"
+
+[node name="puerta2" parent="." unique_id=1675144440 instance=ExtResource("3_di7h7")]
+position = Vector2(568, 586)
+cuarto_destino = "res://game/world/rooms/cuarto1.tscn"
+
+[node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_sspw2")]
+position = Vector2(-18, 46)

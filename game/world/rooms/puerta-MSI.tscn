@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b6tv63xxtm0pj"]
+
+[ext_resource type="Script" uid="uid://pelb2gco510r" path="res://game/world/rooms/puerta.gd" id="1_bek8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkwho"]
+size = Vector2(65, 69)
+
+[node name="puerta" type="Area2D" unique_id=1675144440]
+script = ExtResource("1_bek8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=108296318]
+position = Vector2(40.5, 25.5)
+shape = SubResource("RectangleShape2D_bkwho")
