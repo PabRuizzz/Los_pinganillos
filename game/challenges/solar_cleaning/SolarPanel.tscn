@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://game/challenges/solar_cleaning/SolarPanel.gd" id="1"]
+[node name="SolarPanel" type="Control"]
+offset_right = 240.0
+offset_bottom = 160.0
+mouse_filter = 2
+script = ExtResource("1")
