@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://bm43kh4cjklxe"]
 
-[ext_resource type="Script" path="res://game/main/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://d4l55dd1px68r" path="res://game/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://game/world/mars_base.tscn" id="2_world"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=188718994]
 script = ExtResource("1_main")
 
-[node name="MarsBase" parent="." instance=ExtResource("2_world")]
+[node name="MarsBase" parent="." unique_id=1354353622 instance=ExtResource("2_world")]
