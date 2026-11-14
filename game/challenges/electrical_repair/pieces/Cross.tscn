@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/PipePiece.tscn" id="1"]
+[node name="Cross" instance=ExtResource("1")]
+connections = 15
