@@ -50,7 +50,7 @@ cuarto_destino = "uid://jexu5nqaai6d"
 
 [node name="puerta2" parent="." unique_id=1675144440 instance=ExtResource("3_18tqn")]
 position = Vector2(567, 585)
-cuarto_destino = "uid://jexu5nqaai6d"
+cuarto_destino = "uid://djnjchenqclp2"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("6_71gpl")]
 position = Vector2(-17, 58)
