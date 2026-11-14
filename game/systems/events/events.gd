@@ -1,6 +1,6 @@
 extends Node
 
-enum Events {
+enum EventType {
 	NONE,
 	TORMENTA_ARENA,
 	PERDIDA_PRESION,
@@ -9,7 +9,7 @@ enum Events {
 	HONGOS_INVERNADERO
 }
 
-var actual_event: Events = Events.NONE
+var actual_event: EventType = EventType.NONE
 
 # Bateria de emergencia
 var emergency_battery = 100.0
@@ -28,10 +28,10 @@ var fungus_timer_active = false
 const FUNGUS_TIME_LIMIT = 120.0
 
 func tormenta_arena():
-	if actual_event != Events.NONE:
+	if actual_event != EventType.NONE:
 		return
 
-	actual_event = Events.TORMENTA_ARENA
+	actual_event = EventType.TORMENTA_ARENA
 
 	StationCost.energy_plant_state = "AVERIADO"
 	StationCost.life_support_state = "OPERATIVO"
@@ -43,25 +43,25 @@ func tormenta_arena():
 
 
 func perdida_presion():
-	if actual_event != Events.NONE:
+	if actual_event != EventType.NONE:
 		return
-	actual_event = Events.PERDIDA_PRESION
+	actual_event = EventType.PERDIDA_PRESION
 
 	StationCost.life_support_state = "AVERIADO"
 
 
 func falta_energia():
-	if actual_event != Events.NONE:
+	if actual_event != EventType.NONE:
 		return
-	actual_event = Events.FALTA_ENERGIA
+	actual_event = EventType.FALTA_ENERGIA
 
 	StationCost.greenhouse_state = "DEGRADADO"
 
 
 func congelamiento_tuberias():
-	if actual_event != Events.NONE:
+	if actual_event != EventType.NONE:
 		return
-	actual_event = Events.CONGELAMIENTO_TUBERIAS
+	actual_event = EventType.CONGELAMIENTO_TUBERIAS
 
 	StationCost.water_station_state = "DEGRADADO"
 	StationCost.greenhouse_state = "DEGRADADO"
@@ -70,10 +70,10 @@ func congelamiento_tuberias():
 	pipe_timer_active = true
 
 func hongos_invernadero():
-	if actual_event != Events.NONE:
+	if actual_event != EventType.NONE:
 		return
 
-	actual_event = Events.HONGOS_INVERNADERO
+	actual_event = EventType.HONGOS_INVERNADERO
 
 	StationCost.greenhouse_state = "DEGRADADO"
 
@@ -84,16 +84,16 @@ func hongos_invernadero():
 func _process(delta):
 	match actual_event:
 
-		Events.TORMENTA_ARENA:
+		EventType.TORMENTA_ARENA:
 			procesar_tormenta(delta)
 
-		Events.PERDIDA_PRESION:
+		EventType.PERDIDA_PRESION:
 			procesar_perdida_presion(delta)
 
-		Events.CONGELAMIENTO_TUBERIAS:
+		EventType.CONGELAMIENTO_TUBERIAS:
 			procesar_congelamiento(delta)
-		
-		Events.HONGOS_INVERNADERO:
+
+		EventType.HONGOS_INVERNADERO:
 			procesar_hongos(delta)
 
 func procesar_tormenta(delta):
@@ -152,33 +152,33 @@ func check_task_completion(station: String, task_name: String):
 
 	match actual_event:
 
-		Events.TORMENTA_ARENA:
+		EventType.TORMENTA_ARENA:
 			if station == "energy_plant":
 				StationCost.energy_plant_state = "OPERATIVO"
 				StationCost.life_support_state = "OPERATIVO"
 				battery_active = false
-				actual_event = Events.NONE
+				actual_event = EventType.NONE
 
-		Events.PERDIDA_PRESION:
+		EventType.PERDIDA_PRESION:
 			if station == "life_support":
 				StationCost.life_support_state = "OPERATIVO"
-				actual_event = Events.NONE
+				actual_event = EventType.NONE
 
-		Events.FALTA_ENERGIA:
+		EventType.FALTA_ENERGIA:
 			if station == "energy_plant":
 				StationCost.greenhouse_state = "OPERATIVO"
-				actual_event = Events.NONE
+				actual_event = EventType.NONE
 
-		Events.CONGELAMIENTO_TUBERIAS:
+		EventType.CONGELAMIENTO_TUBERIAS:
 			if station == "water_station":
 				StationCost.water_station_state = "OPERATIVO"
 				StationCost.greenhouse_state = "OPERATIVO"
 
 				pipe_timer_active = false
-				actual_event = Events.NONE
-				
-		Events.HONGOS_INVERNADERO:
+				actual_event = EventType.NONE
+
+		EventType.HONGOS_INVERNADERO:
 			if station == "greenhouse":
 				StationCost.greenhouse_state = "OPERATIVO"
 				fungus_timer_active = false
-				actual_event = Events.NONE
+				actual_event = EventType.NONE
