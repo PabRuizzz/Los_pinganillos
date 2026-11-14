@@ -34,9 +34,12 @@ func _run() -> void:
 	check(game.panels.size() == 6, "Exactly six panels are required")
 	for panel in game.panels:
 		check(panel.states.size() == 100 and panel.clean_count == 0, "Each panel must start with 100 dirty cells")
+		check(panel.get_node("Cells").get_child_count() == 100, "Grid cells must be saved editable scene instances")
+		check(panel.has_node("Artwork"), "Each panel needs an artwork slot")
 	var panel = game.panels[0]
 	check(panel.clean_circle(Vector2(-100, -100), 5) == 0, "A circle outside the panel must not clean")
 	check(panel.clean_circle(Vector2(12, 8), 1) == 1, "A small circle should clean one cell")
+	check(panel.get_node("Cells").get_child(0).clean, "The visual cell must match the logical state")
 	check(panel.clean_circle(Vector2(12, 8), 1) == 0 and panel.clean_count == 1, "Repeated contact must not count twice")
 	panel.reset()
 	check(panel.clean_circle(Vector2(-2, -2), 2.5) == 0, "Circle bounding-box overlap alone must not clean a corner")
@@ -80,12 +83,40 @@ func _run() -> void:
 		check(p.clean_count == 0, "Reset must dirty every panel")
 	# Scale changes must preserve the cursor collision coordinates.
 	for dimensions in [Vector2(1280, 720), Vector2(800, 600), Vector2(900, 1100)]:
-		game.size = dimensions
+		root.content_scale_size = Vector2i.ZERO
+		root.size = Vector2i(dimensions)
 		game._layout()
+		game.get_node("Camera2D").fit_panels()
 		game.reset()
 		mouse(game, game.panels[5].position + Vector2(120, 80), true)
 		check(game.panels[5].clean_count > 0 and game.panels[0].clean_count == 0, "Scaled input must clean the targeted panel only")
 		mouse(game, Vector2.ZERO, false)
+	var camera = game.get_node("Camera2D")
+	camera.auto_frame_panels = false
+	var hud_transform: Transform2D = game.status.get_global_transform_with_canvas()
+	for zoom_value in [0.7, 1.0, 1.5]:
+		camera.position = Vector2(450, 300)
+		camera.zoom = Vector2.ONE * zoom_value
+		camera.force_update_scroll()
+		game.reset()
+		mouse(game, game.panels[1].position + Vector2(120, 80), true)
+		check(game.panels[1].clean_count > 0 and game.panels[0].clean_count == 0, "Cleaning must follow camera pan and zoom")
+		check(game.status.get_global_transform_with_canvas().is_equal_approx(hud_transform), "HUD must not move with camera")
+		mouse(game, Vector2.ZERO, false)
+	game.reset()
+	var moved_panel = game.panels[0]
+	moved_panel.rotation = 0.2
+	moved_panel.scale = Vector2(0.8, 1.1)
+	var center: Vector2 = game.stage.to_local(moved_panel.get_global_transform() * (moved_panel.size / 2.0))
+	mouse(game, center, true)
+	check(moved_panel.clean_count > 0, "Rotated and scaled panel nodes must remain cleanable")
+	mouse(game, Vector2.ZERO, false)
+	var texture := GradientTexture2D.new()
+	texture.gradient = Gradient.new()
+	moved_panel.get_node("Artwork").texture = texture
+	game.reset()
+	check(moved_panel.get_node("Artwork").texture == texture, "Restart must preserve frontend artwork")
+	check(moved_panel.get_node("Cells").get_child(0).reveal_panel_artwork, "Clean cells must reveal the panel image")
 	game.queue_free()
 	await process_frame
 	print("SOLAR CLEANING: circle geometry, dirty/clean states, hold/release, fast motion, six panels, 89/90 percent, focus, restart, resize. Failures: ", failures)

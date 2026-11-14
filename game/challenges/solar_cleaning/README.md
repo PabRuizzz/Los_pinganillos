@@ -15,22 +15,65 @@ este prototipo muestra únicamente rejillas y colores de estado.
 
 ## Nodos y lógica
 
-`solar_cleaning.tscn` contiene seis instancias de `SolarPanel.tscn`, visibles en el
-editor 2D. `SolarPanel.gd` guarda los estados, cuenta las casillas y comprueba el
-contacto círculo-rectángulo. `WaterSpray.gd` dibuja el círculo; su `radius` se puede
-editar en el Inspector. `SolarCleaning.gd` controla la entrada, interpola los
-movimientos rápidos, adapta la escala y verifica el objetivo.
+La raíz es Node2D y contiene estos nodos editables:
 
-`Stage/Panels` es un agrupador en el origen: mueve las instancias de los paneles
-dentro de él para cambiar su distribución. Los textos son indicadores de prueba,
-sin diseño visual final. La escena principal del proyecto no se modifica.
+```text
+SolarCleaning
+├── Camera2D
+├── Backdrop/Background
+├── World
+│   ├── Panels/Panel1 ... Panel6
+│   └── WaterSpray/Artwork
+└── Interface (CanvasLayer)
+    └── HUD/Content
+        ├── Instructions
+        └── Status
+```
+
+`SolarPanel.tscn` es la plantilla de un panel; contiene `Artwork` (TextureRect)
+y `Cells`, con 100 instancias de `SolarCell.tscn`. Hay 600 casillas persistentes
+en total, visibles en el editor 2D. `SolarPanel.gd` guarda los estados y cuenta
+las casillas; `SolarCell.gd` representa cada estado y su hitbox. Las colisiones
+respetan las posiciones, rotaciones y escalas de las instancias de panel.
+
+### Añadir imágenes sin modificar la lógica
+
+- Imagen del panel completo: abre `SolarPanel.tscn`, selecciona `Artwork` y
+  asigna `Texture`. Al limpiar, las casillas transparentes revelan esa imagen.
+- Texturas por casilla: abre `SolarCell.tscn`, asigna imágenes a `DirtyArtwork`
+  y/o `CleanArtwork`. Son compartidas por todas sus instancias. Los colores
+  marrón/azul siguen siendo la representación provisional si no hay imagen.
+- Cursor de agua/pistola: asigna una textura al Sprite2D `World/WaterSpray/Artwork`.
+  Su imagen es independiente del radio de colisión, editable en `WaterSpray → Radius`.
+- Mantén `Mouse Filter = Ignore` en los TextureRect para no interceptar la entrada.
+- Para cambiar un solo panel, activa **Editable Children / Hijos editables** en
+  su instancia y asigna una textura propia. Mueve los paneles desde `World/Panels`.
+- No renombres los nodos utilizados por los scripts. La rejilla permanece en
+  10×10; modifica los assets del nodo base para cambiar su apariencia común.
+
+### Cámara
+
+`Camera2D` encuadra automáticamente los seis paneles al iniciar o redimensionar.
+Para controlarla manualmente, desactiva **Auto Frame Panels** y ajusta Position
+y Zoom. La interfaz permanece fija en `Interface`, un CanvasLayer independiente.
+El círculo y la limpieza siguen las coordenadas del ratón con cualquier zoom.
+
+Los textos son indicadores de prueba, sin diseño visual final. No se modifica
+la escena principal del proyecto ni se integra todavía la imagen de referencia.
 
 Para integrarlo, conecta `cleaning_completed` o `cleaning_progress_changed(ratio)`.
 Esta última señal informa el porcentaje total (0–1); completar requiere que los
 seis paneles cumplan el umbral individual. `reset()` reinicia la partida.
+Como escena Node2D con cámara, puede ejecutarse directamente o aislarse en un
+SubViewport. Si comparte viewport con otro juego, el anfitrión debe gestionar
+qué cámara está activa.
 
 ## Pruebas
 
 ```sh
 godot --headless --path . --script res://game/challenges/solar_cleaning/tests/test_cleaning.gd
 ```
+
+Se prueban estados, contacto circular, clic mantenido/liberado, movimientos
+rápidos, umbral exacto 89%/90%, reinicio, foco, cambio de tamaño, zoom y movimiento
+de cámara, HUD fijo, paneles transformados y conservación de texturas.

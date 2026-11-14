@@ -5,9 +5,9 @@ extends Control
 signal progress_changed(clean_cells: int, total_cells: int)
 signal cell_cleaned(coordinates: Vector2i)
 
-@export var columns := 10
-@export var rows := 10
-@export var cell_size := Vector2(24, 16)
+const columns := 10
+const rows := 10
+const cell_size := Vector2(24, 16)
 var states := PackedByteArray()
 var clean_count := 0
 
@@ -19,6 +19,7 @@ func reset() -> void:
 	states.fill(0)
 	clean_count = 0
 	size = Vector2(columns, rows) * cell_size
+	_refresh_cells()
 	queue_redraw()
 	progress_changed.emit(clean_count, states.size())
 
@@ -47,17 +48,44 @@ func clean_circle(center: Vector2, radius: float) -> int:
 				changed += 1
 				cell_cleaned.emit(Vector2i(x, y))
 	if changed > 0:
+		_refresh_cells()
 		queue_redraw()
 		progress_changed.emit(clean_count, states.size())
 	return changed
 
 func _draw() -> void:
-	for y in rows:
-		for x in columns:
-			var index := y * columns + x
-			var clean := index < states.size() and states[index] == 1
-			var color := Color("347fba") if clean else Color("77604b")
-			var rect := Rect2(Vector2(x, y) * cell_size, cell_size)
-			draw_rect(rect, color)
-			draw_rect(rect, Color("263547"), false, 1.0)
-	draw_rect(Rect2(Vector2.ZERO, Vector2(columns, rows) * cell_size), Color("b9c5d2"), false, 2.0)
+	draw_rect(Rect2(Vector2.ZERO, size), Color("b9c5d2"), false, 2.0)
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		_sync_artwork()
+
+func _sync_artwork() -> void:
+	if not has_node("Cells"):
+		return
+	var has_image: bool = $Artwork.texture != null
+	for cell in $Cells.get_children():
+		if cell.reveal_panel_artwork != has_image:
+			cell.reveal_panel_artwork = has_image
+			cell.queue_redraw()
+
+func _refresh_cells() -> void:
+	_sync_artwork()
+	for i in states.size():
+		$Cells.get_child(i).clean = states[i] == 1
+
+func clean_world_circle(center: Vector2, radius: float) -> int:
+	if radius <= 0:
+		return 0
+	var changed := 0
+	for i in states.size():
+		var cell = $Cells.get_child(i)
+		if states[i] == 0 and cell.touches_circle(center, radius):
+			states[i] = 1
+			cell.clean = true
+			clean_count += 1
+			changed += 1
+			cell_cleaned.emit(Vector2i(i % columns, i / columns))
+	if changed > 0:
+		progress_changed.emit(clean_count, states.size())
+	return changed

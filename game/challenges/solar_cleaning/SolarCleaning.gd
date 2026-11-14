@@ -1,23 +1,24 @@
-extends Control
+extends Node2D
 ## Independent prototype: six panels, hold left mouse to clean, no timer.
 
 signal cleaning_progress_changed(ratio: float)
 signal cleaning_completed
 
 const REQUIRED_RATIO := 0.9
-@onready var stage: Control = $Stage
-@onready var spray: Node2D = $Stage/WaterSpray
-@onready var status: Label = $Stage/Status
+@onready var stage: Node2D = $World
+@onready var content: Control = $Interface/HUD/Content
+@onready var spray: Node2D = $World/WaterSpray
+@onready var status: Label = $Interface/HUD/Content/Status
 var panels: Array[Control] = []
 var completed := false
 var _last_point := Vector2.ZERO
 var _batching := false
 
 func _ready() -> void:
-	for panel in $Stage/Panels.get_children():
+	for panel in $World/Panels.get_children():
 		panels.append(panel)
 		panel.progress_changed.connect(_on_progress)
-	resized.connect(_layout)
+	get_viewport().size_changed.connect(_layout)
 	_layout()
 	reset()
 
@@ -31,15 +32,16 @@ func reset() -> void:
 	_update_progress()
 
 func _layout() -> void:
-	var factor := minf(size.x / 900.0, size.y / 610.0)
-	stage.scale = Vector2.ONE * factor
-	stage.position = (size - Vector2(800, 520) * factor) / 2.0
+	var viewport_size := get_viewport_rect().size
+	var factor := minf(viewport_size.x / 900.0, viewport_size.y / 610.0)
+	content.scale = Vector2.ONE * factor
+	content.position = (viewport_size - Vector2(800, 520) * factor) / 2.0
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		var point: Vector2 = stage.get_global_transform_with_canvas().affine_inverse() * event.position
 		spray.position = point
-		spray.visible = Rect2(Vector2.ZERO, size).has_point(get_global_transform_with_canvas().affine_inverse() * event.position)
+		spray.visible = get_viewport_rect().has_point(event.position)
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and not completed:
 				spray.spraying = true
@@ -76,7 +78,7 @@ func _clean_segment(from: Vector2, to: Vector2) -> void:
 	for i in range(steps + 1):
 		var point := from.lerp(to, float(i) / steps)
 		for panel in panels:
-			panel.clean_circle(point - panel.position, spray.radius)
+			panel.clean_world_circle(stage.to_global(point), spray.radius)
 	_batching = false
 	_update_progress()
 
