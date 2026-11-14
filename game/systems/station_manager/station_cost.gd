@@ -1,3 +1,5 @@
+extends Node
+
 var energy_plant_state = "OPERATIVO"
 var life_support_state = "OPERATIVO"
 var water_station_state = "OPERATIVO"
