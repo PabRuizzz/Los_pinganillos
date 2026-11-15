@@ -96,8 +96,16 @@ func run_checks() -> void:
 	check(cue.visible, "El indicador [E] debe verse dentro del rango")
 	await press_interact(6)  # mantener E varios frames = una sola interacción
 	check(events.requested == 1, "Una pulsación debe interactuar una vez (fueron %d)" % events.requested)
+	# Desde la Fase 4 la primera pulsación envía el rover y la estación se desactiva:
+	# con el rover fuera, E no hace nada; al volver, E interactúa otra vez.
+	var controller := mars.get_node("RoverExpeditionController")
+	check(controller.is_on_expedition() and not cue.visible, "La primera pulsación debe enviar el rover y ocultar [E]")
+	await press_interact(2)
+	check(events.requested == 1, "No debe interactuar con el rover fuera")
+	controller.reset()
 	await press_interact(2)
 	check(events.requested == 2, "Una segunda pulsación debe volver a interactuar")
+	controller.reset()
 
 	player.global_position = STATION_POS + Vector2(0, 160)
 	await physics_frames(3)

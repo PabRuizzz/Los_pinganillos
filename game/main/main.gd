@@ -5,6 +5,7 @@ extends Node2D
 
 
 func _ready():
-	TaskExecution.start_day()
+	# Events lanza el evento al iniciar cada dia (day_started), no solo el primero.
 	# La alerta es autoload, asi que ya esta conectada a Events
-	Events.trigger_random_event(event_chance)
+	Events.day_start_event_chance = event_chance
+	TaskExecution.start_day()

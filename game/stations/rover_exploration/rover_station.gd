@@ -1,3 +1,4 @@
+class_name RoverStation
 extends Node2D
 ## Estación de control del rover (objeto físico del mundo, no una pantalla de UI).
 ##
@@ -8,8 +9,8 @@ extends Node2D
 ##
 ## Interacción: igual que EnergyStation (Area2D + grupo "player" + acción "interact").
 ## Esta escena no lanza expediciones ni descubre muestras: solo emite
-## interaction_requested. Un futuro controlador de expediciones se conecta a esa señal
-## y, cuando el rover vuelva, llama a SampleDiscovery.complete_expedition().
+## interaction_requested. RoverExpeditionController se conecta a esa señal y desactiva
+## la interacción (set_interaction_enabled) mientras el rover está fuera.
 
 signal player_entered_range
 signal player_exited_range
@@ -48,7 +49,7 @@ func set_interaction_enabled(enabled: bool) -> void:
 
 func interact() -> void:
 	if interaction_requested.get_connections().is_empty():
-		print("Estación del rover: interacción detectada (las expediciones llegarán en una fase futura)")
+		print("Estación del rover: interacción detectada (sin controlador de expediciones conectado)")
 	_flash_cue()
 	interaction_requested.emit()
 
