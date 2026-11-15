@@ -20,6 +20,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
+[ext_resource type="Script" path="res://game/systems/sample_discovery/sample_discovery.gd" id="18_discovery"]
+[ext_resource type="Script" path="res://game/systems/rover_expedition/rover_sample_discovery_bridge.gd" id="19_bridge"]
+[ext_resource type="Script" path="res://game/stations/mars/mars.gd" id="20_mars"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e87fy"]
 texture = ExtResource("1_tm4dk")
 1:0/0 = 0
@@ -599,6 +602,7 @@ animations = [{
 size = Vector2(196, 126)
 
 [node name="Mars" type="Node2D" unique_id=556579645 groups=["exterior"]]
+script = ExtResource("20_mars")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2038045617]
 position = Vector2(117, -212)
@@ -699,7 +703,7 @@ texture = ExtResource("14_8do8n")
 y_sort_enabled = true
 
 [node name="player" parent="YSortObjects" unique_id=1998034301 instance=ExtResource("2_74yx0")]
-position = Vector2(106, -184)
+position = Vector2(391, -528)
 
 [node name="RoverStation" parent="YSortObjects" unique_id=1184268611 instance=ExtResource("16_rover")]
 position = Vector2(40, 230)
@@ -757,9 +761,6 @@ polygon = PackedVector2Array(220.25919, 250.27185, 311.2592, 249.27185, 331.2592
 position = Vector2(165.01187, -583.6668)
 polygon = PackedVector2Array(4.9881287, 4.666809, 187.98813, 4.666809, 187.98813, -78.33319, 267.98813, -80.33319, 273.98813, 4.666809, 458.98813, 5.666809, 482.98813, -21.33319, 472.98813, -214.33319, 449.98813, -239.33319, 321.98813, -237.33319, 304.98813, -261.3332, 148.98813, -260.3332, 130.98813, -231.33319, 13.988129, -235.33319, -15.011871, -212.33319, -24.011871, -21.33319)
 
-[node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_74yx0")]
-position = Vector2(391, -528)
-
 [node name="EnergyStation" type="Area2D" parent="." unique_id=862025961]
 visible = false
 position = Vector2(26, 45)
@@ -782,6 +783,14 @@ shape = SubResource("RectangleShape2D_88uyf")
 [node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
 script = ExtResource("17_expedition")
 station = NodePath("../YSortObjects/RoverStation")
+
+[node name="SampleDiscovery" type="Node" parent="." unique_id=1406671829]
+script = ExtResource("18_discovery")
+
+[node name="RoverSampleDiscoveryBridge" type="Node" parent="." unique_id=1172904356 node_paths=PackedStringArray("expedition_controller", "sample_discovery")]
+script = ExtResource("19_bridge")
+expedition_controller = NodePath("../RoverExpeditionController")
+sample_discovery = NodePath("../SampleDiscovery")
 [node name="spawpoints" type="Node2D" parent="." unique_id=700062660]
 position = Vector2(60, -138)
 

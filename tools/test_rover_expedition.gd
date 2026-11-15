@@ -15,6 +15,7 @@ const ON_EXPEDITION := 1
 var sim: Node    # autoload SimulationTime
 var tasks: Node  # autoload TaskExecution
 
+const TEST_DISCOVERY_SAVE := "user://test_isolated_sample_discovery.cfg"
 var failures := 0
 var mars: Node
 var controller: Node
@@ -72,6 +73,13 @@ func stand_at_station() -> void:
 
 
 func run_checks() -> void:
+	# Aislamiento: desde la Fase 5 el regreso del rover descubre una muestra. Cualquier
+	# SampleDiscovery que entre al árbol (antes de su _ready) usa un archivo de prueba,
+	# nunca el progreso real del jugador.
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
+	node_added.connect(func(node: Node):
+		if node is SampleDiscovery:
+			node.save_path = TEST_DISCOVERY_SAVE)
 	var discovery_save := SampleDiscoverySave.DEFAULT_PATH
 	var save_before := FileAccess.get_md5(discovery_save) if FileAccess.file_exists(discovery_save) else ""
 	var cue: Label
@@ -177,4 +185,5 @@ func run_checks() -> void:
 	check(save_after == save_before, "Se tocó el archivo de descubrimientos del jugador")
 
 	print("ROVER EXPEDITION CHECKS: failures: %d" % failures)
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
 	quit(0 if failures == 0 else 1)

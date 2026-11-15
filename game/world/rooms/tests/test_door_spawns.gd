@@ -7,12 +7,13 @@ func travel(door_path: String) -> void:
 	var door = current_scene.get_node(door_path)
 	var marker_name: String = door.nombre_spawn
 	var destination: String = door.cuarto_destino
-	door._on_body_entered(current_scene.get_node("player"))
+	# El jugador puede estar dentro de un grupo (en Marte: YSortObjects/player).
+	door._on_body_entered(current_scene.find_child("player", true, false))
 	await scene_changed
 	await physics_frame
 	await physics_frame
 	assert(current_scene.scene_file_path == destination)
-	var player = current_scene.get_node("player")
+	var player = current_scene.find_child("player", true, false)
 	var marker = current_scene.find_child(marker_name, true, false)
 	assert(marker is Marker2D)
 	assert(player.global_position.is_equal_approx(marker.global_position))
