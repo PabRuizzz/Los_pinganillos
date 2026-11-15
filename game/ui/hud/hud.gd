@@ -40,7 +40,7 @@ func _process(_delta):
 
 # 480 minutos -> "8:00 h"
 func _format_hours(minutes: int) -> String:
-	return "%d:%02d h" % [minutes / 60, minutes % 60]
+	return "%d:%02d h" % [floori(minutes / 60.0), minutes % 60]
 
 
 func _show_state(label: Label, station_name: String, state: String):
