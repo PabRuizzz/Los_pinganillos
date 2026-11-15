@@ -12,7 +12,6 @@ config_version=5
 
 config/name="Proyecto_Marte"
 run/main_scene="uid://bu44bv2ir0kb5"
-run/enable_alt_space_menu=true
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://assets/sprites/icon.svg"
 
@@ -26,12 +25,9 @@ Events="*uid://cvhnrdjeius14"
 Oxygen="*res://game/systems/oxygen/oxygen.gd"
 Alert="*res://game/ui/alerts/alert.tscn"
 HUD="*res://game/ui/hud/hud.tscn"
-GameOver="*res://game/ui/game_over/game_over.tscn"
-<<<<<<< Updated upstream
-GameFlow="*res://game/systems/game_flow/game_flow.gd"
-=======
 EventTracker="*res://game/ui/event_tracker/event_tracker.tscn"
->>>>>>> Stashed changes
+GameOver="*res://game/ui/game_over/game_over.tscn"
+GameFlow="*res://game/systems/game_flow/game_flow.gd"
 
 [display]
 
