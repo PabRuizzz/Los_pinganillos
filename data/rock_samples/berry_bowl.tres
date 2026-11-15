@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3 uid="uid://butlymltvdyhx"]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://84l86ntgytnr" path="res://assets/science/rock_samples/berry_bowl.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "berry_bowl"
+sample_name = "Berry Bowl (blueberry spherules)"
+rock_type = "Hematite spherules on sedimentary rock"
+location = "Eagle Crater outcrop, Meridiani Planum"
+rover = "Opportunity"
+origin = 1
+description = "A small rock covered with spherules nicknamed blueberries: gray balls about the size of a pellet, averaging around 4 mm across. Opportunity found that they are rich in hematite and that the rock beneath them has a very different composition. They were examined and analyzed in place only."
+interesting_fact = "These are concretions: they grew within deposits soaked by iron-carrying water. On Earth, hematite with crystals this size usually forms in wet environments."
+sample_image = ExtResource("2_image")
+image_caption = "PIA05634 · Pancam, approximately true color, March 2004. The Berry Bowl rock, with the area brushed by the rover for analysis."
+image_credit = "NASA/JPL/Cornell"
+image_url = "https://images-assets.nasa.gov/image/PIA05634/PIA05634~orig.jpg"
+source_name = "NASA Science – Discovery Served Up in a Bowl"
+source_url = "https://science.nasa.gov/resource/discovery-served-up-in-a-bowl/"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

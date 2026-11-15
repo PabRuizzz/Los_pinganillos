@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3 uid="uid://fafewmrsnfim"]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cct2iaqbtgkqt" path="res://assets/science/rock_samples/hazeltop.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "hazeltop"
+sample_name = "Hazeltop"
+rock_type = "Sedimentary rock (mudstone)"
+location = "Wildcat Ridge rock, delta front, Jezero Crater"
+rover = "Perseverance"
+description = "The mission's core No. 12 (5.97 cm) was sealed on July 27, 2022. Wildcat Ridge, a rock about 1 m wide, likely formed as mud and fine sand settled in a salty lake that was drying up. It preserves layers of clay and sulfate minerals."
+interesting_fact = "The SHERLOC instrument recorded the mission's richest detections of organic matter here, as of 2022. Remember: “organic” does not mean “life”; many organic molecules form through chemical processes without living things."
+sample_image = ExtResource("2_image")
+image_caption = "PIA24929 · Mastcam-Z. Pair of images showing the two chalk-sized Wildcat Ridge cores inside the drill bit: Hazeltop (July 25, 2022) and its twin, Bearwallow."
+image_credit = "NASA/JPL-Caltech/ASU/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA24929/PIA24929~orig.jpg"
+source_name = "NASA Science – Mars Rock Samples"
+source_url = "https://science.nasa.gov/mission/mars-2020-perseverance/mars-rock-samples/"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

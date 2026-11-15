@@ -1,6 +1,8 @@
 extends CanvasLayer
 
 # HUD simple: dia, tiempo restante, recursos y estado de los sistemas.
+# Tambien tiene el boton "Terminar día": pide confirmacion y llama a
+# TaskExecution.request_end_day(). El HUD no cambia el dia ni los recursos.
 # Cada valor es un Label propio para que frontend pueda moverlo o cambiarle estilo.
 
 # Colores por estado (se pueden cambiar desde el Inspector)
@@ -21,6 +23,22 @@ extends CanvasLayer
 @onready var water_station_label: Label = %WaterStationLabel
 @onready var greenhouse_label: Label = %GreenhouseLabel
 
+@onready var end_day_button: Button = %EndDayButton
+@onready var end_day_hint: Label = %EndDayHint
+@onready var end_day_confirm: Control = %EndDayConfirm
+@onready var confirm_label: Label = %ConfirmLabel
+@onready var confirm_end_day_button: Button = %ConfirmEndDayButton
+@onready var cancel_end_day_button: Button = %CancelEndDayButton
+
+
+func _ready():
+	end_day_button.pressed.connect(_on_end_day_pressed)
+	confirm_end_day_button.pressed.connect(_on_confirm_end_day_pressed)
+	cancel_end_day_button.pressed.connect(_close_end_day_confirm)
+	# Si el dia cambia (por ejemplo, se agoto la jornada), una confirmacion
+	# abierta para el dia anterior ya no vale.
+	TaskExecution.day_started.connect(func(_day): _close_end_day_confirm())
+
 
 # Los estados y el oxigeno cambian sin señal, asi que actualizamos cada frame.
 func _process(_delta):
@@ -36,6 +54,40 @@ func _process(_delta):
 	_show_state(life_support_label, "Soporte vital", StationCost.life_support_state)
 	_show_state(water_station_label, "Estación de agua", StationCost.water_station_state)
 	_show_state(greenhouse_label, "Invernadero", StationCost.greenhouse_state)
+
+	_update_end_day()
+
+
+# El boton solo sirve con el dia activo, sin tarea en curso y sin pausa.
+func _update_end_day():
+	var can_end = TaskExecution.can_end_day() and not get_tree().paused
+	if not can_end:
+		end_day_confirm.visible = false
+	end_day_button.disabled = not can_end
+	end_day_button.visible = not end_day_confirm.visible
+	# Explica por que esta apagado cuando hay una tarea en curso
+	end_day_hint.visible = TaskExecution.day_active and TaskExecution.current_task != ""
+
+
+func _on_end_day_pressed():
+	if not TaskExecution.can_end_day():
+		return
+	confirm_label.text = "¿Terminar el día %d?" % SimulationTime.day
+	end_day_confirm.visible = true
+	end_day_button.visible = false
+
+
+func _on_confirm_end_day_pressed():
+	# Solo vale una confirmacion visible: clics repetidos no terminan mas dias
+	if not end_day_confirm.visible:
+		return
+	_close_end_day_confirm()
+	TaskExecution.request_end_day()
+
+
+func _close_end_day_confirm():
+	end_day_confirm.visible = false
+	end_day_button.visible = true
 
 
 # 480 minutos -> "8:00 h"

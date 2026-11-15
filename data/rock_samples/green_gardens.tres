@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3 uid="uid://d0s24wqbfcov0"]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://ceqv3pcqi1tbi" path="res://assets/science/rock_samples/green_gardens.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "green_gardens"
+sample_name = "Green Gardens"
+rock_type = "Serpentinite (serpentine-rich rock)"
+location = "Tablelands rock, Witch Hazel Hill, Jezero Crater rim"
+rover = "Perseverance"
+description = "Core No. 27 (7.19 cm), collected on February 16, 2025, and sealed on March 2. Rover data indicate that Tablelands is made almost entirely of serpentine minerals, which form when large amounts of water react with iron- and magnesium-rich minerals in igneous rocks."
+interesting_fact = "Serpentine is often green, which inspired the name Green Gardens. On Earth, serpentinite rocks can release hydrogen and support communities of microbes. Sealing this tube was an engineering challenge that took two weeks."
+sample_image = ExtResource("2_image")
+image_caption = "PIA26529 · Mastcam-Z, February 16, 2025 (sol 1420). Chalk-sized core inside Perseverance's drill bit."
+image_credit = "NASA/JPL-Caltech/ASU/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA26529/PIA26529~orig.jpg"
+source_name = "NASA – NASA's Perseverance Mars Rover Studies Trove of Rocks on Crater Rim"
+source_url = "https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-perseverance-mars-rover-studies-trove-of-rocks-on-crater-rim"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"
