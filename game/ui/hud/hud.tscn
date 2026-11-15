@@ -1,20 +1,20 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bpe0kqa3ox5uh"]
 
-[ext_resource type="Script" path="res://game/ui/hud/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://d3fup4pxab741" path="res://game/ui/hud/hud.gd" id="1_hud"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=881011932]
 process_mode = 3
 layer = 5
 script = ExtResource("1_hud")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=496222170]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 380.0
 offset_bottom = 420.0
 mouse_filter = 2
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=719002214]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 12
@@ -22,75 +22,75 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=70376461]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="DayLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="DayLabel" type="Label" parent="Panel/Margin/VBox" unique_id=2118451918]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Día 1"
 
-[node name="TimeLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="TimeLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1714382013]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Tiempo restante: 8:00 h"
 
-[node name="ResourcesTitle" type="Label" parent="Panel/Margin/VBox"]
+[node name="ResourcesTitle" type="Label" parent="Panel/Margin/VBox" unique_id=1152192865]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Recursos"
 
-[node name="EnergyLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="EnergyLabel" type="Label" parent="Panel/Margin/VBox" unique_id=688369970]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Energía: 0"
 
-[node name="WaterLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="WaterLabel" type="Label" parent="Panel/Margin/VBox" unique_id=912423452]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Agua: 0"
 
-[node name="FoodLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="FoodLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1714558588]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Comida: 0"
 
-[node name="OxygenLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="OxygenLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1675478550]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Oxígeno: 0"
 
-[node name="SystemsTitle" type="Label" parent="Panel/Margin/VBox"]
+[node name="SystemsTitle" type="Label" parent="Panel/Margin/VBox" unique_id=741150720]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Sistemas"
 
-[node name="EnergyPlantLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="EnergyPlantLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1303981436]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Planta de energía: OPERATIVO"
 
-[node name="LifeSupportLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="LifeSupportLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1215152983]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Soporte vital: OPERATIVO"
 
-[node name="WaterStationLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="WaterStationLabel" type="Label" parent="Panel/Margin/VBox" unique_id=735094457]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Estación de agua: OPERATIVO"
 
-[node name="GreenhouseLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="GreenhouseLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1412126862]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20

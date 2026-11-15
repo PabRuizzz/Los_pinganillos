@@ -7,25 +7,71 @@ extends CanvasLayer
 # Autoloads cuyas variables vuelven a su valor inicial al reiniciar
 const AUTOLOADS_TO_RESET = ["Resources", "SimulationTime", "StationCost", "TaskExecution", "Events", "Oxygen"]
 
+# Días que hay que completar para ganar la misión
+@export var dias_para_ganar := 5
+
+# Apariencia de cada pantalla (se cambia desde el Inspector)
+@export_group("Éxito")
+@export var color_exito := Color(0.4, 1.0, 0.5)
+@export var imagen_exito: Texture2D
+@export var boton_exito := "Jugar de nuevo"
+@export_group("Derrota")
+@export var color_derrota := Color(1.0, 0.35, 0.35)
+@export var imagen_derrota: Texture2D
+@export var boton_derrota := "Reiniciar"
+
 @onready var root_control: Control = $Root
 @onready var title: Label = %Title
 @onready var message: Label = %Message
 @onready var restart_button: Button = %RestartButton
+@onready var artwork: TextureRect = $Root/Center/VBox/Artwork
 
 
 func _ready():
 	root_control.visible = false
 	restart_button.pressed.connect(restart_game)
 	Oxygen.oxygen_depleted.connect(_on_oxygen_depleted)
+	TaskExecution.day_finished.connect(_on_day_finished)
 
 
 func _on_oxygen_depleted():
-	show_game_over("Te quedaste sin oxígeno", "Sobreviviste %d día(s) en Marte." % SimulationTime.day)
+	show_defeat("Te quedaste sin oxígeno", "Sobreviviste %d día(s) en Marte." % SimulationTime.day)
 
 
+# Al terminar el día, SimulationTime.day ya avanzó al siguiente,
+# así que los días completados son day - 1.
+func _on_day_finished():
+	var dias_completados = SimulationTime.day - 1
+
+	# Primero la derrota: si te quedas sin recursos el último día, no ganas.
+	if Resources.energy <= 0 or Resources.food <= 0 or Resources.water <= 0:
+		show_defeat("Sin recursos", "La base se quedó sin recursos tras %d día(s)." % dias_completados)
+	elif dias_completados >= dias_para_ganar:
+		show_victory("¡Misión cumplida!", "Sobreviviste %d días en Marte." % dias_completados)
+
+
+func show_victory(t: String, m: String):
+	_show(t, m, color_exito, imagen_exito, boton_exito)
+
+
+func show_defeat(t: String, m: String):
+	_show(t, m, color_derrota, imagen_derrota, boton_derrota)
+
+
+# Se mantiene por compatibilidad: muestra la pantalla de derrota.
 func show_game_over(t: String, m: String):
+	show_defeat(t, m)
+
+
+func _show(t: String, m: String, color: Color, imagen: Texture2D, texto_boton: String):
+	if root_control.visible:
+		return # ya hay una pantalla final abierta
 	title.text = t
+	title.add_theme_color_override("font_color", color)
 	message.text = m
+	restart_button.text = texto_boton
+	artwork.texture = imagen
+	artwork.visible = imagen != null
 	root_control.visible = true
 	get_tree().paused = true
 
