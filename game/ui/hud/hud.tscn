@@ -95,3 +95,59 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Invernadero: OPERATIVO"
+
+[node name="EndDaySeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="EndDayButton" type="Button" parent="Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 22
+text = "Terminar día"
+
+[node name="EndDayHint" type="Label" parent="Panel/Margin/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Termina tu tarea primero."
+horizontal_alignment = 1
+
+[node name="EndDayConfirm" type="VBoxContainer" parent="Panel/Margin/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ConfirmLabel" type="Label" parent="Panel/Margin/VBox/EndDayConfirm"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "¿Terminar el día 1?"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/Margin/VBox/EndDayConfirm"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="ConfirmEndDayButton" type="Button" parent="Panel/Margin/VBox/EndDayConfirm/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 22
+text = "Sí"
+
+[node name="CancelEndDayButton" type="Button" parent="Panel/Margin/VBox/EndDayConfirm/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 22
+text = "No"

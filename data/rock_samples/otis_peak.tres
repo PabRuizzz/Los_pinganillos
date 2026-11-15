@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/otis_peak.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "otis_peak"
+sample_name = "Otis Peak"
+rock_type = "Sedimentary rock (conglomerate)"
+location = "Emerald Lake rock, Upper Fan, Jezero Crater"
+rover = "Perseverance"
+origin = 0
+description = "Core No. 20 (5.77 cm), sealed on June 23, 2023. A conglomerate is a rock made of fragments of other rocks cemented together. The differently colored areas are minerals or rock fragments carried by a river into Jezero Crater."
+interesting_fact = "Each colored spot in the core is a different piece brought by water: one sample contains rocks from several sources."
+sample_image = ExtResource("2_image")
+image_caption = "PIA25962 · CacheCam, June 12, 2023 (sol 822). Base of the Otis Peak core; the different colors are minerals or rock fragments."
+image_credit = "NASA/JPL-Caltech"
+image_url = "https://images-assets.nasa.gov/image/PIA25962/PIA25962~orig.jpg"
+source_name = "NASA Image and Video Library – PIA25962"
+source_url = "https://images.nasa.gov/details/PIA25962"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

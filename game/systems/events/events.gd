@@ -27,6 +27,10 @@ var fungus_timer = 120.0
 var fungus_timer_active = false
 const FUNGUS_TIME_LIMIT = 120.0
 
+# Probabilidad de que ocurra un evento al iniciar un dia. main.gd la fija con su
+# event_chance; vale 0 si se corre una escena suelta (F6), como antes.
+var day_start_event_chance := 0.0
+
 signal event_started(type: EventTypes, title: String, message: String)
 signal event_resolved(type: EventTypes)
 
@@ -43,6 +47,12 @@ const EVENT_INFO = {
 func _ready():
 	# Cuando se termina una tarea, revisamos si resolvio el evento activo
 	TaskExecution.task_finished.connect(_on_task_finished)
+	# Al iniciar cada dia puede ocurrir un evento
+	TaskExecution.day_started.connect(_on_day_started)
+
+
+func _on_day_started(_day):
+	trigger_random_event(day_start_event_chance)
 
 
 func _on_task_finished(station, task_name, _time_spent):
