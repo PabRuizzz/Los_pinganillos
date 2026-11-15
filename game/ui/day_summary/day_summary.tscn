@@ -1,0 +1,420 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://game/ui/day_summary/day_summary.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/monitor.png" id="2_monitor"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/button_normal.png" id="3_btn_normal"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/button_pressed.png" id="4_btn_pressed"]
+[ext_resource type="PackedScene" path="res://game/ui/day_summary/resource_row.tscn" id="5_resource_row"]
+[ext_resource type="PackedScene" path="res://game/ui/day_summary/station_row.tscn" id="6_station_row"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_energy.png" id="7_icon_energy"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_water.png" id="8_icon_water"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_food.png" id="9_icon_food"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_oxygen.png" id="10_icon_oxygen"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_energy_plant.png" id="11_st_energy"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_life_support.png" id="12_st_life"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_water_station.png" id="13_st_water"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_greenhouse.png" id="14_st_green"]
+
+[sub_resource type="SystemFont" id="SystemFont_bold"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+font_weight = 700
+
+[sub_resource type="SystemFont" id="SystemFont_body"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_photo"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.02, 0.04, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3, 0.85, 1, 0.7)
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_btn_normal"]
+content_margin_left = 40.0
+content_margin_top = 16.0
+content_margin_right = 40.0
+content_margin_bottom = 16.0
+texture = ExtResource("3_btn_normal")
+texture_margin_left = 56.0
+texture_margin_top = 56.0
+texture_margin_right = 56.0
+texture_margin_bottom = 56.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_btn_hover"]
+content_margin_left = 40.0
+content_margin_top = 16.0
+content_margin_right = 40.0
+content_margin_bottom = 16.0
+texture = ExtResource("3_btn_normal")
+texture_margin_left = 56.0
+texture_margin_top = 56.0
+texture_margin_right = 56.0
+texture_margin_bottom = 56.0
+modulate_color = Color(1.2, 1.15, 1.1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_btn_pressed"]
+content_margin_left = 40.0
+content_margin_top = 20.0
+content_margin_right = 40.0
+content_margin_bottom = 12.0
+texture = ExtResource("4_btn_pressed")
+texture_margin_left = 56.0
+texture_margin_top = 56.0
+texture_margin_right = 56.0
+texture_margin_bottom = 56.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_focus"]
+
+[node name="DaySummary" type="CanvasLayer"]
+process_mode = 3
+layer = 15
+script = ExtResource("1_script")
+
+[node name="Root" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.01, 0.01, 0.03, 0.78)
+
+[node name="Monitor" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -840.0
+offset_top = -596.0
+offset_right = 840.0
+offset_bottom = 596.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(840, 596)
+mouse_filter = 2
+
+[node name="Artwork" type="TextureRect" parent="Root/Monitor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_monitor")
+expand_mode = 1
+
+[node name="Screen" type="MarginContainer" parent="Root/Monitor"]
+layout_mode = 1
+anchor_left = 0.112
+anchor_top = 0.163
+anchor_right = 0.888
+anchor_bottom = 0.84
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Content" type="VBoxContainer" parent="Root/Monitor/Screen"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Root/Monitor/Screen/Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DayTitle" type="Label" parent="Root/Monitor/Screen/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 44
+text = "DÍA 1 COMPLETADO"
+
+[node name="Subtitle" type="Label" parent="Root/Monitor/Screen/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 22
+text = "REPORTE DE LA BASE · MARTE"
+
+[node name="HeaderLine" type="ColorRect" parent="Root/Monitor/Screen/Content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.3, 0.85, 1, 0.45)
+
+[node name="Columns" type="HBoxContainer" parent="Root/Monitor/Screen/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 32
+
+[node name="Left" type="VBoxContainer" parent="Root/Monitor/Screen/Content/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="ResourcesTitle" type="Label" parent="Root/Monitor/Screen/Content/Columns/Left"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 22
+text = "RECURSOS"
+
+[node name="EnergyRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("7_icon_energy")
+display_name = "Energía"
+
+[node name="WaterRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("8_icon_water")
+display_name = "Agua"
+
+[node name="FoodRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("9_icon_food")
+display_name = "Comida"
+
+[node name="OxygenRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("10_icon_oxygen")
+display_name = "Oxígeno"
+
+[node name="SectionGap" type="Control" parent="Root/Monitor/Screen/Content/Columns/Left"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StationsTitle" type="Label" parent="Root/Monitor/Screen/Content/Columns/Left"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 22
+text = "ESTACIONES"
+
+[node name="EnergyPlantRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("11_st_energy")
+display_name = "Planta de energía"
+
+[node name="LifeSupportRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("12_st_life")
+display_name = "Soporte vital"
+
+[node name="WaterStationRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("13_st_water")
+display_name = "Estación de agua"
+
+[node name="GreenhouseRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("14_st_green")
+display_name = "Invernadero"
+
+[node name="Divider" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.3, 0.85, 1, 0.3)
+
+[node name="Right" type="VBoxContainer" parent="Root/Monitor/Screen/Content/Columns"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.15
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="RoverHeader" type="HBoxContainer" parent="Root/Monitor/Screen/Content/Columns/Right"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RoverTitle" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right/RoverHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 22
+text = "MUESTRA DEL ROVER"
+
+[node name="ScanStatus" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right/RoverHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "ANALIZANDO MUESTRA..."
+
+[node name="PhotoFrame" type="PanelContainer" parent="Root/Monitor/Screen/Content/Columns/Right"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_photo")
+
+[node name="PhotoArea" type="Control" parent="Root/Monitor/Screen/Content/Columns/Right/PhotoFrame"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Photo" type="TextureRect" parent="Root/Monitor/Screen/Content/Columns/Right/PhotoFrame/PhotoArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NoSampleLabel" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right/PhotoFrame/PhotoArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 24
+text = "SIN MUESTRA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cover" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns/Right/PhotoFrame/PhotoArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.04, 0.08, 1)
+
+[node name="ScanLine" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns/Right/PhotoFrame/PhotoArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.45, 0.95, 1, 0.9)
+
+[node name="SampleName" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 32
+text = "Nombre de la muestra"
+text_overrun_behavior = 3
+
+[node name="SampleMeta" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 18
+text = "Tipo de roca · Ubicación · Rover"
+text_overrun_behavior = 3
+
+[node name="Description" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.86, 0.94, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 18
+text = "Descripción de la muestra."
+autowrap_mode = 3
+max_lines_visible = 4
+text_overrun_behavior = 3
+
+[node name="FactTitle" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "DATO CURIOSO"
+
+[node name="Fact" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.86, 0.94, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 18
+text = "Dato curioso de la muestra."
+autowrap_mode = 3
+max_lines_visible = 3
+text_overrun_behavior = 3
+
+[node name="Footer" type="HBoxContainer" parent="Root/Monitor/Screen/Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FooterHint" type="Label" parent="Root/Monitor/Screen/Content/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 20
+text = "Mañana te esperan nuevos eventos."
+
+[node name="NextButton" type="Button" parent="Root/Monitor/Screen/Content/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.6, 1)
+theme_override_colors/font_hover_color = Color(1, 0.95, 0.8, 1)
+theme_override_colors/font_pressed_color = Color(0.9, 0.7, 0.45, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBox_focus")
+theme_override_styles/hover = SubResource("StyleBox_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
+theme_override_styles/normal = SubResource("StyleBox_btn_normal")
+text = "SIGUIENTE DÍA"
