@@ -1,5 +1,10 @@
 [gd_scene format=4 uid="uid://bu44bv2ir0kb5"]
 
+[ext_resource type="Script" path="res://game/stations/mars/WaterStationAppearance.gd" id="22_water_appearance"]
+[ext_resource type="Texture2D" path="res://game/stations/mars/assets/waterstation_frozen.png" id="23_water_frozen"]
+
+[ext_resource type="PackedScene" path="res://game/stations/mars/Sandstorm.tscn" id="21_sandstorm"]
+
 [ext_resource type="Texture2D" uid="uid://bmsf3qkqn8fx8" path="res://assets/tilesets/mars.JPG" id="1_tm4dk"]
 [ext_resource type="Texture2D" uid="uid://dpbfw5civuq66" path="res://assets/tilesets/mars_camino.png" id="2_1ckbn"]
 [ext_resource type="PackedScene" uid="uid://c04p72g88ofht" path="res://game/astronaut/astronaut.tscn" id="2_74yx0"]
@@ -638,6 +643,8 @@ texture = ExtResource("11_8cmg6")
 [node name="h2o" type="Sprite2D" parent="sprites" unique_id=671716511]
 position = Vector2(909, -579)
 texture = ExtResource("12_snyjx")
+script = ExtResource("22_water_appearance")
+frozen_texture = ExtResource("23_water_frozen")
 
 [node name="panel3" type="Sprite2D" parent="sprites" unique_id=1443695553]
 position = Vector2(313, 109)
@@ -972,3 +979,5 @@ gizmo_extents = 856.5
 [node name="campspw" type="Marker2D" parent="spawpoints" unique_id=1569309181]
 position = Vector2(332.45, -412)
 gizmo_extents = 589.0
+
+[node name="Sandstorm" parent="." instance=ExtResource("21_sandstorm")]
