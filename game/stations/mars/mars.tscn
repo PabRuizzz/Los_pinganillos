@@ -34,8 +34,6 @@
 [ext_resource type="Script" path="res://game/systems/rover_expedition/rover_sample_discovery_bridge.gd" id="19_bridge"]
 [ext_resource type="Texture2D" uid="uid://if2mqjpee47d" path="res://assets/tilesets/limitmapver.png" id="15_fnhve"]
 [ext_resource type="Texture2D" uid="uid://cr42aqrcwarrc" path="res://assets/tilesets/limitmap.png" id="15_loy4b"]
-[ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
-[ext_resource type="Script" uid="uid://dvttd52a8nbhe" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
 [ext_resource type="Script" path="res://game/stations/station_state_sprite.gd" id="18_state_sprite"]
 [ext_resource type="Texture2D" uid="uid://cxlivr43ahg84" path="res://assets/sprites/mars_walk.png" id="20_c5xh0"]
 
@@ -1016,7 +1014,6 @@ station_id = "water_station"
 maintenance_minigame = ExtResource("25_pumping")
 repair_minigame = ExtResource("26_pipe")
 operational_message = "La estación de agua funciona correctamente"
-repair_events = Array[int]([4])
 
 [node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
 script = ExtResource("17_expedition")

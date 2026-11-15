@@ -24,6 +24,18 @@ signal expedition_returned_without_sample(departure_day: int, returned_on_day: i
 @export var expedition_controller: RoverExpeditionController
 @export var sample_discovery: SampleDiscovery
 
+## Muestras que trajo el rover y que el resumen del día aún no mostró. Es estática
+## para que sobreviva a los cambios de escena (Marte se recarga en cada puerta).
+static var _unreported: Array[RockSampleData] = []
+
+
+## Devuelve (y olvida) las muestras que trajo el rover desde la última vez que se
+## llamó. La usa DaySummary al terminar el día.
+static func take_unreported_samples() -> Array[RockSampleData]:
+	var samples := _unreported.duplicate()
+	_unreported.clear()
+	return samples
+
 
 func _ready() -> void:
 	if expedition_controller == null or sample_discovery == null:
@@ -40,4 +52,5 @@ func _on_expedition_returned(departure_day: int, returned_on_day: int) -> void:
 		print("Rover: volvió el día %d sin muestra nueva (catálogo completo)" % returned_on_day)
 		expedition_returned_without_sample.emit(departure_day, returned_on_day)
 		return
+	_unreported.append(sample)
 	print("Rover: trajo la muestra '%s' (%s) el día %d" % [sample.sample_name, sample.sample_id, returned_on_day])
