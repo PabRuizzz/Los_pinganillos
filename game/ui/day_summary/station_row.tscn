@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://game/ui/day_summary/station_row.gd" id="1_row"]
+
+[sub_resource type="SystemFont" id="SystemFont_bold"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+font_weight = 700
+
+[node name="StationRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 54)
+theme_override_constants/separation = 18
+script = ExtResource("1_row")
+
+[node name="Artwork" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.84, 0.95, 1)
+theme_override_font_sizes/font_size = 22
+text = "Estación"
+vertical_alignment = 1
+
+[node name="StateLight" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.4, 1, 0.4, 1)
+
+[node name="StateLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.4, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 22
+text = "OPERATIVO"
+vertical_alignment = 1

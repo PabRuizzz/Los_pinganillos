@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @onready var mapa: TileMapLayer = $TileMapLayer
 @onready var camara: Camera2D = $player/Camera2D
 

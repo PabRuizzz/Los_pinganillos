@@ -1,7 +1,7 @@
 # Minijuego de reparación eléctrica
 
 Abre `electrical_repair.tscn` y pulsa **F6** (ejecutar escena actual).
-La escena no utiliza autoloads, assets externos ni otras escenas del juego.
+La escena no utiliza autoloads ni otras escenas del juego. Sus imágenes están en assets/.
 La escena principal del proyecto sigue siendo la misma.
 
 ## Controles
@@ -9,15 +9,15 @@ La escena principal del proyecto sigue siendo la misma.
 - Mantén el botón izquierdo para arrastrar una pieza.
 - Suelta en una casilla vacía para moverla o sobre una pieza para intercambiarlas.
 - Suelta fuera del tablero, pulsa Escape o cambia de aplicación para cancelar el arrastre.
-- Conecta el inicio **I** verde con la única salida ámbar, siempre situada en
+- Conecta el terminal de inicio verde con la única salida ámbar, siempre situada en
   el borde opuesto: norte–sur, sur–norte, este–oeste u oeste–este.
   La posición dentro de cada borde es aleatoria; no tienen que estar alineados.
 - Debe haber al menos **10 piezas conectadas** a la red del inicio para ganar.
 - Cada tablero contiene **dos grupos de 2–5 casillas bloqueadas**, adyacentes por
-  sus lados y marcadas con una X. No admiten piezas; al soltar sobre ellas el cable vuelve a su origen.
-- Las líneas verdes muestran la red que recibe corriente del inicio.
+  sus lados y representadas por placas elevadas sin símbolos. No admiten piezas; al soltar sobre ellas el cable vuelve a su origen.
+- El tinte verde de los cables muestra la red que recibe corriente del inicio.
 - No hay temporizador, límite de movimientos ni rotación de piezas.
-- `Nuevo circuito` genera otra partida. `Ver hitboxes` muestra las casillas en cian y las piezas en rosa.
+- `Ver hitboxes` muestra las casillas en cian y las piezas en rosa.
 
 ## Trabajo visual de frontend en el editor 2D
 
@@ -117,7 +117,7 @@ El minijuego no pausa ni cambia escenas por su cuenta.
 
 Siempre se genera una sola salida; ya no existe `destination_count`.
 Configura `puzzle_seed` en -1 para partidas nuevas. Una semilla no negativa permite reproducir una partida;
-en ese caso `Nuevo circuito` reinicia esa misma partida. La interfaz adapta su
+la semilla determina la partida al abrirla. La interfaz adapta su
 escala al tamaño del viewport y centra el lienzo de diseño del HUD. El tablero
 se visualiza mediante Camera2D: su encuadre automático se adapta junto al HUD,
 o puede ajustarse independientemente desactivando Auto Frame Board.
@@ -148,3 +148,13 @@ Comprueba 10.000 semillas, verifica la salida única en el borde opuesto y las
 conexiones de la solución y resuelve 200 partidas mediante las operaciones reales
 de arrastre/intercambio del tablero y sus señales de victoria. También comprueba
 que se rechazan inventarios con piezas de más/de menos y soluciones bloqueadas.
+
+## Assets sci-fi integrados
+
+El atlas aprobado está en `assets/navy_tiles.png`. Los recursos `.tres` son AtlasTexture con recortes del atlas original: no requieren procesamiento ni plugins. Las once escenas de `pieces/` asignan el recorte correspondiente a Artwork; todas mantienen sus conexiones y hitboxes originales. Puedes sustituir cada textura desde el Inspector.
+
+Cell.tscn incluye Artwork para la casilla vacía, Blocked Texture para los bloqueos y Source/Target Texture para los terminales. Terminal es un nodo visual elevado, fuera del borde del tablero, y no intercepta el ratón. El exterior conserva el fondo liso; solo las cajas verde y naranja aparecen fuera del tablero, orientadas hacia su conexión.
+
+La propuesta y su prompt se conservan en `assets/proposals/`. Verificación breve: carga de texturas, solución válida, retorno al soltar fuera y colocación/intercambio de piezas.
+
+La versión activa usa cables gruesos azul oscuro. `south_east.tres` y `south_west.tres` se asignan según sus conexiones reales en la imagen. Las placas bloqueadas no llevan X ni naranja.

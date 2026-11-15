@@ -3,26 +3,15 @@
 [ext_resource type="Script" uid="uid://d1lpk2a2310uk" path="res://game/challenges/electrical_repair/PuzzleManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/Board.tscn" id="2"]
 [ext_resource type="Script" uid="uid://om8eks2i4k7q" path="res://game/challenges/electrical_repair/PuzzleCamera.gd" id="3_camera"]
+[ext_resource type="Texture2D" uid="uid://b1q0q2poahf4c" path="res://game/challenges/electrical_repair/assets/greenhouse_background.png" id="4_0qbsr"]
 
-[node name="ElectricalRepair" type="Node2D" unique_id=331987606]
+[node name="ElectricalRepair" type="Node2D" unique_id=331987606 groups=["minigame"]]
 script = ExtResource("1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1733122090]
 position = Vector2(1293, 706)
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_camera")
-
-[node name="Backdrop" type="CanvasLayer" parent="." unique_id=176863361]
-layer = -1
-
-[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1739277090]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.051, 0.082, 0.129, 1)
 
 [node name="Board" parent="." unique_id=888232065 instance=ExtResource("2")]
 layout_mode = 3
@@ -338,7 +327,7 @@ offset_top = 186.0
 offset_right = 900.0
 offset_bottom = 226.0
 theme_override_font_sizes/font_size = 16
-text = "X: casilla bloqueada · Conecta al menos 10 piezas"
+text = "Placa elevada: casilla bloqueada · Conecta al menos 10 piezas"
 horizontal_alignment = 1
 
 [node name="Status" type="Label" parent="Interface/HUD/Content" unique_id=1638148991]
@@ -359,15 +348,6 @@ theme_override_font_sizes/font_size = 18
 text = "0/1 salida · 0 piezas conectadas (mín. 10) · 0 movimientos"
 horizontal_alignment = 1
 
-[node name="NewCircuit" type="Button" parent="Interface/HUD/Content" unique_id=682690679]
-layout_mode = 0
-offset_left = 130.0
-offset_top = 1010.0
-offset_right = 350.0
-offset_bottom = 1054.0
-theme_override_font_sizes/font_size = 20
-text = "Nuevo circuito"
-
 [node name="DebugHitboxes" type="CheckButton" parent="Interface/HUD/Content" unique_id=132823625]
 layout_mode = 0
 offset_left = 550.0
@@ -376,5 +356,13 @@ offset_right = 770.0
 offset_bottom = 1054.0
 theme_override_font_sizes/font_size = 20
 text = "Ver hitboxes"
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=176863361]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Backdrop" unique_id=1551687551]
+offset_right = 2301.0
+offset_bottom = 1283.0
+texture = ExtResource("4_0qbsr")
 
 [editable path="Board"]

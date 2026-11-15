@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3]
 [ext_resource type="Script" path="res://game/challenges/solar_cleaning/SolarCell.gd" id="1"]
 [node name="SolarCell" type="Control"]
-offset_right = 24.0
-offset_bottom = 16.0
+offset_right = 12.0
+offset_bottom = 8.0
 mouse_filter = 2
 script = ExtResource("1")
 [node name="DirtyArtwork" type="TextureRect" parent="."]

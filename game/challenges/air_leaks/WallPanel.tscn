@@ -1,0 +1,26 @@
+[gd_scene format=3]
+[node name="WallPanel" type="ColorRect"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 290.0
+offset_bottom = 190.0
+mouse_filter = 2
+color = Color(0.12, 0.19, 0.25, 1)
+[node name="Artwork" type="TextureRect" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 290.0
+offset_bottom = 190.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="Symbol" type="Label" parent="."]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 290.0
+offset_bottom = 190.0
+mouse_filter = 2
+text = "[ PANEL ]"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 20

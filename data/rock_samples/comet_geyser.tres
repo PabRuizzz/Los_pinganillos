@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/comet_geyser.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "comet_geyser"
+sample_name = "Comet Geyser"
+rock_type = "Carbonate cemented with silica"
+location = "Bunsen Peak rock, Margin Unit, Jezero Crater"
+rover = "Perseverance"
+origin = 0
+description = "The mission's sample No. 24 was collected on March 12, 2024 (sol 1088). Bunsen Peak is about 1.7 m wide and 1 m tall, and is made of roughly 75% carbonate grains held together by nearly pure silica. It may have formed along the shore of the ancient lake."
+interesting_fact = "On Earth, carbonate and silica can preserve signs of life for millions of years, and silica can preserve them for even billions of years. The names come from Yellowstone: Bunsen Peak is a mountain, and Comet Geyser is a geyser."
+sample_image = ExtResource("2_image")
+image_caption = "PIA26313 · March 12, 2024 (sol 1088). Base of the core collected from Bunsen Peak."
+image_credit = "NASA/JPL-Caltech"
+image_url = "https://images-assets.nasa.gov/image/PIA26313/PIA26313~orig.jpg"
+source_name = "JPL – Rock Sampled by NASA's Perseverance Embodies Why Rover Came to Mars"
+source_url = "https://www.jpl.nasa.gov/news/rock-sampled-by-nasas-perseverance-embodies-why-rover-came-to-mars/"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

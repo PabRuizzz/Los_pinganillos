@@ -7,4 +7,4 @@
 script = ExtResource("1_main")
 
 [node name="MarsBase" parent="." unique_id=421647589 instance=ExtResource("2_world")]
-position = Vector2(-106, -85)
+position = Vector2(123, 123)

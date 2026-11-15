@@ -24,7 +24,6 @@ var completed := false
 
 func _ready() -> void:
 	board.piece_placed.connect(_on_piece_placed)
-	$Interface/HUD/Content/NewCircuit.pressed.connect(start_new_puzzle)
 	$Interface/HUD/Content/DebugHitboxes.toggled.connect(board.set_debug_hitboxes)
 	get_viewport().size_changed.connect(_layout)
 	_layout()
@@ -38,7 +37,7 @@ func start_new_puzzle() -> void:
 	current_seed = rng.seed
 	puzzle = generator.generate(rng, 8, 8)
 	if puzzle.is_empty():
-		status_label.text = "No se pudo generar el circuito. Pulsa Nuevo circuito."
+		status_label.text = "No se pudo generar el circuito."
 		return
 	board.build(puzzle)
 	_layout()

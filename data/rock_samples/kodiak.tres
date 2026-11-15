@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3 uid="uid://bj6mg38aitdnj"]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dorldi0ugry15" path="res://assets/science/rock_samples/kodiak.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "kodiak"
+sample_name = "Kodiak"
+rock_type = "Layered sedimentary rocks (remnant of a delta)"
+location = "Kodiak butte, western Jezero Crater delta"
+rover = "Perseverance"
+origin = 1
+description = "A flat-topped hill, an isolated remnant of Jezero's western delta. Its layers show that river sediments built up gradually in a delta, followed by floods. Perseverance photographed it from a distance; it did not collect samples from it."
+interesting_fact = "Kodiak's tilted layers provided field evidence that Jezero once had a lake with a delta. The rover was about 2.2 km away when it took the image."
+sample_image = ExtResource("2_image")
+image_caption = "PIA24802 · Mastcam-Z, April 18, 2021. Enhanced color highlights differences between the layers."
+image_credit = "NASA/JPL-Caltech/ASU/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA24802/PIA24802~large.jpg"
+source_name = "NASA/JPL Photojournal – PIA24802"
+source_url = "https://photojournal.jpl.nasa.gov/catalog/PIA24802"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

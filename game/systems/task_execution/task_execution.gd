@@ -2,6 +2,12 @@ extends Node
 
 signal task_started(station, task_name)
 signal task_finished(station, task_name, time_spent)
+# Empezó un día: la jornada está completa y ya se pueden iniciar tareas.
+# day es el número del día que empieza (SimulationTime.day).
+signal day_started(day)
+# Terminó un día. Al emitirse, los recursos diarios ya se aplicaron y
+# SimulationTime.day ya es el día NUEVO; la jornada nueva aún no empieza
+# (day_started llega justo después).
 signal day_finished
 
 var current_station = ""
@@ -9,16 +15,22 @@ var current_task = ""
 var current_task_time_cost = 0
 var day_active = false
 
+# Empieza el día actual (SimulationTime.day). No hace nada si el día ya está
+# activo, para que el reinicio diario no pueda ocurrir dos veces.
+# Lo llaman main.gd (partida nueva) y finish_day() (día siguiente).
 func start_day():
+	if day_active:
+		return
+
 	# Reiniciamos el tiempo en el Autoload de tiempo
-	SimulationTime.tiempo_jornada = SimulationTime.MAX_JOURNEY_TIME
-	SimulationTime.simulation_time_changed.emit()
+	SimulationTime.reset_daily_time()
 	
 	day_active = true
 	current_station = ""
 	current_task = ""
 	current_task_time_cost = 0
 	Resources.oxygen = 100
+	day_started.emit(SimulationTime.day)
 
 
 func start_task(station: String, task_name: String) -> bool:
@@ -56,6 +68,15 @@ func finish_task():
 	var finished_name = current_task
 	var spent = current_task_time_cost
 
+	# Descontamos los recursos que cuesta la tarea (se revisaron en start_task)
+	var costs = StationCost.station_costs[finished_station][finished_name]
+	if costs.has("energy"):
+		Resources.modify_energy(-costs["energy"])
+	if costs.has("water"):
+		Resources.modify_water(-costs["water"])
+	if costs.has("food"):
+		Resources.modify_food(-costs["food"])
+
 	# Cambiamos el estado de la estación según la tarea realizada
 	update_station_state(finished_station, finished_name)
 
@@ -69,6 +90,13 @@ func finish_task():
 
 	if SimulationTime.tiempo_jornada <= 0:
 		finish_day()
+
+
+# Libera la tarea actual sin aplicar efectos (por ejemplo, si el jugador sale con Esc).
+func cancel_task():
+	current_station = ""
+	current_task = ""
+	current_task_time_cost = 0
 
 
 func update_station_state(station: String, task_name: String):
@@ -110,28 +138,43 @@ func update_station_state(station: String, task_name: String):
 			StationCost.greenhouse_state = nuevo_estado
 
 
+# Se puede terminar el día a petición del jugador solo si el día está activo
+# y no hay ninguna tarea en curso (no se interrumpe una actividad a medias).
+func can_end_day() -> bool:
+	return day_active and current_task == ""
+
+
+# Petición del jugador (botón "Terminar día" del HUD) para terminar el día antes
+# de agotar la jornada. Usa el mismo finish_day() que el fin automático, así que
+# los recursos diarios, el rover y los eventos del día siguiente pasan igual.
+# Devuelve false, sin cambiar nada, si can_end_day() es false.
+func request_end_day() -> bool:
+	if not can_end_day():
+		return false
+	finish_day()
+	return true
+
+
+# Termina el día actual y empieza el siguiente. Se ejecuta una sola vez por día:
+# si el día no está activo (ya terminó o nunca empezó) no hace nada.
+# Lo llama finish_task() al agotarse la jornada y request_end_day() cuando el
+# jugador termina el día antes de tiempo (los recursos diarios se aplican igual,
+# no se pueden saltar).
+#
+# Orden:
+#   1. day_active = false           -> no se pueden iniciar más tareas
+#   2. se libera la tarea en curso  -> sin efectos ni costo de tiempo
+#   3. Resources.apply_daily_station_changes() -> recursos del día que termina
+#   4. SimulationTime.advance_day() -> SimulationTime.day ya es el día nuevo
+#   5. day_finished                 -> p. ej. el rover revisa si le toca volver
+#   6. start_day()                  -> jornada completa, oxígeno, day_started
 func finish_day():
+	if not day_active:
+		return
+
 	day_active = false
-	SimulationTime.day += 1
-
-	# 1. Planta de energía (modifica energía)
-	var estado_energia = StationCost.energy_plant_state
-	var cambio_energia = StationCost.station_costs["energy_plant"][estado_energia]["energy"]
-	Resources.modify_energy(cambio_energia)
-
-	# 2. Soporte vital (modifica energía)
-	var estado_soporte = StationCost.life_support_state
-	var cambio_soporte = StationCost.station_costs["life_support"][estado_soporte]["energy"]
-	Resources.modify_energy(cambio_soporte)
-
-	# 3. Estación de agua (modifica agua)
-	var estado_agua = StationCost.water_station_state
-	var cambio_agua = StationCost.station_costs["water_station"][estado_agua]["water"]
-	Resources.modify_water(cambio_agua)
-
-	# 4. Invernadero (modifica comida)
-	var estado_comida = StationCost.greenhouse_state
-	var cambio_comida = StationCost.station_costs["greenhouse"][estado_comida]["food"]
-	Resources.modify_food(cambio_comida)
-
+	cancel_task()
+	Resources.apply_daily_station_changes()
+	SimulationTime.advance_day()
 	day_finished.emit()
+	start_day()

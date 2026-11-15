@@ -19,8 +19,8 @@ func fit_panels() -> void:
 		return
 	global_position = bounds.get_center()
 	var screen := get_viewport_rect().size
-	var factor := minf(screen.x / 900.0, screen.y / 610.0)
-	var fit := minf(800.0 / maxf(bounds.size.x, 1), 370.0 / maxf(bounds.size.y, 1))
-	zoom = Vector2.ONE * factor * fit
+	# Reserve room for fixed HUD, frames and per-panel readouts.
+	var fit := minf(screen.x * 0.94 / (bounds.size.x + 16.0), screen.y * 0.74 / (bounds.size.y + 40.0))
+	zoom = Vector2.ONE * fit
 	offset = Vector2.ZERO
 	force_update_scroll()
