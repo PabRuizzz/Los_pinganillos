@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Proyecto_Marte"
-run/main_scene="res://game/main/main.tscn"
+run/main_scene="res://game/ui/main_menu/menu_principal.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://assets/sprites/icon.svg"
 
