@@ -9,7 +9,7 @@ extends HBoxContainer
 		icon = value
 		if is_node_ready():
 			artwork.texture = value
-@export var display_name := "Recurso":
+@export var display_name := "Resource":
 	set(value):
 		display_name = value
 		if is_node_ready():

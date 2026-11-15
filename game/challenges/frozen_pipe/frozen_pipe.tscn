@@ -26,7 +26,7 @@ offset_top = 10.0
 offset_right = 960.0
 offset_bottom = 55.0
 mouse_filter = 2
-text = "TUBERÍA CONGELADA"
+text = "FROZEN PIPE"
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 28
@@ -43,7 +43,7 @@ offset_top = 0.0
 offset_right = 950.0
 offset_bottom = 55.0
 mouse_filter = 2
-text = "Repara ambas tuberías y mantén pulsados sus tornillos."
+text = "Repair both pipes and hold down the screws."
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_override_font_sizes/font_size = 20
@@ -68,7 +68,7 @@ offset_top = 440.0
 offset_right = 190.0
 offset_bottom = 510.0
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Straight" index="2"]
-text = "RECTA
+text = "STRAIGHT
 --"
 [node name="Curve" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 235.0
@@ -76,7 +76,7 @@ offset_top = 440.0
 offset_right = 365.0
 offset_bottom = 510.0
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Curve" index="2"]
-text = "CURVA
+text = "BEND
 L"
 [node name="Valve" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 410.0
@@ -84,7 +84,7 @@ offset_top = 440.0
 offset_right = 540.0
 offset_bottom = 510.0
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Valve" index="2"]
-text = "VÁLVULA
+text = "VALVE
 (X)"
 [node name="Joint" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 585.0
@@ -92,7 +92,7 @@ offset_top = 440.0
 offset_right = 715.0
 offset_bottom = 510.0
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Joint" index="2"]
-text = "JUNTA
+text = "COUPLING
 [ ]"
 [node name="Elbow" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 760.0
@@ -100,7 +100,7 @@ offset_top = 440.0
 offset_right = 890.0
 offset_bottom = 510.0
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Elbow" index="2"]
-text = "CODO
+text = "ELBOW
 J"
 [node name="Result" type="Label" parent="Content"]
 offset_left = 0.0

@@ -1,23 +1,23 @@
 extends Node
 
-# Arranque de la partida: inicia el día 1. Los eventos los lanza Events
-# al empezar cada día, siguiendo su PLAN (game/systems/events/events.gd).
-# Es autoload para que funcione sin importar cuál sea la escena principal
-# (las puertas recargan las escenas, así que esto no puede vivir en una de ellas).
+const STARTING_SCENE := "res://game/stations/campament/campament.tscn"
 
-# Desactiva este interruptor para volver al primer evento aleatorio.
-const START_WITH_SANDSTORM := true
-const EVENT_CHANCE := 1.0
+func _ready() -> void:
+	get_window().title = "Five Nights on Mars"
+	_start_direct_scene.call_deferred()
 
+func _start_direct_scene() -> void:
+	# Running a world scene directly in Godot should still start a day.
+	if get_tree().current_scene != null and not get_tree().has_group("main_menu"):
+		start_game()
 
-func _ready():
-	# Diferido para que el resto de autoloads (Alert, HUD...) ya estén listos
-	start_game.call_deferred()
+func enter_game() -> Error:
+	var tree := get_tree()
+	var error := tree.change_scene_to_file(STARTING_SCENE)
+	if error == OK:
+		tree.scene_changed.connect(start_game, CONNECT_ONE_SHOT)
+	return error
 
-
-func start_game():
+func start_game() -> void:
+	# Events owns the daily plan and reacts to TaskExecution.day_started.
 	TaskExecution.start_day()
-	if START_WITH_SANDSTORM:
-		Events.trigger_event(Events.EventTypes.TORMENTA_ARENA)
-	else:
-		Events.trigger_random_event(EVENT_CHANCE)

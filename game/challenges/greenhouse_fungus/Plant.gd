@@ -8,9 +8,9 @@ func show_state(uv_on: bool, locked: bool) -> void:
 	$UVShade.visible = uv_on
 	disabled = locked
 	if not uv_on:
-		$Health.text = "Sin examinar"
+		$Health.text = "Unscanned"
 	else:
-		$Health.text = "Infectada" if infected else "Sana"
+		$Health.text = "Infected" if infected else "Healthy"
 	$Health.modulate = Color("ffc58a") if uv_on and infected else Color("a5e5c5")
 
 func show_spray() -> void:

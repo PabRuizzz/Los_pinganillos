@@ -33,7 +33,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("Barrier")
 theme_override_font_sizes/font_size = 14
-text = "CERRAR"
+text = "CLOSE"
 script = ExtResource("1")
 
 [node name="Line" type="ColorRect" parent="."]

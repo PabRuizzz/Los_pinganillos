@@ -9,7 +9,7 @@ extends HBoxContainer
 		icon = value
 		if is_node_ready():
 			artwork.texture = value
-@export var display_name := "Estación":
+@export var display_name := "Station":
 	set(value):
 		display_name = value
 		if is_node_ready():
@@ -37,6 +37,6 @@ func set_state(state: String):
 			color = degradado_color
 		"AVERIADO":
 			color = averiado_color
-	state_label.text = state
+	state_label.text = StationCost.get_state_label(state)
 	state_label.add_theme_color_override("font_color", color)
 	state_light.color = color

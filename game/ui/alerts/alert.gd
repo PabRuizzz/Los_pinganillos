@@ -56,11 +56,11 @@ func _on_event_started(_type, event_title: String, event_message: String):
 
 
 func _on_event_resolved(_type):
-	show_alert("Evento resuelto", "La estación volvió a operar.", 4.0, Kind.SUCCESS)
+	show_alert("Event resolved", "The station is operational again.", 4.0, Kind.SUCCESS)
 
 
 func _on_oxygen_low():
-	show_alert("Oxígeno bajo", "Regresa a la base para recuperar oxígeno.", 6.0, Kind.DANGER)
+	show_alert("Low oxygen", "Return to base to restore your oxygen.", 6.0, Kind.DANGER)
 
 
 # Una tarea no pudo empezar porque no queda tiempo en la jornada. Los minutos vienen
@@ -68,17 +68,17 @@ func _on_oxygen_low():
 func _on_insufficient_time(_station, _task_name, required: int, available: int):
 	var m: String
 	if required > SimulationTime.MAX_JOURNEY_TIME:
-		m = "Esta tarea dura %s y un día solo tiene %s." % [format_time(required), format_time(SimulationTime.MAX_JOURNEY_TIME)]
+		m = "This task takes %s, and a day only lasts %s." % [format_time(required), format_time(SimulationTime.MAX_JOURNEY_TIME)]
 	else:
-		m = "Necesitas %s y te quedan %s.\nTermina el día o elige una tarea más corta." % [format_time(required), format_time(available)]
-	show_alert("Tiempo insuficiente", m, 6.0, Kind.WARNING, "insufficient_time")
+		m = "You need %s and have %s left.\nEnd the day or choose a shorter task." % [format_time(required), format_time(available)]
+	show_alert("Not enough time", m, 6.0, Kind.WARNING, "insufficient_time")
 
 
 # Una tarea no pudo empezar porque no hay energía suficiente (costo "energy" de la
 # tarea en StationCost frente a Resources.energy).
 func _on_insufficient_energy(_station, _task_name, required: int, available: int):
-	var m := "Necesitas %d de energía y tienes %d.\nRepara la planta de energía o elige otra tarea." % [required, available]
-	show_alert("Energía insuficiente", m, 6.0, Kind.WARNING, "insufficient_energy")
+	var m := "You need %d energy and have %d.\nRepair the power plant or choose another task." % [required, available]
+	show_alert("Not enough energy", m, 6.0, Kind.WARNING, "insufficient_energy")
 
 
 # Tiempo simulado con el mismo formato que el HUD: 240 -> "4:00 h".

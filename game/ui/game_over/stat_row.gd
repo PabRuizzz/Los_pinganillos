@@ -3,7 +3,7 @@ extends HBoxContainer
 
 # Fila "Nombre ........ valor" del resumen de la misión.
 
-@export var display_name := "Dato":
+@export var display_name := "Stat":
 	set(value):
 		display_name = value
 		if is_node_ready():

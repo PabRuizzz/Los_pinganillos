@@ -47,7 +47,7 @@ offset_right = 800.0
 offset_bottom = 55.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 17
-text = "MANTENIMIENTO SOLAR  /  SECTOR 06\nMantén clic izquierdo y retira el polvo · Objetivo: 100% en cada panel"
+text = "SOLAR MAINTENANCE  /  SECTOR 06\nHold the left mouse button to remove dust · Target: 100% on every panel"
 horizontal_alignment = 1
 [node name="Panels" type="Node2D" parent="World"]
 [node name="Panel1" parent="World/Panels" instance=ExtResource("2")]
@@ -82,7 +82,7 @@ offset_right = 800.0
 offset_bottom = 580.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 15
-text = "0/6 paneles al 100%"
+text = "0/6 panels fully clean"
 horizontal_alignment = 1
 [node name="WaterSpray" type="Node2D" parent="World"]
 visible = false

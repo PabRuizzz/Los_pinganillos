@@ -22,7 +22,7 @@ func run() -> void:
 		panel.clean_count = 399
 		panel._refresh_cells()
 		panel._update_readout()
-		assert(panel.get_node("Readout").text == "99% LIMPIO")
+		assert(panel.get_node("Readout").text == "99% CLEAN")
 	game._update_progress()
 	assert(not game.completed)
 	for i in 6:

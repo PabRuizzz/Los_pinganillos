@@ -38,26 +38,26 @@ func _layout() -> void:
 func _toggle_uv(enabled: bool) -> void:
 	uv_on = enabled
 	if uv_on:
-		feedback.text = "Coloca barreras en las rutas ámbar antes de abrir una planta infectada."
+		feedback.text = "Close the barriers on amber paths before treating an infected plant."
 	else:
-		feedback.text = "Activa la luz UV para localizar hongos y rutas de contagio."
+		feedback.text = "Turn on the UV light to reveal fungus and spread routes."
 	_refresh()
 
 func _toggle_barrier(route: Button) -> void:
 	if finished:
 		return
 	route.closed = not route.closed
-	feedback.text = "Barrera colocada." if route.closed else "Barrera retirada."
+	feedback.text = "Barrier closed." if route.closed else "Barrier opened."
 	_refresh()
 
 func _open_treatment(plant: Button) -> void:
 	if finished or is_instance_valid(treatment):
 		return
 	if not uv_on:
-		feedback.text = "Enciende la luz UV para localizar el hongo."
+		feedback.text = "Turn on the UV light to find the fungus."
 		return
 	if not plant.infected:
-		feedback.text = "Esta planta está sana."
+		feedback.text = "This plant is healthy."
 		return
 
 	treatment = TREATMENT_SCENE.instantiate()
@@ -88,10 +88,10 @@ func _finish_treatment(plant: Button) -> void:
 	treatment = null
 	content.show()
 	plant.show_spray()
-	feedback.text = "Maceta tratada." if exposed.is_empty() else "Maceta tratada. El hongo se propagó por las rutas abiertas."
+	feedback.text = "Plant treated." if exposed.is_empty() else "Plant treated. The fungus spread along open paths."
 	if plants.all(func(item): return not item.infected):
 		finished = true
-		feedback.text = "Brote controlado. Todas las plantas están sanas."
+		feedback.text = "Outbreak contained. All plants are healthy."
 	_refresh()
 	if finished:
 		completed.emit()
@@ -118,12 +118,12 @@ func _refresh() -> void:
 	for route in routes:
 		var connects_blight: bool = plants[route.left_plant].infected != plants[route.right_plant].infected
 		route.show_state(uv_on and connects_blight, finished)
-	uv_button.text = "LUZ UV  ·  ENCENDIDA" if uv_on else "ENCENDER LUZ UV"
+	uv_button.text = "UV LIGHT  ·  ON" if uv_on else "TURN ON UV LIGHT"
 	uv_button.disabled = finished
 	if not uv_on:
-		status.text = "Infección sin examinar"
+		status.text = "Infection not yet scanned"
 	elif infected_count == 0:
-		status.text = "4/4 plantas sanas"
+		status.text = "4/4 plants healthy"
 	else:
-		status.text = "%d/4 sanas  ·  %s" % [plants.size() - infected_count,
-			"Brote contenido" if _open_neighbors().is_empty() else "Contagio abierto"]
+		status.text = "%d/4 healthy  ·  %s" % [plants.size() - infected_count,
+			"Outbreak contained" if _open_neighbors().is_empty() else "Fungus can spread"]

@@ -94,10 +94,10 @@ func _update_progress() -> void:
 		total_cells += panel.states.size()
 		if panel.clean_ratio() >= REQUIRED_RATIO:
 			ready_panels += 1
-	status.text = "%d/6 paneles al 100%%" % ready_panels
+	status.text = "%d/6 panels fully clean" % ready_panels
 	cleaning_progress_changed.emit(float(total_clean) / maxi(total_cells, 1))
 	if ready_panels == 6 and not completed:
 		completed = true
 		_stop_spray()
-		status.text = "¡Limpieza completada! Los 6 paneles están completamente limpios."
+		status.text = "Cleaning complete! All six panels are fully clean."
 		cleaning_completed.emit()

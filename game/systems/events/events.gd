@@ -34,7 +34,7 @@ const PLAN = {
 }
 
 # Segundos (reales) entre resolver un evento y que empiece el siguiente,
-# para que se alcance a leer la alerta de "Evento resuelto".
+# para que se alcance a leer la alerta de "Event resolved".
 const NEXT_EVENT_DELAY = 5.0
 
 # Tiempo real antes de que hongos / tuberías escalen
@@ -47,11 +47,11 @@ const OXYGEN_DRAIN_RATE = 0.4    # oxígeno sin soporte vital: 100 -> 0 en 250 s
 
 # Título y mensaje de la alerta de cada evento
 const EVENT_INFO = {
-	EventTypes.TORMENTA_ARENA: ["Tormenta de arena", "La planta de energía está averiada. Batería de emergencia activa."],
-	EventTypes.PERDIDA_PRESION: ["Pérdida de presión", "El soporte vital falló. El oxígeno está bajando."],
-	EventTypes.FALTA_ENERGIA: ["Falta de energía", "La planta de energía está degradada. Dale mantenimiento."],
-	EventTypes.CONGELAMIENTO_TUBERIAS: ["Tuberías congeladas", "Repara la estación de agua antes de 2 minutos o el invernadero también se averiará."],
-	EventTypes.HONGOS_INVERNADERO: ["Hongos en el invernadero", "Da mantenimiento al invernadero antes de 2 minutos o se averiará."],
+	EventTypes.TORMENTA_ARENA: ["Sandstorm", "The power plant is down. The emergency battery is active."],
+	EventTypes.PERDIDA_PRESION: ["Pressure Loss", "Life support has failed. Oxygen is dropping."],
+	EventTypes.FALTA_ENERGIA: ["Power Shortage", "The power plant is degraded. Perform maintenance."],
+	EventTypes.CONGELAMIENTO_TUBERIAS: ["Frozen Pipes", "Repair the water station within two minutes or the greenhouse will fail too."],
+	EventTypes.HONGOS_INVERNADERO: ["Greenhouse Fungus", "Service the greenhouse within two minutes or it will fail."],
 }
 
 signal event_started(type: EventTypes, title: String, message: String)

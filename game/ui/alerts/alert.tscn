@@ -104,7 +104,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_title")
 theme_override_font_sizes/font_size = 40
-text = "Evento"
+text = "Event"
 
 [node name="Message" type="Label" parent="Panel/VBox/Content/Texts"]
 custom_minimum_size = Vector2(600, 0)
@@ -112,7 +112,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.84, 0.92, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 30
-text = "Mensaje del evento"
+text = "Event message"
 autowrap_mode = 3
 
 [node name="TimeBar" type="ProgressBar" parent="Panel/VBox"]

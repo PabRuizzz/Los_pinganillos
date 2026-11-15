@@ -109,14 +109,14 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_title")
 theme_override_font_sizes/font_size = 20
-text = "EVENTO ACTIVO"
+text = "ACTIVE EVENT"
 
 [node name="EventName" type="Label" parent="Card/VBox/Header/HeaderTexts"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_title")
 theme_override_font_sizes/font_size = 34
-text = "Tormenta de arena"
+text = "Sandstorm"
 
 [node name="Divider" type="Panel" parent="Card/VBox"]
 custom_minimum_size = Vector2(0, 2)
@@ -130,7 +130,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.84, 0.92, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 26
-text = "Repara la planta de energía"
+text = "Repair the power plant"
 autowrap_mode = 3
 
 [node name="Counter" type="VBoxContainer" parent="Card/VBox"]
@@ -149,7 +149,7 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.62, 0.67, 0.78, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 24
-text = "Batería de emergencia"
+text = "Emergency Battery"
 
 [node name="CounterValue" type="Label" parent="Card/VBox/Counter/CounterRow"]
 layout_mode = 2
