@@ -46,11 +46,11 @@ tile_set = SubResource("TileSet_c7vpv")
 
 [node name="puerta" parent="." unique_id=1532978903 instance=ExtResource("3_18tqn")]
 position = Vector2(568, 109)
-cuarto_destino = "uid://jexu5nqaai6d"
+cuarto_destino = "res://game/world/rooms/cuarto2.tscn"
 
 [node name="puerta2" parent="." unique_id=1675144440 instance=ExtResource("3_18tqn")]
 position = Vector2(567, 585)
-cuarto_destino = "uid://djnjchenqclp2"
+cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("6_71gpl")]
 position = Vector2(-17, 58)

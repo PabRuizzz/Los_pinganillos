@@ -15,6 +15,7 @@ func run_checks() -> void:
 		"uid://c48fronko4746": "res://game/world/rooms/cuarto1.tscn",
 		"uid://jexu5nqaai6d": "res://game/world/rooms/cuarto2.tscn",
 		"uid://b6tv63xxtm0pj": "res://game/world/rooms/puerta.tscn",
+		"uid://djnjchenqclp2": "res://game/stations/greenhouse/greenhouse.tscn",
 		"uid://caqmvqbn661my": "res://game/main/main.gd",
 		"uid://bvjydf0kyxvc0": "res://game/stations/greenhouse/greenhouse.gd",
 		"uid://fbmnrp4uqmtk": "res://game/stations/power/power_station.gd"
@@ -34,6 +35,6 @@ func run_checks() -> void:
 			if target is PackedScene:
 				check(not target.resource_path.contains("-MSI"), "Door resolves to a discarded copy")
 		if path.ends_with("cuarto1.tscn"):
-			check(load(current_scene.get_node("puerta2").cuarto_destino).resource_path == "res://game/stations/greenhouse/greenhouse.tscn", "The original room must keep its greenhouse exit")
+			check(current_scene.get_node("puerta2").cuarto_destino == "res://game/stations/greenhouse/greenhouse.tscn", "The original room must keep its greenhouse exit")
 	print("SCENE CHECKS: 6 scenes, canonical UID resolution and door targets; failures: ", failures)
 	quit(0 if failures == 0 else 1)

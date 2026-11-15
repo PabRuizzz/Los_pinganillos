@@ -605,7 +605,7 @@ animation = &"invernadero"
 [node name="puerta" parent="." unique_id=1675144440 instance=ExtResource("10_8do8n")]
 position = Vector2(70, -283)
 scale = Vector2(0.9, 1.1)
-cuarto_destino = "uid://djnjchenqclp2"
+cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
 
 [node name="hitbox" type="Node2D" parent="." unique_id=1489311480]
 
