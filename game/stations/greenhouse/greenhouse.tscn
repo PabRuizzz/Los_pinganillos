@@ -1076,4 +1076,3 @@ station_id = "greenhouse"
 maintenance_minigame = ExtResource("10_fungus")
 repair_minigame = ExtResource("10_fungus")
 operational_message = "Las plantas del invernadero están sanas"
-repair_events = Array[int]([5])

@@ -2,7 +2,9 @@ extends CanvasLayer
 
 # Pantalla de fin de día con forma de monitor.
 # - Izquierda: recursos (inicio del día -> fin del día) y estado de las estaciones.
-# - Derecha: la muestra que descubrió el rover ese día, con una animación de escaneo.
+# - Derecha: la muestra que trajo el rover ese día, con una animación de escaneo.
+#   Las muestras solo las descubre el rover (RoverSampleDiscoveryBridge); esta pantalla
+#   solo las muestra. Si el rover no volvió ese día, dice que no trajo muestras.
 #
 # Es autoload: aparece sola cuando termina un día (TaskExecution.day_finished),
 # pausa el juego y se cierra con "Siguiente día".
@@ -13,9 +15,9 @@ extends CanvasLayer
 
 signal summary_closed
 
-# Si es true, cada día terminado descubre una muestra nueva del catálogo.
-# Ponlo en false si prefieres llamar show_summary() tú mismo con la muestra.
-@export var discover_sample_each_day := true
+# Si es true, además del rover, cada día terminado descubre una muestra nueva del
+# catálogo por su cuenta. Está en false: las muestras las trae solo el rover.
+@export var discover_sample_each_day := false
 
 # Duración de las partes de la animación (segundos)
 @export var intro_time := 0.45
@@ -69,8 +71,9 @@ func _ready():
 	root_control.visible = false
 	next_button.pressed.connect(close)
 
-	_discovery = SampleDiscovery.new()
-	add_child(_discovery)
+	if discover_sample_each_day:
+		_discovery = SampleDiscovery.new()
+		add_child(_discovery)
 
 	TaskExecution.day_started.connect(_on_day_started)
 	TaskExecution.day_finished.connect(_on_day_finished)
@@ -83,18 +86,28 @@ func _on_day_started(_day):
 
 func _on_day_finished():
 	var finished_day = SimulationTime.day - 1
-	var sample: RockSampleData = null
+	# Se leen ahora porque start_day() (justo después) vuelve a llenar el oxígeno
+	var before = _day_start
+	var after = _read_resources()
+	# Diferido: el regreso del rover también se procesa con day_finished (en Marte),
+	# así se espera a que termine antes de buscar la muestra que trajo.
+	_finish_day_summary.call_deferred(finished_day, before, after)
+
+
+func _finish_day_summary(finished_day: int, before: Dictionary, after: Dictionary):
+	var samples := RoverSampleDiscoveryBridge.take_unreported_samples()
 	if discover_sample_each_day:
-		sample = _pick_sample()
-		if sample != null:
-			samples_this_run.append(sample)
+		var extra = _pick_sample()
+		if extra != null:
+			samples.append(extra)
+	samples_this_run.append_array(samples)
+	var sample: RockSampleData = samples[0] if not samples.is_empty() else null
 
 	# Si el día terminó en victoria o derrota, manda la pantalla final
 	# (la muestra de ese día igual cuenta y aparece en su galería)
 	if GameOver.root_control.visible:
 		return
-	# Se leen ahora porque start_day() (justo después) vuelve a llenar el oxígeno
-	show_summary(finished_day, sample, _day_start, _read_resources())
+	show_summary(finished_day, sample, before, after)
 
 
 # Muestra la pantalla. sample puede ser null (el rover no trajo nada).
