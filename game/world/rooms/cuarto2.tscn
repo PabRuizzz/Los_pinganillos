@@ -47,10 +47,18 @@ tile_set = SubResource("TileSet_di7h7")
 [node name="puerta" parent="." unique_id=1532978903 instance=ExtResource("3_di7h7")]
 position = Vector2(568, 110)
 cuarto_destino = "res://game/world/rooms/cuarto1.tscn"
+nombre_spawn = "SpawnTop"
 
 [node name="puerta2" parent="." unique_id=1675144440 instance=ExtResource("3_di7h7")]
 position = Vector2(568, 586)
 cuarto_destino = "res://game/world/rooms/cuarto1.tscn"
+nombre_spawn = "SpawnBottom"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_sspw2")]
-position = Vector2(-18, 46)
+position = Vector2(607.75, 343.5)
+
+[node name="SpawnTop" type="Marker2D" parent="."]
+position = Vector2(608, 210)
+
+[node name="SpawnBottom" type="Marker2D" parent="."]
+position = Vector2(608, 550)

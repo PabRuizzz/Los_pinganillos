@@ -702,12 +702,14 @@ collision_mask = 3
 position = Vector2(-13.999999, -279)
 scale = Vector2(0.9, 1.1)
 cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
+nombre_spawn = "SpawnFromMars"
 
 [node name="puerta2" parent="hitbox/StaticBody2D" unique_id=1665512416 instance=ExtResource("10_8do8n")]
 position = Vector2(356, -650)
 scale = Vector2(0.9, 1.1)
 script = ExtResource("8_8do8n")
-cuarto_destino = "uid://c6cfntway4iwp"
+cuarto_destino = "res://game/stations/campament/campament.tscn"
+nombre_spawn = "SpawnFromMars"
 
 [node name="greenhs_hit" type="CollisionPolygon2D" parent="hitbox/StaticBody2D" unique_id=527892531]
 position = Vector2(-36.259186, -216.27185)
@@ -746,7 +748,7 @@ position = Vector2(165.01187, -583.6668)
 polygon = PackedVector2Array(4.9881287, 4.666809, 187.98813, 4.666809, 187.98813, -78.33319, 267.98813, -80.33319, 273.98813, 4.666809, 458.98813, 5.666809, 482.98813, -21.33319, 472.98813, -214.33319, 449.98813, -239.33319, 321.98813, -237.33319, 304.98813, -261.3332, 148.98813, -260.3332, 130.98813, -231.33319, 13.988129, -235.33319, -15.011871, -212.33319, -24.011871, -21.33319)
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_74yx0")]
-position = Vector2(-385, -617)
+position = Vector2(240.75, -319.5)
 
 [node name="EnergyStation" type="Area2D" parent="." unique_id=862025961]
 visible = false
@@ -771,9 +773,9 @@ shape = SubResource("RectangleShape2D_88uyf")
 position = Vector2(60, -138)
 
 [node name="greenhousespw" type="Marker2D" parent="spawpoints" unique_id=1383847756]
-position = Vector2(21, -4)
+position = Vector2(-37.55, -42)
 gizmo_extents = 856.5
 
 [node name="campspw" type="Marker2D" parent="spawpoints" unique_id=1569309181]
-position = Vector2(378, -378)
+position = Vector2(332.45, -412)
 gizmo_extents = 589.0

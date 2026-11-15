@@ -6174,11 +6174,11 @@ tile_set = SubResource("TileSet_fcfdb")
 
 [node name="puerta" parent="." unique_id=1675144440 instance=ExtResource("2_cv6nd")]
 position = Vector2(276, 339)
-cuarto_destino = "uid://bu44bv2ir0kb5"
+cuarto_destino = "res://game/stations/mars/mars.tscn"
 nombre_spawn = "campspw"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("3_12nqk")]
-position = Vector2(-274, 10)
+position = Vector2(351.75, 307.5)
 
 [node name="hitbox" type="StaticBody2D" parent="." unique_id=2074451542]
 
@@ -6217,3 +6217,6 @@ shape = SubResource("RectangleShape2D_44doc")
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="hitbox" unique_id=1636477701]
 position = Vector2(604, 208)
 shape = SubResource("RectangleShape2D_44doc")
+
+[node name="SpawnFromMars" type="Marker2D" parent="."]
+position = Vector2(316.5, 295)
