@@ -20,7 +20,6 @@ config/icon="res://assets/sprites/icon.svg"
 Resources="*uid://dt1f54qpgsmmb"
 SimulationTime="*uid://ciqtwt15erc0g"
 StationCost="*uid://c4rop7fkc37ea"
-StationManager="*uid://cwqbm3n5oof6o"
 TaskExecution="*uid://bdgybgsf0og72"
 Events="*uid://cvhnrdjeius14"
 
@@ -28,6 +27,8 @@ Events="*uid://cvhnrdjeius14"
 
 window/size/viewport_width=2560
 window/size/viewport_height=1440
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
