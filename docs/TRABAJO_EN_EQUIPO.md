@@ -15,6 +15,9 @@
 - Incluye las escenas, scripts, `.gd.uid`, imágenes originales y sus `.import`.
   La carpeta generada `.godot/` debe permanecer fuera de Git.
 - Incluye todas las dependencias nuevas de un minijuego en el mismo commit.
+- Para campos de texto que se usan como rutas (por ejemplo, `@export_file` y
+  `change_scene_to_file`), guarda rutas `res://...`; reserva los UID para
+  referencias de recursos serializadas por Godot.
 - Evita editar a la vez la misma escena que otro compañero.
 - Mantén el clon de trabajo fuera de una carpeta sincronizada por OneDrive para
   que Git gestione las versiones sin copias adicionales del sincronizador.
