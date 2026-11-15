@@ -1,5 +1,73 @@
 [gd_scene format=3 uid="uid://cnmbj6uouof2h"]
 
-[node name="Menu" type="Control" unique_id=867806117]
+[ext_resource type="Texture2D" uid="uid://bae12ccmfddec" path="res://assets/sprites/Fondo_Marte.jpg" id="1_aek0h"]
+[ext_resource type="Script" uid="uid://ct8h2c2plmik1" path="res://game/ui/main_menu/menu_principal.gd" id="2_menu"]
+
+[sub_resource type="SystemFont" id="SystemFont_pqi7x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sdtnk"]
+font = SubResource("SystemFont_pqi7x")
+font_size = 64
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqi7x"]
+bg_color = Color(0, 0, 0, 0.45000002)
+
+[node name="menu_principal" type="Control" unique_id=867806117]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_menu")
+
+[node name="FondoMarte" type="TextureRect" parent="." unique_id=943289974]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_aek0h")
+
+[node name="Titulo" type="Label" parent="." unique_id=1432101459]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 153.0
+offset_bottom = 109.0
+text = "Five Night's At Mars
+"
+label_settings = SubResource("LabelSettings_sdtnk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelBotones" type="PanelContainer" parent="." unique_id=427936076]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 120.04
+offset_top = -1260.0
+offset_right = 243.04001
+offset_bottom = -1260.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqi7x")
+
+[node name="Botones" type="VBoxContainer" parent="." unique_id=1760189186]
+layout_mode = 0
+offset_left = 120.04
+offset_top = -81.0
+offset_right = 243.04001
+offset_bottom = 20.0
+alignment = 1
+
+[node name="startbutton" type="Button" parent="Botones" unique_id=207125901]
+layout_mode = 2
+text = "Iniciar"
+
+[node name="CollectiblesButton" type="Button" parent="Botones" unique_id=946043935]
+layout_mode = 2
+text = "Coleccionables"
+
+[node name="ExitButton" type="Button" parent="Botones" unique_id=1335717807]
+layout_mode = 2
+text = "Salir"
