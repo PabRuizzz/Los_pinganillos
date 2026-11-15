@@ -56,9 +56,7 @@ func _input(event: InputEvent) -> void:
 				_clean_segment(_last_point, point)
 				_last_point = point
 	elif event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_R:
-			reset()
-		elif event.keycode == KEY_ESCAPE:
+		if event.keycode == KEY_ESCAPE:
 			_stop_spray()
 
 func _notification(what: int) -> void:
@@ -96,10 +94,10 @@ func _update_progress() -> void:
 		total_cells += panel.states.size()
 		if panel.clean_ratio() >= REQUIRED_RATIO:
 			ready_panels += 1
-	status.text = "%d/6 paneles al 100%% · R: reiniciar" % ready_panels
+	status.text = "%d/6 paneles al 100%%" % ready_panels
 	cleaning_progress_changed.emit(float(total_clean) / maxi(total_cells, 1))
 	if ready_panels == 6 and not completed:
 		completed = true
 		_stop_spray()
-		status.text = "¡Limpieza completada! Los 6 paneles están completamente limpios.\nR: reiniciar"
+		status.text = "¡Limpieza completada! Los 6 paneles están completamente limpios."
 		cleaning_completed.emit()

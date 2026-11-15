@@ -226,7 +226,7 @@ func _run() -> void:
 		var screen := Rect2(Vector2.ZERO, Vector2(dimensions))
 		for corner in [Vector2(-35, -35), Vector2(675, 675)]:
 			check(screen.has_point(frame_transform * corner), "Board and terminal markers must fit in the viewport")
-		for label_path in ["Interface/HUD/Content/Title", "Interface/HUD/Content/NewCircuit", "Interface/HUD/Content/DebugHitboxes"]:
+		for label_path in ["Interface/HUD/Content/Title", "Interface/HUD/Content/DebugHitboxes"]:
 			var control: Control = framed.get_node(label_path)
 			var transform := control.get_global_transform_with_canvas()
 			check(screen.has_point(transform * Vector2.ZERO) and screen.has_point(transform * control.size), "HUD must fit after resize")

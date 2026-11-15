@@ -11,7 +11,7 @@ sin autoloads. Incluye las imágenes proporcionadas, copiadas a
   es discreto por casillas, no una máscara de píxeles: cada casilla representa 0,25%.
 - Debes limpiar el 100% **de cada panel** (400 de 400 casillas en cada uno).
 - No hay temporizador. Suelta el botón o pulsa Escape para detener el agua.
-- Perder el foco también detiene el agua. Pulsa **R** para reiniciar.
+- Perder el foco también detiene el agua.
 
 ## Nodos y lógica
 

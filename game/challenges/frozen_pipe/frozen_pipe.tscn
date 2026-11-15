@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/challenges/frozen_pipe/RepairPhase.gd" id="2"]
 [ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/SparePiece.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/PipeSlot.tscn" id="5"]
-[node name="FrozenPipe" type="Control"]
+[node name="FrozenPipe" type="Control" groups=["minigame"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -2,105 +2,302 @@
 
 [ext_resource type="Script" uid="uid://d3fup4pxab741" path="res://game/ui/hud/hud.gd" id="1_hud"]
 
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/energy.tres" id="2"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/water.tres" id="3"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/food.tres" id="4"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/oxygen.tres" id="5"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/power_plant.tres" id="6"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/life_support.tres" id="7"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/water_station.tres" id="8"]
+[ext_resource type="Texture2D" path="res://game/ui/hud/assets/greenhouse.tres" id="9"]
+
+[sub_resource type="SystemFont" id="InterfaceFont"]
+font_names = PackedStringArray("Bahnschrift", "Segoe UI", "Noto Sans")
+font_weight = 500
+font_stretch = 90
+
+[sub_resource type="Theme" id="HudTheme"]
+default_font = SubResource("InterfaceFont")
+default_font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+content_margin_left = 18.0
+content_margin_top = 13.0
+content_margin_right = 18.0
+content_margin_bottom = 13.0
+bg_color = Color(0.071, 0.085, 0.12, 0.94)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.66, 0.43, 0.29, 0.86)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.025, 0.02, 0.035, 0.37)
+shadow_size = 5
+shadow_offset = Vector2(0, 3)
+
 [node name="HUD" type="CanvasLayer" unique_id=881011932]
 process_mode = 3
 layer = 5
 script = ExtResource("1_hud")
 
-[node name="Panel" type="PanelContainer" parent="." unique_id=496222170]
-offset_left = 20.0
+[node name="Top" type="VBoxContainer" parent="."]
+offset_left = 22.0
 offset_top = 20.0
-offset_right = 380.0
-offset_bottom = 420.0
 mouse_filter = 2
+theme_override_constants/separation = 10
 
-[node name="Margin" type="MarginContainer" parent="Panel" unique_id=719002214]
+[node name="Clock" type="PanelContainer" parent="Top"]
+layout_mode = 2
+custom_minimum_size = Vector2(315, 0)
+mouse_filter = 2
+theme = SubResource("HudTheme")
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Rows" type="VBoxContainer" parent="Top/Clock"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/separation = 5
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=70376461]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="DayLabel" type="Label" parent="Panel/Margin/VBox" unique_id=2118451918]
+[node name="DayLabel" type="Label" parent="Top/Clock/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 34
+theme_override_colors/font_color = Color(1, 0.83, 0.68, 1)
 text = "Día 1"
 
-[node name="TimeLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1714382013]
+[node name="TimeLabel" type="Label" parent="Top/Clock/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
 text = "Tiempo restante: 8:00 h"
 
-[node name="ResourcesTitle" type="Label" parent="Panel/Margin/VBox" unique_id=1152192865]
+[node name="Resources" type="PanelContainer" parent="Top"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Recursos"
+custom_minimum_size = Vector2(315, 0)
+mouse_filter = 2
+theme = SubResource("HudTheme")
+theme_override_styles/panel = SubResource("Card")
 
-[node name="EnergyLabel" type="Label" parent="Panel/Margin/VBox" unique_id=688369970]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Energía: 0"
-
-[node name="WaterLabel" type="Label" parent="Panel/Margin/VBox" unique_id=912423452]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Agua: 0"
-
-[node name="FoodLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1714558588]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Comida: 0"
-
-[node name="OxygenLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1675478550]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Oxígeno: 0"
-
-[node name="SystemsTitle" type="Label" parent="Panel/Margin/VBox" unique_id=741150720]
-layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Sistemas"
-
-[node name="EnergyPlantLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1303981436]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Planta de energía: OPERATIVO"
-
-[node name="LifeSupportLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1215152983]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Soporte vital: OPERATIVO"
-
-[node name="WaterStationLabel" type="Label" parent="Panel/Margin/VBox" unique_id=735094457]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Estación de agua: OPERATIVO"
-
-[node name="GreenhouseLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1412126862]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Invernadero: OPERATIVO"
-
-[node name="EndDaySeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+[node name="Rows" type="VBoxContainer" parent="Top/Resources"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 5
 
-[node name="EndDayButton" type="Button" parent="Panel/Margin/VBox"]
+[node name="ResourcesTitle" type="Label" parent="Top/Resources/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.83, 0.72, 0.64, 1)
+text = "RECURSOS"
+
+[node name="EnergyRow" type="HBoxContainer" parent="Top/Resources/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Top/Resources/Rows/EnergyRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyLabel" type="Label" parent="Top/Resources/Rows/EnergyRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Energía: 0"
+
+[node name="WaterRow" type="HBoxContainer" parent="Top/Resources/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Top/Resources/Rows/WaterRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WaterLabel" type="Label" parent="Top/Resources/Rows/WaterRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Agua: 0"
+
+[node name="FoodRow" type="HBoxContainer" parent="Top/Resources/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Top/Resources/Rows/FoodRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FoodLabel" type="Label" parent="Top/Resources/Rows/FoodRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Comida: 0"
+
+[node name="OxygenRow" type="HBoxContainer" parent="Top/Resources/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Top/Resources/Rows/OxygenRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OxygenLabel" type="Label" parent="Top/Resources/Rows/OxygenRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Oxígeno: 0"
+
+[node name="Systems" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -205.0
+offset_bottom = -20.0
+grow_vertical = 0
+custom_minimum_size = Vector2(355, 0)
+mouse_filter = 2
+theme = SubResource("HudTheme")
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Rows" type="VBoxContainer" parent="Systems"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="SystemsTitle" type="Label" parent="Systems/Rows"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.83, 0.72, 0.64, 1)
+text = "SISTEMAS"
+
+[node name="EnergyPlantRow" type="HBoxContainer" parent="Systems/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Systems/Rows/EnergyPlantRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyPlantLabel" type="Label" parent="Systems/Rows/EnergyPlantRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Planta de energía: OPERATIVO"
+
+[node name="LifeSupportRow" type="HBoxContainer" parent="Systems/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Systems/Rows/LifeSupportRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LifeSupportLabel" type="Label" parent="Systems/Rows/LifeSupportRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Soporte vital: OPERATIVO"
+
+[node name="WaterStationRow" type="HBoxContainer" parent="Systems/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Systems/Rows/WaterStationRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WaterStationLabel" type="Label" parent="Systems/Rows/WaterStationRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Estación de agua: OPERATIVO"
+
+[node name="GreenhouseRow" type="HBoxContainer" parent="Systems/Rows"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Systems/Rows/GreenhouseRow"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GreenhouseLabel" type="Label" parent="Systems/Rows/GreenhouseRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
+text = "Invernadero: OPERATIVO"
+
+[node name="DayActions" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -96.0
+offset_right = -22.0
+offset_bottom = -20.0
+grow_vertical = 0
+custom_minimum_size = Vector2(288, 0)
+mouse_filter = 2
+theme = SubResource("HudTheme")
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Rows" type="VBoxContainer" parent="DayActions"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="EndDayButton" type="Button" parent="DayActions/Rows"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -108,7 +305,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 22
 text = "Terminar día"
 
-[node name="EndDayHint" type="Label" parent="Panel/Margin/VBox"]
+[node name="EndDayHint" type="Label" parent="DayActions/Rows"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -116,25 +313,25 @@ theme_override_font_sizes/font_size = 18
 text = "Termina tu tarea primero."
 horizontal_alignment = 1
 
-[node name="EndDayConfirm" type="VBoxContainer" parent="Panel/Margin/VBox"]
+[node name="EndDayConfirm" type="VBoxContainer" parent="DayActions/Rows"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ConfirmLabel" type="Label" parent="Panel/Margin/VBox/EndDayConfirm"]
+[node name="ConfirmLabel" type="Label" parent="DayActions/Rows/EndDayConfirm"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "¿Terminar el día 1?"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Panel/Margin/VBox/EndDayConfirm"]
+[node name="Buttons" type="HBoxContainer" parent="DayActions/Rows/EndDayConfirm"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="ConfirmEndDayButton" type="Button" parent="Panel/Margin/VBox/EndDayConfirm/Buttons"]
+[node name="ConfirmEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -143,7 +340,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 22
 text = "Sí"
 
-[node name="CancelEndDayButton" type="Button" parent="Panel/Margin/VBox/EndDayConfirm/Buttons"]
+[node name="CancelEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
