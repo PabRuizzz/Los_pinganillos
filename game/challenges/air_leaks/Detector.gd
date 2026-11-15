@@ -3,8 +3,10 @@ extends Node2D
 signal reading_changed(strength: float)
 var targets: Array = []
 var detection_range := 260.0
+var lock_radius := 24.0
 var scanning := false
 var elapsed := 0.0
+@onready var segments := $Indicator/Segments.get_children()
 
 func _ready() -> void:
 	# A short synthesized tone; replace Beep.stream in the Inspector for final audio.
@@ -41,6 +43,11 @@ func _process(delta: float) -> void:
 		return
 	var strength := clampf(1.0 - distance / detection_range, 0.0, 1.0)
 	$Indicator.color = Color.DODGER_BLUE.lerp(Color.RED, strength)
+	var lit := mini(ceili(strength * segments.size()), segments.size() - 1)
+	if distance <= lock_radius:
+		lit = segments.size()
+	for i in segments.size():
+		segments[i].color = Color("effbff") if i < lit else Color("263447")
 	reading_changed.emit(strength)
 	elapsed += delta
 	if elapsed >= lerpf(1.4, 0.12, strength):

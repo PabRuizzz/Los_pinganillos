@@ -17,7 +17,7 @@ La escena principal del proyecto sigue siendo la misma.
   sus lados y representadas por placas elevadas sin símbolos. No admiten piezas; al soltar sobre ellas el cable vuelve a su origen.
 - El tinte verde de los cables muestra la red que recibe corriente del inicio.
 - No hay temporizador, límite de movimientos ni rotación de piezas.
-- `Nuevo circuito` genera otra partida. `Ver hitboxes` muestra las casillas en cian y las piezas en rosa.
+- `Ver hitboxes` muestra las casillas en cian y las piezas en rosa.
 
 ## Trabajo visual de frontend en el editor 2D
 
@@ -117,7 +117,7 @@ El minijuego no pausa ni cambia escenas por su cuenta.
 
 Siempre se genera una sola salida; ya no existe `destination_count`.
 Configura `puzzle_seed` en -1 para partidas nuevas. Una semilla no negativa permite reproducir una partida;
-en ese caso `Nuevo circuito` reinicia esa misma partida. La interfaz adapta su
+la semilla determina la partida al abrirla. La interfaz adapta su
 escala al tamaño del viewport y centra el lienzo de diseño del HUD. El tablero
 se visualiza mediante Camera2D: su encuadre automático se adapta junto al HUD,
 o puede ajustarse independientemente desactivando Auto Frame Board.

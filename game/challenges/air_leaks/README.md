@@ -23,3 +23,5 @@ Prueba mínima: ejecutar tests/smoke.gd mediante Godot --headless --path . --scr
 
 ## Parches arrastrables
 Patch.tscn es reutilizable y tiene un Control como hitbox. LoosePlate muestra el parche con orificios. SealedPlate muestra el mismo metal con tornillos instalados. Cambia las texturas en el Inspector. Patch.gd gestiona el arrastre y el retorno. AirLeaks.gd valida que el parche se suelte sobre una fuga descubierta.
+
+La bandeja metálica usa assets/repair_tray.png. El HUD muestra el porcentaje de señal y los segmentos bajo Aim indican la cercanía. El tercer segmento solo se enciende dentro del radio válido para descubrir la fuga. Cada Leak contiene Airflow y DropRing. DropRing resalta la misma zona válida que se comprueba al soltar el parche.

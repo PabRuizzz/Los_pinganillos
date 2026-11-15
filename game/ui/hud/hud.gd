@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-# HUD simple: dia, tiempo restante, recursos y estado de los sistemas.
+# HUD de jornada, recursos y estado de los sistemas.
 # Tambien tiene el boton "Terminar día": pide confirmacion y llama a
 # TaskExecution.request_end_day(). El HUD no cambia el dia ni los recursos.
 # Cada valor es un Label propio para que frontend pueda moverlo o cambiarle estilo.
@@ -9,6 +9,8 @@ extends CanvasLayer
 @export var color_operativo := Color(0.4, 1.0, 0.4)
 @export var color_degradado := Color(1.0, 0.85, 0.3)
 @export var color_averiado := Color(1.0, 0.35, 0.35)
+
+var compact_mode := false
 
 @onready var day_label: Label = %DayLabel
 @onready var time_label: Label = %TimeLabel
@@ -45,6 +47,10 @@ func _process(_delta):
 	day_label.text = "Día %d" % SimulationTime.day
 	time_label.text = "Tiempo restante: %s" % _format_hours(SimulationTime.tiempo_jornada)
 
+	_update_minigame_mode()
+	if compact_mode:
+		return
+
 	energy_label.text = "Energía: %d" % Resources.energy
 	water_label.text = "Agua: %d" % Resources.water
 	food_label.text = "Comida: %d" % Resources.food
@@ -56,6 +62,20 @@ func _process(_delta):
 	_show_state(greenhouse_label, "Invernadero", StationCost.greenhouse_state)
 
 	_update_end_day()
+
+
+# La etiqueta de grupo también cubre escenas abiertas directamente con F6.
+func _update_minigame_mode() -> void:
+	var active := get_tree().has_group("minigame")
+	if active == compact_mode:
+		return
+	compact_mode = active
+	$Top/Resources.visible = not active
+	$Systems.visible = not active
+	$DayActions.visible = not active
+	EventTracker.visible = not active
+	Alert.visible = not active
+	_close_end_day_confirm()
 
 
 # El boton solo sirve con el dia activo, sin tarea en curso y sin pausa.
@@ -92,7 +112,7 @@ func _close_end_day_confirm():
 
 # 480 minutos -> "8:00 h"
 func _format_hours(minutes: int) -> String:
-	return "%d:%02d h" % [minutes / 60, minutes % 60]
+	return "%d:%02d h" % [floori(minutes / 60.0), minutes % 60]
 
 
 func _show_state(label: Label, station_name: String, state: String):

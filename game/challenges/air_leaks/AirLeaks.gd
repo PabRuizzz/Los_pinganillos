@@ -5,6 +5,7 @@ enum Difficulty { FACIL, NORMAL }
 @export var difficulty: Difficulty = Difficulty.NORMAL
 var click_radius := 24.0
 var dragged: Control
+var preview_leak: Node2D
 var drag_pointer := -2 # -2: none, -1: mouse, >= 0: touch.
 var finished := false
 var touch_id := -1
@@ -22,6 +23,7 @@ func _ready() -> void:
 	_layout()
 	click_radius = 40.0 if difficulty == Difficulty.FACIL else 24.0
 	detector.detection_range = 500.0 if difficulty == Difficulty.FACIL else 260.0
+	detector.lock_radius = click_radius
 	detector.targets = leaks
 	detector.reading_changed.connect(_show_reading)
 	habitat.gui_input.connect(_habitat_input)
@@ -107,12 +109,12 @@ func _update_status() -> void:
 	for leak in leaks:
 		if leak.state == leak.State.REPAIRED:
 			repaired += 1
-	$Content/Counter.text = "Fugas reparadas: %d/3" % repaired
+	$Content/Counter.text = "Fugas selladas · %d/3" % repaired
 	if repaired == 3 and not finished:
 		finished = true
 		_hide_detector()
 		$ReactionTimer.stop()
-		$Content/Reaction.text = "¡Hábitat sellado!"
+		$Content/Reaction.text = "Hábitat sellado"
 		completed.emit()
 
 func _show_reading(strength: float) -> void:
@@ -135,14 +137,14 @@ func _input(event: InputEvent) -> void:
 		elif drag_pointer == -1:
 			_drop_patch(event.position)
 	elif event is InputEventMouseMotion and drag_pointer == -1:
-		dragged.move_drag(event.position)
+		_move_patch(event.position)
 	elif event is InputEventScreenTouch:
 		if event.pressed:
 			_begin_patch(event.position, event.index)
 		elif drag_pointer == event.index:
 			_drop_patch(event.position, event.canceled)
 	elif event is InputEventScreenDrag and drag_pointer == event.index:
-		dragged.move_drag(event.position)
+		_move_patch(event.position)
 	if is_instance_valid(dragged):
 		get_viewport().set_input_as_handled()
 
@@ -157,21 +159,40 @@ func _begin_patch(point: Vector2, pointer: int) -> void:
 			patch.begin_drag(point)
 			return
 
+func _patch_target(point: Vector2) -> Node2D:
+	var local_point := habitat.get_global_transform_with_canvas().affine_inverse() * point
+	for leak in leaks:
+		if leak.state == leak.State.FOUND and local_point.distance_to(leak.position) <= click_radius:
+			return leak
+	return null
+
+func _set_drop_preview(leak: Node2D) -> void:
+	if preview_leak == leak:
+		return
+	if is_instance_valid(preview_leak):
+		preview_leak.set_drop_preview(false)
+	preview_leak = leak
+	if is_instance_valid(preview_leak):
+		preview_leak.set_drop_preview(true)
+
+func _move_patch(point: Vector2) -> void:
+	dragged.move_drag(point)
+	_set_drop_preview(_patch_target(point))
+
 func _drop_patch(point: Vector2, cancel := false) -> void:
 	if not is_instance_valid(dragged):
 		return
 	var patch = dragged
 	dragged = null
 	drag_pointer = -2
-	var local_point := habitat.get_global_transform_with_canvas().affine_inverse() * point
-	if not cancel:
-		for leak in leaks:
-			if leak.state == leak.State.FOUND and local_point.distance_to(leak.position) <= click_radius:
-				patch.attach_to(leak.get_global_transform_with_canvas().origin)
-				installed_patches[leak] = patch
-				leak.patch()
-				get_viewport().set_input_as_handled()
-				return
+	var leak := _patch_target(point) if not cancel else null
+	_set_drop_preview(null)
+	if leak != null:
+		patch.attach_to(leak.get_global_transform_with_canvas().origin)
+		installed_patches[leak] = patch
+		leak.patch()
+		get_viewport().set_input_as_handled()
+		return
 	patch.return_home()
 	$Content/Reaction.text = "Coloca el parche sobre una fuga descubierta."
 	$ReactionTimer.start()

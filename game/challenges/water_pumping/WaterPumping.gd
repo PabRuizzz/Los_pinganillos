@@ -11,19 +11,16 @@ func _ready() -> void:
 	pump.filled.connect(_complete)
 	resized.connect(_layout)
 	_layout()
-	$Content/Result.hide()
 	pump.start(0.6 if difficulty == Difficulty.FACIL else 1.0,
 		0.16 if difficulty == Difficulty.FACIL else 0.10)
 
 func _layout() -> void:
-	var factor := minf(size.x / 1000.0, size.y / 680.0)
+	var factor := minf(size.x / 1120.0, size.y / 630.0)
 	content.scale = Vector2.ONE * factor
-	content.position = (size - Vector2(960, 640) * factor) / 2.0
+	content.position = (size - Vector2(1120, 630) * factor) / 2.0
 
 func _complete() -> void:
 	if finished:
 		return
 	finished = true
-	$Content/Result.text = "¡Agua circulando!"
-	$Content/Result.show()
 	completed.emit()
