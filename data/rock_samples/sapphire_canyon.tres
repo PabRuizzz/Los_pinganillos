@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/sapphire_canyon.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "sapphire_canyon"
+sample_name = "Sapphire Canyon"
+rock_type = "Reddish sedimentary rock with calcium sulfate veins"
+location = "Cheyava Falls rock, Bright Angel formation, Neretva Vallis, Jezero Crater"
+rover = "Perseverance"
+origin = 0
+description = "Core No. 25 (6.2 cm), collected on July 21, 2024. Cheyava Falls is an arrowhead-shaped rock (1 m × 0.6 m) crossed by white calcium sulfate veins. It has tiny black “poppy seeds” and “leopard spots”: light-colored dots surrounded by a dark ring."
+interesting_fact = "In 2025, NASA announced that this sample contains a possible biosignature: minerals such as vivianite and greigite, which are often associated with microbes on Earth. “Possible” means this needs to be confirmed by studying the sample in laboratories on Earth."
+sample_image = ExtResource("2_image")
+image_caption = "PIA26370 · Mastcam-Z, July 21, 2024. Cheyava Falls core inside the drill bit; light-colored spots surrounded by dark minerals are visible."
+image_credit = "NASA/JPL-Caltech/ASU/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA26370/PIA26370~orig.jpg"
+source_name = "JPL – Meet the Mars Samples: Sapphire Canyon (Sample 25)"
+source_url = "https://www.jpl.nasa.gov/videos/meet-the-mars-samples-sapphire-canyon-sample-25/"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

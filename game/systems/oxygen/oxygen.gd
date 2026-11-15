@@ -14,7 +14,7 @@ signal oxygen_depleted  # el oxigeno llego a 0
 const EXTERIOR_GROUP = "exterior"
 
 # Unidades de oxigeno por segundo
-const DRAIN_RATE = 2    # afuera: de 100 a 0 en ~100 s
+const DRAIN_RATE = 0.4   
 const REGEN_RATE = 2.5    # adentro: de 0 a 100 en ~40 s
 
 const LOW_LEVEL = 25.0
