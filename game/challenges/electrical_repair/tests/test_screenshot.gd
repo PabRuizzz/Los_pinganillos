@@ -97,4 +97,3 @@ func _run() -> void:
 	game.queue_free()
 	await process_frame
 	quit(0 if failures == 0 else 1)
-
