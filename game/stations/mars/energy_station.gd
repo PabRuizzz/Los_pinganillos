@@ -38,12 +38,11 @@ func _on_body_entered(body: Node2D):
 
 
 
-func _on_body_exited(body: Node2D):
+func _on_body_exited(_body: Node2D):
 	_refresh_player_proximity()
 
 
 func _refresh_player_proximity() -> void:
-	var was_near = player_near
 	player_near = false
 
 	for body in get_overlapping_bodies():

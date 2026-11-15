@@ -1,29 +1,40 @@
 extends CharacterBody2D
 
-@export var speed:= 200.0
+@export var speed := 200.0
+@export var step_interval := .44   # segundos entre pasos
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var steps: AudioStreamPlayer2D = $Steps
 
-func _physics_process(_delta):
-		var direction:= Input.get_vector("ui_left","ui_right","ui_up","ui_down")
-		velocity = direction * speed
-		move_and_slide()
-		
-		if direction.x < 0:
-			anim.flip_h = true
-		elif direction.x > 0:
-			anim.flip_h = false
-			
-		if direction != Vector2.ZERO:
-			anim.play("run_right")
-		else:
-			anim.play("idle_right")
+var _step_timer := 0.0
 
+
+func _physics_process(delta):
+	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = direction * speed
+	move_and_slide()
+
+	if direction.x < 0:
+		anim.flip_h = true
+	elif direction.x > 0:
+		anim.flip_h = false
+
+	if direction != Vector2.ZERO:
+		anim.play("run_right")
+		_step_timer -= delta
+		if _step_timer <= 0.0:
+			_step_timer = step_interval
+			steps.pitch_scale = randf_range(0.9, 1.1)
+			steps.play()
+	else:
+		anim.play("idle_right")
+		_step_timer = 0.0
 
 
 func _ready() -> void:
 	# Apply arrival before movement. The root now matches the collision center.
 	set_physics_process(false)
 	_aplicar_spawn.call_deferred()
+
 
 func _aplicar_spawn() -> void:
 	var tree := get_tree()

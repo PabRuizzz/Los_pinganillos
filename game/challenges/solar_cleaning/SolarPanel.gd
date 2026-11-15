@@ -98,6 +98,7 @@ func clean_world_circle(center: Vector2, radius: float) -> int:
 			cell.clean = true
 			clean_count += 1
 			changed += 1
+			@warning_ignore("integer_division")
 			cell_cleaned.emit(Vector2i(i % columns, i / columns))
 	if changed > 0:
 		_update_readout()

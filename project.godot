@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Proyecto_Marte"
-run/main_scene="uid://bu44bv2ir0kb5"
+run/main_scene="uid://cbiqhgcbnsd7p"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://assets/sprites/icon.svg"
 
@@ -28,7 +28,7 @@ HUD="*res://game/ui/hud/hud.tscn"
 EventTracker="*res://game/ui/event_tracker/event_tracker.tscn"
 GameOver="*res://game/ui/game_over/game_over.tscn"
 GameFlow="*res://game/systems/game_flow/game_flow.gd"
-DaySummary="*res://game/ui/day_summary/day_summary.tscn"
+Music="*uid://chuf1vykitk3d"
 
 [display]
 

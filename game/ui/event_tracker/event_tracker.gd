@@ -117,6 +117,7 @@ func _set_counter(label: String, value: String, ratio: float):
 # 95.3 s -> "1:36"
 func _format_time(seconds: float) -> String:
 	var s = ceili(maxf(seconds, 0.0))
+	@warning_ignore("integer_division")
 	return "%d:%02d" % [s / 60, s % 60]
 
 
