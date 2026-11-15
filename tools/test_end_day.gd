@@ -115,13 +115,20 @@ func run_checks() -> void:
 	check(end_button.focus_mode == Control.FOCUS_NONE and yes_button.focus_mode == Control.FOCUS_NONE, "Los botones no deben tomar el foco del teclado (las flechas mueven al jugador)")
 
 	# --- Sin día activo: botón apagado y petición rechazada.
+	# El autoload GameFlow inicia el día 1 al arrancar; se desactiva a mano para
+	# probar el estado "sin día" (como antes de arrancar o tras el fin de partida).
+	await frames(2)
+	tasks.day_active = false
+	started_days.clear()
 	await frames(2)
 	check(not tasks.day_active and end_button.disabled, "Sin día activo el botón debe estar apagado")
 	check(not tasks.can_end_day() and not tasks.request_end_day(), "request_end_day debe rechazarse sin día activo")
 	check(sim.day == 1 and finished_count == 0, "Una petición rechazada no debe cambiar el día")
 
 	# --- Partida nueva, sin azar: base operativa y recursos conocidos.
+	# main.gd ya no inicia el día (lo hace GameFlow al arrancar), así que se inicia aquí.
 	await go_to(MAIN)
+	tasks.start_day()
 	events.day_start_event_chance = 0.0
 	clear_events()
 	res.energy = 50
