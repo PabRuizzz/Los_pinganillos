@@ -27,6 +27,7 @@ Alert="*res://game/ui/alerts/alert.tscn"
 HUD="*res://game/ui/hud/hud.tscn"
 EventTracker="*res://game/ui/event_tracker/event_tracker.tscn"
 GameOver="*res://game/ui/game_over/game_over.tscn"
+GameFlow="*res://game/systems/game_flow/game_flow.gd"
 
 [display]
 
