@@ -7,7 +7,9 @@ extends Node2D
 ## de la estación cuando está por encima de ese punto y delante cuando está por debajo.
 ## El sprite (Visual) va desplazado hacia arriba respecto a la raíz.
 ##
-## Interacción: igual que EnergyStation (Area2D + grupo "player" + acción "interact").
+## Interacción: el hijo InteractionArea es un StationInteraction (el componente común
+## de todas las estaciones: detección, indicador "[E]" y acción "interact"). Este
+## script solo reenvía sus señales y conserva la API de la estación.
 ## Esta escena no lanza expediciones ni descubre muestras: solo emite
 ## interaction_requested. RoverExpeditionController se conecta a esa señal y desactiva
 ## la interacción (set_interaction_enabled) mientras el rover está fuera.
@@ -17,25 +19,23 @@ signal player_exited_range
 ## El jugador pulsó "interact" (E) dentro del rango. Una pulsación = una emisión.
 signal interaction_requested
 
-@export var interaction_enabled := true
+@export var interaction_enabled := true: set = set_interaction_enabled
 
-@onready var interaction_area: Area2D = $InteractionArea
-## Indicador "[E]" sobre la estación: visible solo con el jugador en rango.
-@onready var interact_cue: Label = $InteractCue
+@onready var interaction_area: StationInteraction = $InteractionArea
+## Indicador "[E]" sobre la estación (lo controla InteractionArea).
+@onready var interact_cue: Label = $InteractionArea/InteractCue
 
-const CUE_FLASH_COLOR := Color(0.3, 1.0, 1.0)
-
-var player_near := false
+## true mientras el astronauta está en el rango de interacción.
+var player_near: bool:
+	get:
+		return interaction_area != null and interaction_area.player_near
 
 
 func _ready() -> void:
-	interaction_area.body_entered.connect(_on_body_entered)
-	interaction_area.body_exited.connect(_on_body_exited)
-
-
-func _physics_process(_delta: float) -> void:
-	if player_near and interaction_enabled and Input.is_action_just_pressed("interact"):
-		interact()
+	interaction_area.interaction_enabled = interaction_enabled
+	interaction_area.player_entered_range.connect(player_entered_range.emit)
+	interaction_area.player_exited_range.connect(player_exited_range.emit)
+	interaction_area.interaction_requested.connect(_on_area_interaction_requested)
 
 
 func is_player_near() -> bool:
@@ -44,44 +44,15 @@ func is_player_near() -> bool:
 
 func set_interaction_enabled(enabled: bool) -> void:
 	interaction_enabled = enabled
-	_update_cue()
+	if interaction_area != null:
+		interaction_area.set_interaction_enabled(enabled)
 
 
 func interact() -> void:
+	interaction_area.interact()
+
+
+func _on_area_interaction_requested() -> void:
 	if interaction_requested.get_connections().is_empty():
 		print("Estación del rover: interacción detectada (sin controlador de expediciones conectado)")
-	_flash_cue()
 	interaction_requested.emit()
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if _is_player(body) and not player_near:
-		player_near = true
-		_update_cue()
-		player_entered_range.emit()
-
-
-func _on_body_exited(body: Node2D) -> void:
-	if not _is_player(body):
-		return
-	for other in interaction_area.get_overlapping_bodies():
-		if other != body and _is_player(other):
-			return
-	if player_near:
-		player_near = false
-		_update_cue()
-		player_exited_range.emit()
-
-
-func _is_player(body: Node) -> bool:
-	return body is CharacterBody2D and body.is_in_group("player")
-
-
-func _update_cue() -> void:
-	interact_cue.visible = player_near and interaction_enabled
-
-
-## Destello breve del indicador para confirmar que la pulsación se registró.
-func _flash_cue() -> void:
-	interact_cue.modulate = CUE_FLASH_COLOR
-	create_tween().tween_property(interact_cue, "modulate", Color.WHITE, 0.4)

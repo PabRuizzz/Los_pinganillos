@@ -91,7 +91,7 @@ func run_checks() -> void:
 	await load_mars()
 	controller.reset()
 	state_changes.clear()
-	cue = station.get_node("InteractCue")
+	cue = station.get_node("InteractionArea/InteractCue")
 
 	# 1. Rover nuevo: disponible.
 	check(controller.is_available() and not controller.is_on_expedition(), "Un rover nuevo debe estar AVAILABLE")

@@ -93,7 +93,7 @@ func run_checks() -> void:
 	player.global_position = STATION_POS + Vector2(0, 160)
 	await physics_frames(3)
 	check(not station.is_player_near(), "Detecta al jugador fuera de rango")
-	var cue := station.get_node("InteractCue") as Label
+	var cue := station.get_node("InteractionArea/InteractCue") as Label
 	check(cue != null and not cue.visible, "El indicador [E] debe estar oculto fuera de rango")
 	await press_interact(6)
 	check(events.requested == 0, "Interactuó fuera de rango")

@@ -161,6 +161,8 @@ func run_checks() -> void:
 
 	# --- 13. La estación de energía sigue funcionando con E y Esc.
 	var energy_station: Area2D = mars.get_node("EnergyStation")
+	# Sin tipo: StationMinigame usa autoloads, que no existen al compilar este script.
+	var energy_minigame: Node = energy_station.get_node("Minigame")
 	costs.energy_plant_state = "DEGRADADO"
 	player.global_position = energy_station.to_global(energy_station.get_node("CollisionShape2D").position)
 	await frames(3)
@@ -168,12 +170,12 @@ func run_checks() -> void:
 	await frames(3)
 	Input.action_release("interact")
 	await frames(2)
-	check(energy_station.active_minigame != null and tasks.current_task == "maintenance", "E en la estación de energía debe abrir el minijuego de mantenimiento")
+	check(energy_minigame.active_minigame != null and tasks.current_task == "maintenance", "E en la estación de energía debe abrir el minijuego de mantenimiento")
 	Input.action_press("ui_cancel")
 	await frames(3)
 	Input.action_release("ui_cancel")
 	await frames(3)
-	check(energy_station.active_minigame == null and tasks.current_task == "", "Esc debe cerrar el minijuego y liberar la tarea")
+	check(energy_minigame.active_minigame == null and tasks.current_task == "", "Esc debe cerrar el minijuego y liberar la tarea")
 	check(sim.tiempo_jornada == 360, "Salir del minijuego con Esc no debe consumir tiempo")
 	clear_events()
 

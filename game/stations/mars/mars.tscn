@@ -16,7 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://qd67fxri77wa" path="res://assets/tilesets/rock1.png" id="13_7opot"]
 [ext_resource type="Texture2D" uid="uid://dr78xugcyvywo" path="res://assets/tilesets/powergenerator.png" id="13_lbft5"]
 [ext_resource type="Texture2D" uid="uid://c5j6udbtben2u" path="res://assets/tilesets/rock3.png" id="14_8do8n"]
-[ext_resource type="Script" uid="uid://whmt50nsb5j4" path="res://game/stations/mars/energy_station.gd" id="15_lbft5"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_interaction.gd" id="15_lbft5"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_minigame.gd" id="21_minigame"]
+[ext_resource type="PackedScene" path="res://game/systems/station_interaction/interact_cue.tscn" id="22_cue"]
+[ext_resource type="PackedScene" path="res://game/challenges/solar_cleaning/solar_cleaning.tscn" id="23_solar"]
+[ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/electrical_repair.tscn" id="24_electrical"]
+[ext_resource type="PackedScene" path="res://game/challenges/water_pumping/water_pumping.tscn" id="25_pumping"]
+[ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/frozen_pipe.tscn" id="26_pipe"]
 
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
@@ -597,6 +603,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_greenhouse"]
+size = Vector2(140, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
+size = Vector2(230, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88uyf"]
 size = Vector2(196, 126)
 
@@ -761,7 +773,6 @@ position = Vector2(165.01187, -583.6668)
 polygon = PackedVector2Array(4.9881287, 4.666809, 187.98813, 4.666809, 187.98813, -78.33319, 267.98813, -80.33319, 273.98813, 4.666809, 458.98813, 5.666809, 482.98813, -21.33319, 472.98813, -214.33319, 449.98813, -239.33319, 321.98813, -237.33319, 304.98813, -261.3332, 148.98813, -260.3332, 130.98813, -231.33319, 13.988129, -235.33319, -15.011871, -212.33319, -24.011871, -21.33319)
 
 [node name="EnergyStation" type="Area2D" parent="." unique_id=862025961]
-visible = false
 position = Vector2(26, 45)
 collision_layer = 4
 collision_mask = 3
@@ -778,6 +789,66 @@ shape = SubResource("RectangleShape2D_88uyf")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="EnergyStation" unique_id=1402259012]
 position = Vector2(283.5, 67.5)
 shape = SubResource("RectangleShape2D_88uyf")
+
+[node name="CueAnchor1" type="Marker2D" parent="EnergyStation" unique_id=1734120501]
+position = Vector2(288.5, -284.5)
+
+[node name="CueAnchor2" type="Marker2D" parent="EnergyStation" unique_id=1734120502]
+position = Vector2(286.5, -143.5)
+
+[node name="CueAnchor3" type="Marker2D" parent="EnergyStation" unique_id=1734120503]
+position = Vector2(283.5, 4.5)
+
+[node name="InteractCue" parent="EnergyStation" unique_id=1734120504 instance=ExtResource("22_cue")]
+
+[node name="Minigame" type="Node" parent="EnergyStation" unique_id=1734120505]
+script = ExtResource("21_minigame")
+station_id = "energy_plant"
+maintenance_minigame = ExtResource("23_solar")
+repair_minigame = ExtResource("24_electrical")
+operational_message = "Los paneles solares funcionan correctamente"
+
+[node name="GreenhouseStation" type="Area2D" parent="." unique_id=1734120511]
+position = Vector2(-85, -190)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("15_lbft5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GreenhouseStation" unique_id=1734120512]
+shape = SubResource("RectangleShape2D_greenhouse")
+
+[node name="CueAnchor" type="Marker2D" parent="GreenhouseStation" unique_id=1734120513]
+position = Vector2(0, -75)
+
+[node name="InteractCue" parent="GreenhouseStation" unique_id=1734120514 instance=ExtResource("22_cue")]
+
+[node name="Minigame" type="Node" parent="GreenhouseStation" unique_id=1734120515]
+script = ExtResource("21_minigame")
+station_id = "greenhouse"
+operational_message = "El invernadero funciona correctamente"
+
+[node name="WaterStation" type="Area2D" parent="." unique_id=1734120506]
+position = Vector2(909, -393)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("15_lbft5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterStation" unique_id=1734120507]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_water")
+
+[node name="CueAnchor" type="Marker2D" parent="WaterStation" unique_id=1734120508]
+position = Vector2(0, -60)
+
+[node name="InteractCue" parent="WaterStation" unique_id=1734120509 instance=ExtResource("22_cue")]
+
+[node name="Minigame" type="Node" parent="WaterStation" unique_id=1734120510]
+script = ExtResource("21_minigame")
+station_id = "water_station"
+maintenance_minigame = ExtResource("25_pumping")
+repair_minigame = ExtResource("26_pipe")
+operational_message = "La estación de agua funciona correctamente"
+repair_events = Array[int]([4])
 
 [node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
 script = ExtResource("17_expedition")
