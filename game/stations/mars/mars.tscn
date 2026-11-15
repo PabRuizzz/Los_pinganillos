@@ -594,7 +594,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88uyf"]
 size = Vector2(196, 126)
 
-[node name="Mars" type="Node2D" unique_id=556579645]
+[node name="Mars" type="Node2D" unique_id=556579645 groups=["exterior"]]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2038045617]
 position = Vector2(117, -212)

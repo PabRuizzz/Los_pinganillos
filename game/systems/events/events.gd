@@ -27,6 +27,58 @@ var fungus_timer = 120.0
 var fungus_timer_active = false
 const FUNGUS_TIME_LIMIT = 120.0
 
+signal event_started(type: EventTypes, title: String, message: String)
+signal event_resolved(type: EventTypes)
+
+# Titulo y mensaje que se muestran en la alerta de cada evento
+const EVENT_INFO = {
+	EventTypes.TORMENTA_ARENA: ["Tormenta de arena", "La planta de energía está averiada. Batería de emergencia activa."],
+	EventTypes.PERDIDA_PRESION: ["Pérdida de presión", "El soporte vital falló. El oxígeno está bajando."],
+	EventTypes.FALTA_ENERGIA: ["Falta de energía", "El invernadero está degradado. Repara la planta de energía."],
+	EventTypes.CONGELAMIENTO_TUBERIAS: ["Tuberías congeladas", "Repara la estación de agua antes de 2 minutos."],
+	EventTypes.HONGOS_INVERNADERO: ["Hongos en el invernadero", "Repara el invernadero antes de 2 minutos."],
+}
+
+
+func _ready():
+	# Cuando se termina una tarea, revisamos si resolvio el evento activo
+	TaskExecution.task_finished.connect(_on_task_finished)
+
+
+func _on_task_finished(station, task_name, _time_spent):
+	var before = actual_EventType
+	check_task_completion(station, task_name)
+	if before != EventTypes.NONE and actual_EventType == EventTypes.NONE:
+		event_resolved.emit(before)
+
+
+# Inicia un evento concreto y avisa a la UI
+func trigger_event(type: EventTypes):
+	if actual_EventType != EventTypes.NONE or not EVENT_INFO.has(type):
+		return
+
+	match type:
+		EventTypes.TORMENTA_ARENA:
+			tormenta_arena()
+		EventTypes.PERDIDA_PRESION:
+			perdida_presion()
+		EventTypes.FALTA_ENERGIA:
+			falta_energia()
+		EventTypes.CONGELAMIENTO_TUBERIAS:
+			congelamiento_tuberias()
+		EventTypes.HONGOS_INVERNADERO:
+			hongos_invernadero()
+
+	var info = EVENT_INFO[type]
+	event_started.emit(type, info[0], info[1])
+
+
+# Con cierta probabilidad inicia un evento al azar
+func trigger_random_event(chance := 0.5):
+	if randf() < chance:
+		trigger_event(EVENT_INFO.keys().pick_random())
+
+
 func tormenta_arena():
 	if actual_EventType != EventTypes.NONE:
 		return
@@ -182,3 +234,5 @@ func check_task_completion(station: String, task_name: String):
 				StationCost.greenhouse_state = "OPERATIVO"
 				fungus_timer_active = false
 				actual_EventType = EventTypes.NONE
+	trigger_random_event(0.30)
+	

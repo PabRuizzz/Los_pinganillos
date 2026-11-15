@@ -12,11 +12,6 @@ var hidden_world_nodes: Array[CanvasItem] = []
 
 
 func _ready():
-	print("ENERGY STATION INICIADA")
-	print("Monitoring: ", monitoring)
-	print("Collision Mask: ", get_collision_mask())
-	print("Collision Shape: ", $CollisionShape2D.shape)
-
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
@@ -26,30 +21,24 @@ func _ready():
 func _physics_process(_delta):
 	if active_minigame != null:
 		if Input.is_action_just_pressed("ui_cancel"):
-			print("Minijuego cerrado con Esc")
+			TaskExecution.cancel_task()  # sin esto la tarea queda "ocupada" y E deja de funcionar
 			close_minigame()
 		return
 
 	_refresh_player_proximity()
 
 	if player_near:
-		if Input.is_action_just_pressed("interact"):
-			print("PRESIONASTE E")
+		if Input.is_action_just_pressed("interact"): 
 			interact()
 
 
 func _on_body_entered(body: Node2D):
-	print("2. OBJETO DETECTADO: ", body.name)
-	print("¿Es CharacterBody2D?: ", body is CharacterBody2D)
-	print("¿Está en grupo player?: ", body.is_in_group("player"))
-
 	if _is_player(body):
 		player_near = true
-		print("3. JUGADOR DETECTADO")
+
 
 
 func _on_body_exited(body: Node2D):
-	print("OBJETO SALIÓ: ", body.name)
 	_refresh_player_proximity()
 
 
@@ -62,10 +51,6 @@ func _refresh_player_proximity() -> void:
 			player_near = true
 			break
 
-	if was_near != player_near:
-		print("Proximidad del jugador: ", player_near)
-
-
 func _is_player(body: Node) -> bool:
 	return body is CharacterBody2D and body.is_in_group("player")
 
@@ -75,15 +60,19 @@ func interact():
 		print("Ya hay un minijuego abierto")
 		return
 
-	print("5. INTERACTUANDO CON ENERGY STATION")
-	print("Estado: ", StationCost.energy_plant_state)
+	# Si corres esta escena sola (F6), main.gd no se ejecuta y el día nunca empieza.
+	if not TaskExecution.day_active:
+		print("Día no iniciado: llamando a TaskExecution.start_day()")
+		TaskExecution.start_day()
 
 	match StationCost.energy_plant_state:
 		"DEGRADADO":
-			open_cleaning_minigame()
+			if _try_start_task("maintenance"):
+				open_cleaning_minigame()
 
 		"AVERIADO":
-			open_repair_minigame()
+			if _try_start_task("repair"):
+				open_repair_minigame()
 
 		"OPERATIVO":
 			print("Los paneles solares funcionan correctamente")
@@ -92,9 +81,20 @@ func interact():
 			print("ERROR: Estado de estación desconocido")
 
 
-func open_cleaning_minigame():
-	print("6. ABRIENDO MINIJUEGO DE LIMPIEZA")
+func _try_start_task(task_name: String) -> bool:
+	if TaskExecution.start_task("energy_plant", task_name):
+		return true
+	# Explica en la consola por qué no se pudo iniciar
+	if TaskExecution.current_task != "":
+		print("No se puede iniciar: ya hay una tarea en curso (", TaskExecution.current_station, "/", TaskExecution.current_task, ")")
+	elif StationCost.station_costs["energy_plant"][task_name]["time"] > SimulationTime.tiempo_jornada:
+		print("No se puede iniciar: no queda tiempo en la jornada (", SimulationTime.tiempo_jornada, ")")
+	else:
+		print("No se puede iniciar la tarea: faltan recursos")
+	return false
 
+
+func open_cleaning_minigame():
 	active_minigame = CLEANING_SCENE.instantiate()
 
 	if not active_minigame.has_signal("cleaning_completed"):
@@ -112,8 +112,6 @@ func open_cleaning_minigame():
 
 
 func open_repair_minigame():
-	print("6. ABRIENDO MINIJUEGO DE REPARACIÓN")
-
 	active_minigame = REPAIR_SCENE.instantiate()
 
 	if not active_minigame.has_signal("puzzle_completed"):
@@ -133,8 +131,6 @@ func open_repair_minigame():
 func open_minigame():
 	previous_camera = get_viewport().get_camera_2d()
 
-	print("Cámara anterior: ", previous_camera)
-
 	get_tree().current_scene.add_child(active_minigame)
 	_set_player_frozen(true)
 	_set_world_hidden(true)
@@ -143,18 +139,12 @@ func open_minigame():
 
 	if minigame_camera:
 		minigame_camera.make_current()
-		print("Cámara del minijuego activada")
 	else:
 		print("ADVERTENCIA: No se encontró Camera2D")
 
 
 func _on_minigame_completed(_arg1 = null, _arg2 = null):
-	print("7. MINIJUEGO COMPLETADO")
-
-	StationCost.energy_plant_state = "OPERATIVO"
-
-	print("Nuevo estado: ", StationCost.energy_plant_state)
-
+	TaskExecution.finish_task() 
 	close_minigame()
 
 
@@ -165,7 +155,6 @@ func close_minigame():
 
 	if is_instance_valid(previous_camera):
 		previous_camera.make_current()
-		print("Cámara anterior restaurada")
 
 	previous_camera = null
 	_set_player_frozen(false)
