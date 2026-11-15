@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RockSampleCatalog" format=3]
+
+[ext_resource type="Script" path="res://data/rock_samples/rock_sample_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="2_data"]
+[ext_resource type="Resource" uid="uid://dofew40hdy66m" path="res://data/rock_samples/montdenier.tres" id="3_montdenier"]
+[ext_resource type="Resource" uid="uid://fafewmrsnfim" path="res://data/rock_samples/hazeltop.tres" id="4_hazeltop"]
+[ext_resource type="Resource" path="res://data/rock_samples/atmo_mountain.tres" id="5_atmo_mountain"]
+[ext_resource type="Resource" path="res://data/rock_samples/otis_peak.tres" id="6_otis_peak"]
+[ext_resource type="Resource" path="res://data/rock_samples/comet_geyser.tres" id="7_comet_geyser"]
+[ext_resource type="Resource" path="res://data/rock_samples/sapphire_canyon.tres" id="8_sapphire_canyon"]
+[ext_resource type="Resource" path="res://data/rock_samples/silver_mountain.tres" id="9_silver_mountain"]
+[ext_resource type="Resource" uid="uid://d0s24wqbfcov0" path="res://data/rock_samples/green_gardens.tres" id="10_green_gardens"]
+[ext_resource type="Resource" path="res://data/rock_samples/hottah.tres" id="11_hottah"]
+[ext_resource type="Resource" path="res://data/rock_samples/berry_bowl.tres" id="12_berry_bowl"]
+[ext_resource type="Resource" path="res://data/rock_samples/garden_city.tres" id="13_garden_city"]
+[ext_resource type="Resource" path="res://data/rock_samples/kodiak.tres" id="14_kodiak"]
+
+[resource]
+script = ExtResource("1_catalog")
+samples = Array[ExtResource("2_data")]([ExtResource("3_montdenier"), ExtResource("4_hazeltop"), ExtResource("5_atmo_mountain"), ExtResource("6_otis_peak"), ExtResource("7_comet_geyser"), ExtResource("8_sapphire_canyon"), ExtResource("9_silver_mountain"), ExtResource("10_green_gardens"), ExtResource("11_hottah"), ExtResource("12_berry_bowl"), ExtResource("13_garden_city"), ExtResource("14_kodiak")])

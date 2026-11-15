@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/silver_mountain.png" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "silver_mountain"
+sample_name = "Silver Mountain"
+rock_type = "Igneous rock / impactite"
+location = "Shallow Bay rock, Witch Hazel Hill, Jezero Crater rim"
+rover = "Perseverance"
+origin = 0
+description = "The first sample collected at the crater rim (No. 26), a 2.91 cm core sealed on January 28, 2025. It comes from a rock that likely formed during Mars's oldest geological period, the Noachian."
+interesting_fact = "The team thinks it may be the oldest sample in the collection: according to NASA, it is at least about 3.9 billion years old. For comparison, the oldest known rocks on Earth are a little over 4 billion years old."
+sample_image = ExtResource("2_image")
+image_caption = "Right front hazard avoidance camera (Hazcam), January 28, 2025 (sol 1401). The drill hole where the core was collected, with drilling dust beside it."
+image_credit = "NASA/JPL-Caltech"
+image_url = "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar-system/mars/images/mars-rock-samples/Mars_Perseverance_FRF_1401_0791327312_691ECM_N0660000FHAZ02008_01_095J.png"
+source_name = "NASA – NASA's Perseverance Mars Rover Studies Trove of Rocks on Crater Rim"
+source_url = "https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-perseverance-mars-rover-studies-trove-of-rocks-on-crater-rim"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

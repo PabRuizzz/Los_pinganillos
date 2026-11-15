@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/hottah.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "hottah"
+sample_name = "Hottah"
+rock_type = "Sedimentary rock (conglomerate)"
+location = "Aeolis Palus, Gale Crater (between Bradbury Landing and Glenelg)"
+rover = "Curiosity"
+origin = 1
+description = "This outcrop looks like a broken sidewalk, but it is bedrock made of cemented fragments: a sedimentary conglomerate. It contains rounded pebbles up to a few centimeters across in a sandy matrix. It was not collected: Curiosity does not store samples for return to Earth."
+interesting_fact = "The pebbles are too large for wind to move and have been rounded by rubbing together—evidence that a fast-flowing stream once ran here. The name comes from Lake Hottah in Canada."
+sample_image = ExtResource("2_image")
+image_caption = "PIA16156 · Mastcam mosaic (100 mm telephoto), sol 39, September 14, 2012. Colors as recorded by the camera."
+image_credit = "NASA/JPL-Caltech/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA16156/PIA16156~orig.jpg"
+source_name = "NASA/JPL Photojournal – PIA16156"
+source_url = "https://photojournal.jpl.nasa.gov/catalog/PIA16156"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

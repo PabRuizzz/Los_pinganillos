@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/garden_city.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "garden_city"
+sample_name = "Garden City"
+rock_type = "Mineral veins in sedimentary rock"
+location = "Lower Mount Sharp (Aeolis Mons), Gale Crater"
+rover = "Curiosity"
+origin = 1
+description = "A network of two-toned mineral veins, with light and dark material, that rise up to about 6 cm above the rock and are up to about 4 cm wide. Veins form when fluids flow through cracks in rock and leave minerals behind. They were examined and analyzed in place only."
+interesting_fact = "The veins resist erosion better than the surrounding rock, which is why they stand out. Their different textures suggest that water flowed through these cracks in several episodes."
+sample_image = ExtResource("2_image")
+image_caption = "PIA19161 · Mosaic of 28 images from Mastcam's right camera (100 mm), March 2015."
+image_credit = "NASA/JPL-Caltech/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA19161/PIA19161~large.jpg"
+source_name = "NASA/JPL Photojournal – PIA19161"
+source_url = "https://photojournal.jpl.nasa.gov/catalog/PIA19161"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"
