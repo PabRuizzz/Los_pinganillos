@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 [ext_resource type="Script" path="res://game/challenges/electrical_repair/Cell.gd" id="1"]
+[ext_resource type="Texture2D" path="res://game/challenges/electrical_repair/assets/cell.tres" id="2"]
+[ext_resource type="Texture2D" path="res://game/challenges/electrical_repair/assets/blocked.tres" id="3"]
+[ext_resource type="Texture2D" path="res://game/challenges/electrical_repair/assets/source_marker.tres" id="4"]
+[ext_resource type="Texture2D" path="res://game/challenges/electrical_repair/assets/target_marker.tres" id="5"]
 [node name="Cell" type="Control"]
 offset_right = 80.0
 offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1")
+blocked_texture = ExtResource("3")
+source_texture = ExtResource("4")
+target_texture = ExtResource("5")
 [node name="Artwork" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -18,4 +25,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 0
+texture = ExtResource("2")
+[node name="Terminal" type="TextureRect" parent="."]
+visible = false
+z_index = 5
+offset_right = 28.0
+offset_bottom = 28.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
