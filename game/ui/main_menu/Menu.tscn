@@ -143,7 +143,7 @@ offset_left = 128.0
 offset_top = 232.0
 offset_right = 1120.0
 offset_bottom = 486.0
-text = "FIVE NIGHT'S
+text = "FIVE NIGHTS 
 AT MARS"
 label_settings = SubResource("LabelSettings_title")
 vertical_alignment = 1
