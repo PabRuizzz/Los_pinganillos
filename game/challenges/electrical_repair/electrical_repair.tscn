@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://om8eks2i4k7q" path="res://game/challenges/electrical_repair/PuzzleCamera.gd" id="3_camera"]
 [ext_resource type="Texture2D" uid="uid://b1q0q2poahf4c" path="res://game/challenges/electrical_repair/assets/greenhouse_background.png" id="4_0qbsr"]
 
-[node name="ElectricalRepair" type="Node2D" unique_id=331987606]
+[node name="ElectricalRepair" type="Node2D" unique_id=331987606 groups=["minigame"]]
 script = ExtResource("1")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1733122090]
@@ -347,15 +347,6 @@ offset_bottom = 1008.0
 theme_override_font_sizes/font_size = 18
 text = "0/1 salida · 0 piezas conectadas (mín. 10) · 0 movimientos"
 horizontal_alignment = 1
-
-[node name="NewCircuit" type="Button" parent="Interface/HUD/Content" unique_id=682690679]
-layout_mode = 0
-offset_left = 130.0
-offset_top = 1010.0
-offset_right = 350.0
-offset_bottom = 1054.0
-theme_override_font_sizes/font_size = 20
-text = "Nuevo circuito"
 
 [node name="DebugHitboxes" type="CheckButton" parent="Interface/HUD/Content" unique_id=132823625]
 layout_mode = 0

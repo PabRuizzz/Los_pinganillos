@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="Fungus"]
+bg_color = Color(0.70, 0.31, 0.19, 0.97)
+border_color = Color(1, 0.77, 0.44, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_left = 22
+corner_radius_bottom_right = 22
+
+[sub_resource type="StyleBoxFlat" id="Aim"]
+bg_color = Color(0.86, 0.43, 0.22, 1)
+border_color = Color(1, 0.95, 0.78, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_left = 22
+corner_radius_bottom_right = 22
+
+[node name="FungusSpot" type="Button"]
+offset_right = 44.0
+offset_bottom = 44.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+tooltip_text = "Aplicar fungicida"
+theme_override_styles/normal = SubResource("Fungus")
+theme_override_styles/hover = SubResource("Aim")
+theme_override_styles/pressed = SubResource("Aim")
+theme_override_font_sizes/font_size = 19
+text = "•••"
