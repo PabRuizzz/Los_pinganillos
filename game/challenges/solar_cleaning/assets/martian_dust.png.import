@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2p3yapb1wh4k"
-path="res://.godot/imported/PHOTO-2026-11-14-12-12-09.jpg-bf32cf66b6090315bee00ba1f15ee6b1.ctex"
+uid="uid://fq4g1pkl83o7"
+path="res://.godot/imported/martian_dust.png-0a03f01e710f00d034ef2ef58c69923f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/PHOTO-2026-11-14-12-12-09.jpg"
-dest_files=["res://.godot/imported/PHOTO-2026-11-14-12-12-09.jpg-bf32cf66b6090315bee00ba1f15ee6b1.ctex"]
+source_file="res://game/challenges/solar_cleaning/assets/martian_dust.png"
+dest_files=["res://.godot/imported/martian_dust.png-0a03f01e710f00d034ef2ef58c69923f.ctex"]
 
 [params]
 

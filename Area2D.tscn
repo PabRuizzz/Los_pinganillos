@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bjcobo1jxt46h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7vpv"]
+
+[node name="Interactuable" type="Node2D" unique_id=1578735027]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=538252205]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1023414160]
+shape = SubResource("CircleShape2D_c7vpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=1903078368]
