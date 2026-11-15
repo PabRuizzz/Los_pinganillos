@@ -979,11 +979,11 @@ collision_enabled = false
 
 [node name="puerta" parent="." unique_id=1675144440 instance=ExtResource("4_msuh6")]
 position = Vector2(603, 453)
-cuarto_destino = "uid://bu44bv2ir0kb5"
+cuarto_destino = "res://game/stations/mars/mars.tscn"
 nombre_spawn = "greenhousespw"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("5_t3d58")]
-position = Vector2(-30, 117)
+position = Vector2(595.75, 414.5)
 
 [node name="hitbox" type="StaticBody2D" parent="." unique_id=487340894]
 
@@ -1006,3 +1006,6 @@ shape = SubResource("RectangleShape2D_h3ohn")
 [node name="right" type="CollisionShape2D" parent="hitbox" unique_id=5588840]
 position = Vector2(751, 248)
 shape = SubResource("RectangleShape2D_h3ohn")
+
+[node name="SpawnFromMars" type="Marker2D" parent="."]
+position = Vector2(643.5, 405)
