@@ -84,6 +84,8 @@ func restart_game():
 	Alert.panel.visible = false
 	get_tree().paused = false
 	get_tree().change_scene_to_file(ProjectSettings.get_setting("application/run/main_scene"))
+	# Los autoloads no vuelven a ejecutar _ready, así que arrancamos la partida a mano
+	GameFlow.start_game.call_deferred()
 
 
 # Copia los valores iniciales del script (los que estan en "var x = ...")
