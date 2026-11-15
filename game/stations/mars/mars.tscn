@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c5j6udbtben2u" path="res://assets/tilesets/rock3.png" id="14_8do8n"]
 [ext_resource type="Script" uid="uid://whmt50nsb5j4" path="res://game/stations/mars/energy_station.gd" id="15_lbft5"]
 
+[ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
+[ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e87fy"]
 texture = ExtResource("1_tm4dk")
 1:0/0 = 0
@@ -693,7 +695,16 @@ position = Vector2(813, -301)
 scale = Vector2(1.0625, 1.1406252)
 texture = ExtResource("14_8do8n")
 
+[node name="YSortObjects" type="Node2D" parent="." unique_id=1642290517]
+y_sort_enabled = true
+
+[node name="player" parent="YSortObjects" unique_id=1998034301 instance=ExtResource("2_74yx0")]
+position = Vector2(106, -184)
+
+[node name="RoverStation" parent="YSortObjects" unique_id=1184268611 instance=ExtResource("16_rover")]
+position = Vector2(40, 230)
 [node name="hitbox" type="Node2D" parent="." unique_id=1489311480]
+visible = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="hitbox" unique_id=1961332398]
 collision_mask = 3
@@ -769,6 +780,9 @@ shape = SubResource("RectangleShape2D_88uyf")
 position = Vector2(283.5, 67.5)
 shape = SubResource("RectangleShape2D_88uyf")
 
+[node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
+script = ExtResource("17_expedition")
+station = NodePath("../YSortObjects/RoverStation")
 [node name="spawpoints" type="Node2D" parent="." unique_id=700062660]
 position = Vector2(60, -138)
 

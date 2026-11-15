@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3 uid="uid://dofew40hdy66m"]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/montdenier.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "montdenier"
+sample_name = "Montdenier"
+rock_type = "Igneous rock (basalt)"
+location = "Rochette rock, Artuby Ridge, Jezero Crater floor"
+rover = "Perseverance"
+origin = 0
+description = "The first rock sample collected on Mars (mission sample No. 2; tube No. 1, Roubion, held only atmosphere). This 5.98 cm core was sealed on September 6, 2021. Rochette is a hard rock with a basaltic composition, likely formed from lava flows."
+interesting_fact = "After abrading an area of Rochette, the rover found salts—a sign that groundwater flowed through the rock for a long time. In the previous attempt, the rock was so fragile that it crumbled into dust, leaving the tube without a rock sample."
+sample_image = ExtResource("2_image")
+image_caption = "PIA24832 · Mastcam-Z, September 4, 2021. Confirms that the Montdenier core is still inside the tube in the robotic arm's drill bit (contrast enhanced)."
+image_credit = "NASA/JPL-Caltech/ASU/MSSS"
+image_url = "https://images-assets.nasa.gov/image/PIA24832/PIA24832~orig.jpg"
+source_name = "NASA – NASA's Perseverance Rover Collects Puzzle Pieces of Mars' History"
+source_url = "https://www.nasa.gov/news-release/nasas-perseverance-rover-collects-puzzle-pieces-of-mars-history"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"

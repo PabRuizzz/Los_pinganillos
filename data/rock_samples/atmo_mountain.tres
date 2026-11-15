@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RockSampleData" format=3]
+
+[ext_resource type="Script" uid="uid://n4xlqdl52ak0" path="res://data/rock_samples/rock_sample_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/science/rock_samples/atmo_mountain.jpg" id="2_image"]
+
+[resource]
+script = ExtResource("1_script")
+sample_id = "atmo_mountain"
+sample_name = "Atmo Mountain"
+rock_type = "Regolith (a mixture of sedimentary and igneous grains)"
+location = "Observation Mountain megaripple, delta front, Jezero Crater"
+rover = "Perseverance"
+origin = 0
+description = "The mission's first regolith sample (No. 17) was sealed on December 2, 2022. Regolith is loose material made of broken rock, sand, and dust. It was collected from a wind-shaped sand ripple containing grains of different sizes."
+interesting_fact = "Wind can carry fine grains a long way, so a regolith sample is like a surprise bag of material from many parts of Mars. Studying it will help design equipment for future astronauts. Its twin, Crosswind Lake, was left at the Three Forks sample depot."
+sample_image = ExtResource("2_image")
+image_caption = "PIA25588 · CacheCam (the sampling system's internal camera), December 2, 2022. Regolith viewed from above inside the sample tube."
+image_credit = "NASA/JPL-Caltech"
+image_url = "https://images-assets.nasa.gov/image/PIA25588/PIA25588~orig.jpg"
+source_name = "JPL – Meet the Mars Samples: Atmo Mountain and Crosswind Lake (Samples 17 and 18)"
+source_url = "https://www.jpl.nasa.gov/videos/meet-the-mars-samples-atmo-mountain-and-crosswind-lake-samples-17-and-18/"
+metadata/_custom_type_script = "uid://n4xlqdl52ak0"
