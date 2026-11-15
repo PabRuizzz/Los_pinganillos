@@ -25,9 +25,9 @@ SolarCleaning
 │   ├── Panels/Panel1 ... Panel6
 │   └── WaterSpray/Artwork
 └── Interface (CanvasLayer)
-    └── HUD/Content
-        ├── Instructions
-        └── Status
+	└── HUD/Content
+		├── Instructions
+		└── Status
 ```
 
 `SolarPanel.tscn` es la plantilla de un panel; contiene `Artwork` (TextureRect)
