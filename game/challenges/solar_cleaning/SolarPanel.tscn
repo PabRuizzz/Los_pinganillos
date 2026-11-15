@@ -1,16 +1,41 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 [ext_resource type="Script" path="res://game/challenges/solar_cleaning/SolarPanel.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/challenges/solar_cleaning/SolarCell.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://game/challenges/solar_cleaning/assets/solar_panel_clean.png" id="3"]
+[ext_resource type="Texture2D" path="res://game/challenges/solar_cleaning/assets/martian_dust.png" id="4"]
+[sub_resource type="StyleBoxFlat" id="FrameStyle"]
+bg_color = Color(0.12, 0.17, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.42, 0.5, 0.56, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+shadow_color = Color(0.01, 0.02, 0.03, 0.65)
+shadow_size = 9
+shadow_offset = Vector2(3, 6)
 [node name="SolarPanel" type="Control"]
 offset_right = 240.0
 offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("1")
+dust_texture = ExtResource("4")
+[node name="Frame" type="Panel" parent="."]
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 247.0
+offset_bottom = 167.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("FrameStyle")
 [node name="Artwork" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+texture = ExtResource("3")
 expand_mode = 1
 stretch_mode = 0
 [node name="Cells" type="Control" parent="."]
@@ -18,500 +43,2008 @@ mouse_filter = 2
 [node name="Cell_0_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
 offset_top = 0.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_right = 12.0
+offset_bottom = 8.0
 [node name="Cell_1_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 0.0
+offset_right = 24.0
+offset_bottom = 8.0
+[node name="Cell_2_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 24.0
 offset_top = 0.0
+offset_right = 36.0
+offset_bottom = 8.0
+[node name="Cell_3_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 0.0
 offset_right = 48.0
-offset_bottom = 16.0
-[node name="Cell_2_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_4_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 48.0
 offset_top = 0.0
+offset_right = 60.0
+offset_bottom = 8.0
+[node name="Cell_5_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 0.0
 offset_right = 72.0
-offset_bottom = 16.0
-[node name="Cell_3_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_6_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 72.0
 offset_top = 0.0
+offset_right = 84.0
+offset_bottom = 8.0
+[node name="Cell_7_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 0.0
 offset_right = 96.0
-offset_bottom = 16.0
-[node name="Cell_4_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_8_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 96.0
 offset_top = 0.0
+offset_right = 108.0
+offset_bottom = 8.0
+[node name="Cell_9_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 0.0
 offset_right = 120.0
-offset_bottom = 16.0
-[node name="Cell_5_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_10_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 120.0
 offset_top = 0.0
+offset_right = 132.0
+offset_bottom = 8.0
+[node name="Cell_11_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 0.0
 offset_right = 144.0
-offset_bottom = 16.0
-[node name="Cell_6_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_12_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 144.0
 offset_top = 0.0
+offset_right = 156.0
+offset_bottom = 8.0
+[node name="Cell_13_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 0.0
 offset_right = 168.0
-offset_bottom = 16.0
-[node name="Cell_7_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_14_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 168.0
 offset_top = 0.0
+offset_right = 180.0
+offset_bottom = 8.0
+[node name="Cell_15_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 0.0
 offset_right = 192.0
-offset_bottom = 16.0
-[node name="Cell_8_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_16_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 192.0
 offset_top = 0.0
+offset_right = 204.0
+offset_bottom = 8.0
+[node name="Cell_17_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 0.0
 offset_right = 216.0
-offset_bottom = 16.0
-[node name="Cell_9_0" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 8.0
+[node name="Cell_18_0" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
 offset_top = 0.0
+offset_right = 228.0
+offset_bottom = 8.0
+[node name="Cell_19_0" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 0.0
 offset_right = 240.0
-offset_bottom = 16.0
+offset_bottom = 8.0
 [node name="Cell_0_1" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 16.0
-offset_right = 24.0
-offset_bottom = 32.0
+offset_top = 8.0
+offset_right = 12.0
+offset_bottom = 16.0
 [node name="Cell_1_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 32.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 16.0
 [node name="Cell_2_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 16.0
-offset_right = 72.0
-offset_bottom = 32.0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 36.0
+offset_bottom = 16.0
 [node name="Cell_3_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 16.0
-offset_right = 96.0
-offset_bottom = 32.0
+offset_left = 36.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 16.0
 [node name="Cell_4_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 16.0
-offset_right = 120.0
-offset_bottom = 32.0
+offset_left = 48.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 16.0
 [node name="Cell_5_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 16.0
-offset_right = 144.0
-offset_bottom = 32.0
+offset_left = 60.0
+offset_top = 8.0
+offset_right = 72.0
+offset_bottom = 16.0
 [node name="Cell_6_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 16.0
-offset_right = 168.0
-offset_bottom = 32.0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 84.0
+offset_bottom = 16.0
 [node name="Cell_7_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 16.0
-offset_right = 192.0
-offset_bottom = 32.0
+offset_left = 84.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 16.0
 [node name="Cell_8_1" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 16.0
-offset_right = 216.0
-offset_bottom = 32.0
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 108.0
+offset_bottom = 16.0
 [node name="Cell_9_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 16.0
+[node name="Cell_10_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 8.0
+offset_right = 132.0
+offset_bottom = 16.0
+[node name="Cell_11_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 16.0
+[node name="Cell_12_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 8.0
+offset_right = 156.0
+offset_bottom = 16.0
+[node name="Cell_13_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 8.0
+offset_right = 168.0
+offset_bottom = 16.0
+[node name="Cell_14_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 8.0
+offset_right = 180.0
+offset_bottom = 16.0
+[node name="Cell_15_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 16.0
+[node name="Cell_16_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 8.0
+offset_right = 204.0
+offset_bottom = 16.0
+[node name="Cell_17_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 8.0
+offset_right = 216.0
+offset_bottom = 16.0
+[node name="Cell_18_1" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 16.0
+offset_top = 8.0
+offset_right = 228.0
+offset_bottom = 16.0
+[node name="Cell_19_1" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 8.0
 offset_right = 240.0
-offset_bottom = 32.0
+offset_bottom = 16.0
 [node name="Cell_0_2" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 32.0
-offset_right = 24.0
-offset_bottom = 48.0
+offset_top = 16.0
+offset_right = 12.0
+offset_bottom = 24.0
 [node name="Cell_1_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 32.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 24.0
 [node name="Cell_2_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 32.0
-offset_right = 72.0
-offset_bottom = 48.0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 36.0
+offset_bottom = 24.0
 [node name="Cell_3_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 32.0
-offset_right = 96.0
-offset_bottom = 48.0
+offset_left = 36.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 24.0
 [node name="Cell_4_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 32.0
-offset_right = 120.0
-offset_bottom = 48.0
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 60.0
+offset_bottom = 24.0
 [node name="Cell_5_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 32.0
-offset_right = 144.0
-offset_bottom = 48.0
+offset_left = 60.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 24.0
 [node name="Cell_6_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 32.0
-offset_right = 168.0
-offset_bottom = 48.0
+offset_left = 72.0
+offset_top = 16.0
+offset_right = 84.0
+offset_bottom = 24.0
 [node name="Cell_7_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 32.0
-offset_right = 192.0
-offset_bottom = 48.0
+offset_left = 84.0
+offset_top = 16.0
+offset_right = 96.0
+offset_bottom = 24.0
 [node name="Cell_8_2" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 32.0
-offset_right = 216.0
-offset_bottom = 48.0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 108.0
+offset_bottom = 24.0
 [node name="Cell_9_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 24.0
+[node name="Cell_10_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 16.0
+offset_right = 132.0
+offset_bottom = 24.0
+[node name="Cell_11_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 24.0
+[node name="Cell_12_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 16.0
+offset_right = 156.0
+offset_bottom = 24.0
+[node name="Cell_13_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 16.0
+offset_right = 168.0
+offset_bottom = 24.0
+[node name="Cell_14_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 16.0
+offset_right = 180.0
+offset_bottom = 24.0
+[node name="Cell_15_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 16.0
+offset_right = 192.0
+offset_bottom = 24.0
+[node name="Cell_16_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 204.0
+offset_bottom = 24.0
+[node name="Cell_17_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 24.0
+[node name="Cell_18_2" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 32.0
+offset_top = 16.0
+offset_right = 228.0
+offset_bottom = 24.0
+[node name="Cell_19_2" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 16.0
 offset_right = 240.0
-offset_bottom = 48.0
+offset_bottom = 24.0
 [node name="Cell_0_3" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 48.0
-offset_right = 24.0
-offset_bottom = 64.0
+offset_top = 24.0
+offset_right = 12.0
+offset_bottom = 32.0
 [node name="Cell_1_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 48.0
-offset_right = 48.0
-offset_bottom = 64.0
+offset_left = 12.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 32.0
 [node name="Cell_2_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 72.0
-offset_bottom = 64.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 36.0
+offset_bottom = 32.0
 [node name="Cell_3_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 48.0
-offset_right = 96.0
-offset_bottom = 64.0
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 48.0
+offset_bottom = 32.0
 [node name="Cell_4_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 48.0
-offset_right = 120.0
-offset_bottom = 64.0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 60.0
+offset_bottom = 32.0
 [node name="Cell_5_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 48.0
-offset_right = 144.0
-offset_bottom = 64.0
+offset_left = 60.0
+offset_top = 24.0
+offset_right = 72.0
+offset_bottom = 32.0
 [node name="Cell_6_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 48.0
-offset_right = 168.0
-offset_bottom = 64.0
+offset_left = 72.0
+offset_top = 24.0
+offset_right = 84.0
+offset_bottom = 32.0
 [node name="Cell_7_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 48.0
-offset_right = 192.0
-offset_bottom = 64.0
+offset_left = 84.0
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 32.0
 [node name="Cell_8_3" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 48.0
-offset_right = 216.0
-offset_bottom = 64.0
+offset_left = 96.0
+offset_top = 24.0
+offset_right = 108.0
+offset_bottom = 32.0
 [node name="Cell_9_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 24.0
+offset_right = 120.0
+offset_bottom = 32.0
+[node name="Cell_10_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 24.0
+offset_right = 132.0
+offset_bottom = 32.0
+[node name="Cell_11_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 24.0
+offset_right = 144.0
+offset_bottom = 32.0
+[node name="Cell_12_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 24.0
+offset_right = 156.0
+offset_bottom = 32.0
+[node name="Cell_13_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 32.0
+[node name="Cell_14_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 24.0
+offset_right = 180.0
+offset_bottom = 32.0
+[node name="Cell_15_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 24.0
+offset_right = 192.0
+offset_bottom = 32.0
+[node name="Cell_16_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 204.0
+offset_bottom = 32.0
+[node name="Cell_17_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 24.0
+offset_right = 216.0
+offset_bottom = 32.0
+[node name="Cell_18_3" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 48.0
+offset_top = 24.0
+offset_right = 228.0
+offset_bottom = 32.0
+[node name="Cell_19_3" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 24.0
 offset_right = 240.0
-offset_bottom = 64.0
+offset_bottom = 32.0
 [node name="Cell_0_4" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 64.0
-offset_right = 24.0
-offset_bottom = 80.0
+offset_top = 32.0
+offset_right = 12.0
+offset_bottom = 40.0
 [node name="Cell_1_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 64.0
-offset_right = 48.0
-offset_bottom = 80.0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 24.0
+offset_bottom = 40.0
 [node name="Cell_2_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 64.0
-offset_right = 72.0
-offset_bottom = 80.0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 36.0
+offset_bottom = 40.0
 [node name="Cell_3_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 64.0
-offset_right = 96.0
-offset_bottom = 80.0
+offset_left = 36.0
+offset_top = 32.0
+offset_right = 48.0
+offset_bottom = 40.0
 [node name="Cell_4_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 64.0
-offset_right = 120.0
-offset_bottom = 80.0
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 60.0
+offset_bottom = 40.0
 [node name="Cell_5_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 64.0
-offset_right = 144.0
-offset_bottom = 80.0
+offset_left = 60.0
+offset_top = 32.0
+offset_right = 72.0
+offset_bottom = 40.0
 [node name="Cell_6_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 64.0
-offset_right = 168.0
-offset_bottom = 80.0
+offset_left = 72.0
+offset_top = 32.0
+offset_right = 84.0
+offset_bottom = 40.0
 [node name="Cell_7_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 64.0
-offset_right = 192.0
-offset_bottom = 80.0
+offset_left = 84.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 40.0
 [node name="Cell_8_4" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 64.0
-offset_right = 216.0
-offset_bottom = 80.0
+offset_left = 96.0
+offset_top = 32.0
+offset_right = 108.0
+offset_bottom = 40.0
 [node name="Cell_9_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 32.0
+offset_right = 120.0
+offset_bottom = 40.0
+[node name="Cell_10_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 32.0
+offset_right = 132.0
+offset_bottom = 40.0
+[node name="Cell_11_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 32.0
+offset_right = 144.0
+offset_bottom = 40.0
+[node name="Cell_12_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 156.0
+offset_bottom = 40.0
+[node name="Cell_13_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 32.0
+offset_right = 168.0
+offset_bottom = 40.0
+[node name="Cell_14_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 32.0
+offset_right = 180.0
+offset_bottom = 40.0
+[node name="Cell_15_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 32.0
+offset_right = 192.0
+offset_bottom = 40.0
+[node name="Cell_16_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 32.0
+offset_right = 204.0
+offset_bottom = 40.0
+[node name="Cell_17_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 32.0
+offset_right = 216.0
+offset_bottom = 40.0
+[node name="Cell_18_4" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 64.0
+offset_top = 32.0
+offset_right = 228.0
+offset_bottom = 40.0
+[node name="Cell_19_4" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 32.0
 offset_right = 240.0
-offset_bottom = 80.0
+offset_bottom = 40.0
 [node name="Cell_0_5" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 80.0
-offset_right = 24.0
-offset_bottom = 96.0
+offset_top = 40.0
+offset_right = 12.0
+offset_bottom = 48.0
 [node name="Cell_1_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 80.0
-offset_right = 48.0
-offset_bottom = 96.0
+offset_left = 12.0
+offset_top = 40.0
+offset_right = 24.0
+offset_bottom = 48.0
 [node name="Cell_2_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 80.0
-offset_right = 72.0
-offset_bottom = 96.0
+offset_left = 24.0
+offset_top = 40.0
+offset_right = 36.0
+offset_bottom = 48.0
 [node name="Cell_3_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 80.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_left = 36.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 48.0
 [node name="Cell_4_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 80.0
-offset_right = 120.0
-offset_bottom = 96.0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 48.0
 [node name="Cell_5_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 80.0
-offset_right = 144.0
-offset_bottom = 96.0
+offset_left = 60.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 48.0
 [node name="Cell_6_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 80.0
-offset_right = 168.0
-offset_bottom = 96.0
+offset_left = 72.0
+offset_top = 40.0
+offset_right = 84.0
+offset_bottom = 48.0
 [node name="Cell_7_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 80.0
-offset_right = 192.0
-offset_bottom = 96.0
+offset_left = 84.0
+offset_top = 40.0
+offset_right = 96.0
+offset_bottom = 48.0
 [node name="Cell_8_5" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 80.0
-offset_right = 216.0
-offset_bottom = 96.0
+offset_left = 96.0
+offset_top = 40.0
+offset_right = 108.0
+offset_bottom = 48.0
 [node name="Cell_9_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 40.0
+offset_right = 120.0
+offset_bottom = 48.0
+[node name="Cell_10_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 40.0
+offset_right = 132.0
+offset_bottom = 48.0
+[node name="Cell_11_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 40.0
+offset_right = 144.0
+offset_bottom = 48.0
+[node name="Cell_12_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 40.0
+offset_right = 156.0
+offset_bottom = 48.0
+[node name="Cell_13_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 40.0
+offset_right = 168.0
+offset_bottom = 48.0
+[node name="Cell_14_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 40.0
+offset_right = 180.0
+offset_bottom = 48.0
+[node name="Cell_15_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 40.0
+offset_right = 192.0
+offset_bottom = 48.0
+[node name="Cell_16_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 40.0
+offset_right = 204.0
+offset_bottom = 48.0
+[node name="Cell_17_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 40.0
+offset_right = 216.0
+offset_bottom = 48.0
+[node name="Cell_18_5" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 80.0
+offset_top = 40.0
+offset_right = 228.0
+offset_bottom = 48.0
+[node name="Cell_19_5" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 40.0
 offset_right = 240.0
-offset_bottom = 96.0
+offset_bottom = 48.0
 [node name="Cell_0_6" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 96.0
-offset_right = 24.0
-offset_bottom = 112.0
+offset_top = 48.0
+offset_right = 12.0
+offset_bottom = 56.0
 [node name="Cell_1_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 96.0
-offset_right = 48.0
-offset_bottom = 112.0
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 24.0
+offset_bottom = 56.0
 [node name="Cell_2_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 96.0
-offset_right = 72.0
-offset_bottom = 112.0
+offset_left = 24.0
+offset_top = 48.0
+offset_right = 36.0
+offset_bottom = 56.0
 [node name="Cell_3_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 96.0
-offset_right = 96.0
-offset_bottom = 112.0
+offset_left = 36.0
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 56.0
 [node name="Cell_4_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 96.0
-offset_right = 120.0
-offset_bottom = 112.0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 60.0
+offset_bottom = 56.0
 [node name="Cell_5_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 96.0
-offset_right = 144.0
-offset_bottom = 112.0
+offset_left = 60.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 56.0
 [node name="Cell_6_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 96.0
-offset_right = 168.0
-offset_bottom = 112.0
+offset_left = 72.0
+offset_top = 48.0
+offset_right = 84.0
+offset_bottom = 56.0
 [node name="Cell_7_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 96.0
-offset_right = 192.0
-offset_bottom = 112.0
+offset_left = 84.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 56.0
 [node name="Cell_8_6" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 96.0
-offset_right = 216.0
-offset_bottom = 112.0
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 108.0
+offset_bottom = 56.0
 [node name="Cell_9_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 48.0
+offset_right = 120.0
+offset_bottom = 56.0
+[node name="Cell_10_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 48.0
+offset_right = 132.0
+offset_bottom = 56.0
+[node name="Cell_11_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 56.0
+[node name="Cell_12_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 48.0
+offset_right = 156.0
+offset_bottom = 56.0
+[node name="Cell_13_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 48.0
+offset_right = 168.0
+offset_bottom = 56.0
+[node name="Cell_14_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 48.0
+offset_right = 180.0
+offset_bottom = 56.0
+[node name="Cell_15_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 48.0
+offset_right = 192.0
+offset_bottom = 56.0
+[node name="Cell_16_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 204.0
+offset_bottom = 56.0
+[node name="Cell_17_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 56.0
+[node name="Cell_18_6" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 96.0
+offset_top = 48.0
+offset_right = 228.0
+offset_bottom = 56.0
+[node name="Cell_19_6" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 48.0
 offset_right = 240.0
-offset_bottom = 112.0
+offset_bottom = 56.0
 [node name="Cell_0_7" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 112.0
-offset_right = 24.0
-offset_bottom = 128.0
+offset_top = 56.0
+offset_right = 12.0
+offset_bottom = 64.0
 [node name="Cell_1_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 112.0
-offset_right = 48.0
-offset_bottom = 128.0
+offset_left = 12.0
+offset_top = 56.0
+offset_right = 24.0
+offset_bottom = 64.0
 [node name="Cell_2_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 112.0
-offset_right = 72.0
-offset_bottom = 128.0
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 36.0
+offset_bottom = 64.0
 [node name="Cell_3_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 112.0
-offset_right = 96.0
-offset_bottom = 128.0
+offset_left = 36.0
+offset_top = 56.0
+offset_right = 48.0
+offset_bottom = 64.0
 [node name="Cell_4_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 112.0
-offset_right = 120.0
-offset_bottom = 128.0
+offset_left = 48.0
+offset_top = 56.0
+offset_right = 60.0
+offset_bottom = 64.0
 [node name="Cell_5_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 112.0
-offset_right = 144.0
-offset_bottom = 128.0
+offset_left = 60.0
+offset_top = 56.0
+offset_right = 72.0
+offset_bottom = 64.0
 [node name="Cell_6_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 112.0
-offset_right = 168.0
-offset_bottom = 128.0
+offset_left = 72.0
+offset_top = 56.0
+offset_right = 84.0
+offset_bottom = 64.0
 [node name="Cell_7_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 112.0
-offset_right = 192.0
-offset_bottom = 128.0
+offset_left = 84.0
+offset_top = 56.0
+offset_right = 96.0
+offset_bottom = 64.0
 [node name="Cell_8_7" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 112.0
-offset_right = 216.0
-offset_bottom = 128.0
+offset_left = 96.0
+offset_top = 56.0
+offset_right = 108.0
+offset_bottom = 64.0
 [node name="Cell_9_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 56.0
+offset_right = 120.0
+offset_bottom = 64.0
+[node name="Cell_10_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 56.0
+offset_right = 132.0
+offset_bottom = 64.0
+[node name="Cell_11_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 56.0
+offset_right = 144.0
+offset_bottom = 64.0
+[node name="Cell_12_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 56.0
+offset_right = 156.0
+offset_bottom = 64.0
+[node name="Cell_13_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 56.0
+offset_right = 168.0
+offset_bottom = 64.0
+[node name="Cell_14_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 56.0
+offset_right = 180.0
+offset_bottom = 64.0
+[node name="Cell_15_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 56.0
+offset_right = 192.0
+offset_bottom = 64.0
+[node name="Cell_16_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 56.0
+offset_right = 204.0
+offset_bottom = 64.0
+[node name="Cell_17_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 56.0
+offset_right = 216.0
+offset_bottom = 64.0
+[node name="Cell_18_7" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 112.0
+offset_top = 56.0
+offset_right = 228.0
+offset_bottom = 64.0
+[node name="Cell_19_7" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 56.0
 offset_right = 240.0
-offset_bottom = 128.0
+offset_bottom = 64.0
 [node name="Cell_0_8" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
-offset_top = 128.0
-offset_right = 24.0
-offset_bottom = 144.0
+offset_top = 64.0
+offset_right = 12.0
+offset_bottom = 72.0
 [node name="Cell_1_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 24.0
-offset_top = 128.0
-offset_right = 48.0
-offset_bottom = 144.0
+offset_left = 12.0
+offset_top = 64.0
+offset_right = 24.0
+offset_bottom = 72.0
 [node name="Cell_2_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 48.0
-offset_top = 128.0
-offset_right = 72.0
-offset_bottom = 144.0
+offset_left = 24.0
+offset_top = 64.0
+offset_right = 36.0
+offset_bottom = 72.0
 [node name="Cell_3_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 72.0
-offset_top = 128.0
-offset_right = 96.0
-offset_bottom = 144.0
+offset_left = 36.0
+offset_top = 64.0
+offset_right = 48.0
+offset_bottom = 72.0
 [node name="Cell_4_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 96.0
-offset_top = 128.0
-offset_right = 120.0
-offset_bottom = 144.0
+offset_left = 48.0
+offset_top = 64.0
+offset_right = 60.0
+offset_bottom = 72.0
 [node name="Cell_5_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 120.0
-offset_top = 128.0
-offset_right = 144.0
-offset_bottom = 144.0
+offset_left = 60.0
+offset_top = 64.0
+offset_right = 72.0
+offset_bottom = 72.0
 [node name="Cell_6_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 144.0
-offset_top = 128.0
-offset_right = 168.0
-offset_bottom = 144.0
+offset_left = 72.0
+offset_top = 64.0
+offset_right = 84.0
+offset_bottom = 72.0
 [node name="Cell_7_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 168.0
-offset_top = 128.0
-offset_right = 192.0
-offset_bottom = 144.0
+offset_left = 84.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 72.0
 [node name="Cell_8_8" parent="Cells" instance=ExtResource("2")]
-offset_left = 192.0
-offset_top = 128.0
-offset_right = 216.0
-offset_bottom = 144.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 108.0
+offset_bottom = 72.0
 [node name="Cell_9_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 64.0
+offset_right = 120.0
+offset_bottom = 72.0
+[node name="Cell_10_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 64.0
+offset_right = 132.0
+offset_bottom = 72.0
+[node name="Cell_11_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 64.0
+offset_right = 144.0
+offset_bottom = 72.0
+[node name="Cell_12_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 64.0
+offset_right = 156.0
+offset_bottom = 72.0
+[node name="Cell_13_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 64.0
+offset_right = 168.0
+offset_bottom = 72.0
+[node name="Cell_14_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 64.0
+offset_right = 180.0
+offset_bottom = 72.0
+[node name="Cell_15_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 72.0
+[node name="Cell_16_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 204.0
+offset_bottom = 72.0
+[node name="Cell_17_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 64.0
+offset_right = 216.0
+offset_bottom = 72.0
+[node name="Cell_18_8" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
-offset_top = 128.0
+offset_top = 64.0
+offset_right = 228.0
+offset_bottom = 72.0
+[node name="Cell_19_8" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 64.0
 offset_right = 240.0
-offset_bottom = 144.0
+offset_bottom = 72.0
 [node name="Cell_0_9" parent="Cells" instance=ExtResource("2")]
 offset_left = 0.0
+offset_top = 72.0
+offset_right = 12.0
+offset_bottom = 80.0
+[node name="Cell_1_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 72.0
+offset_right = 24.0
+offset_bottom = 80.0
+[node name="Cell_2_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 72.0
+offset_right = 36.0
+offset_bottom = 80.0
+[node name="Cell_3_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 72.0
+offset_right = 48.0
+offset_bottom = 80.0
+[node name="Cell_4_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 72.0
+offset_right = 60.0
+offset_bottom = 80.0
+[node name="Cell_5_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 72.0
+offset_right = 72.0
+offset_bottom = 80.0
+[node name="Cell_6_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 84.0
+offset_bottom = 80.0
+[node name="Cell_7_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 72.0
+offset_right = 96.0
+offset_bottom = 80.0
+[node name="Cell_8_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 108.0
+offset_bottom = 80.0
+[node name="Cell_9_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 72.0
+offset_right = 120.0
+offset_bottom = 80.0
+[node name="Cell_10_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 72.0
+offset_right = 132.0
+offset_bottom = 80.0
+[node name="Cell_11_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 72.0
+offset_right = 144.0
+offset_bottom = 80.0
+[node name="Cell_12_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 72.0
+offset_right = 156.0
+offset_bottom = 80.0
+[node name="Cell_13_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 72.0
+offset_right = 168.0
+offset_bottom = 80.0
+[node name="Cell_14_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 72.0
+offset_right = 180.0
+offset_bottom = 80.0
+[node name="Cell_15_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 72.0
+offset_right = 192.0
+offset_bottom = 80.0
+[node name="Cell_16_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 72.0
+offset_right = 204.0
+offset_bottom = 80.0
+[node name="Cell_17_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 72.0
+offset_right = 216.0
+offset_bottom = 80.0
+[node name="Cell_18_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 72.0
+offset_right = 228.0
+offset_bottom = 80.0
+[node name="Cell_19_9" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 80.0
+[node name="Cell_0_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 80.0
+offset_right = 12.0
+offset_bottom = 88.0
+[node name="Cell_1_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 80.0
+offset_right = 24.0
+offset_bottom = 88.0
+[node name="Cell_2_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 80.0
+offset_right = 36.0
+offset_bottom = 88.0
+[node name="Cell_3_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 80.0
+offset_right = 48.0
+offset_bottom = 88.0
+[node name="Cell_4_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 80.0
+offset_right = 60.0
+offset_bottom = 88.0
+[node name="Cell_5_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 80.0
+offset_right = 72.0
+offset_bottom = 88.0
+[node name="Cell_6_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 80.0
+offset_right = 84.0
+offset_bottom = 88.0
+[node name="Cell_7_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = 88.0
+[node name="Cell_8_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 80.0
+offset_right = 108.0
+offset_bottom = 88.0
+[node name="Cell_9_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 80.0
+offset_right = 120.0
+offset_bottom = 88.0
+[node name="Cell_10_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 132.0
+offset_bottom = 88.0
+[node name="Cell_11_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 80.0
+offset_right = 144.0
+offset_bottom = 88.0
+[node name="Cell_12_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 80.0
+offset_right = 156.0
+offset_bottom = 88.0
+[node name="Cell_13_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 80.0
+offset_right = 168.0
+offset_bottom = 88.0
+[node name="Cell_14_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 80.0
+offset_right = 180.0
+offset_bottom = 88.0
+[node name="Cell_15_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 80.0
+offset_right = 192.0
+offset_bottom = 88.0
+[node name="Cell_16_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 204.0
+offset_bottom = 88.0
+[node name="Cell_17_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 80.0
+offset_right = 216.0
+offset_bottom = 88.0
+[node name="Cell_18_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 80.0
+offset_right = 228.0
+offset_bottom = 88.0
+[node name="Cell_19_10" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 88.0
+[node name="Cell_0_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 88.0
+offset_right = 12.0
+offset_bottom = 96.0
+[node name="Cell_1_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 88.0
+offset_right = 24.0
+offset_bottom = 96.0
+[node name="Cell_2_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 88.0
+offset_right = 36.0
+offset_bottom = 96.0
+[node name="Cell_3_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 88.0
+offset_right = 48.0
+offset_bottom = 96.0
+[node name="Cell_4_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 88.0
+offset_right = 60.0
+offset_bottom = 96.0
+[node name="Cell_5_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 88.0
+offset_right = 72.0
+offset_bottom = 96.0
+[node name="Cell_6_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 88.0
+offset_right = 84.0
+offset_bottom = 96.0
+[node name="Cell_7_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 88.0
+offset_right = 96.0
+offset_bottom = 96.0
+[node name="Cell_8_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 88.0
+offset_right = 108.0
+offset_bottom = 96.0
+[node name="Cell_9_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 88.0
+offset_right = 120.0
+offset_bottom = 96.0
+[node name="Cell_10_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 88.0
+offset_right = 132.0
+offset_bottom = 96.0
+[node name="Cell_11_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 88.0
+offset_right = 144.0
+offset_bottom = 96.0
+[node name="Cell_12_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 88.0
+offset_right = 156.0
+offset_bottom = 96.0
+[node name="Cell_13_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 88.0
+offset_right = 168.0
+offset_bottom = 96.0
+[node name="Cell_14_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 88.0
+offset_right = 180.0
+offset_bottom = 96.0
+[node name="Cell_15_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 88.0
+offset_right = 192.0
+offset_bottom = 96.0
+[node name="Cell_16_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 88.0
+offset_right = 204.0
+offset_bottom = 96.0
+[node name="Cell_17_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 88.0
+offset_right = 216.0
+offset_bottom = 96.0
+[node name="Cell_18_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 88.0
+offset_right = 228.0
+offset_bottom = 96.0
+[node name="Cell_19_11" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 88.0
+offset_right = 240.0
+offset_bottom = 96.0
+[node name="Cell_0_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 96.0
+offset_right = 12.0
+offset_bottom = 104.0
+[node name="Cell_1_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 96.0
+offset_right = 24.0
+offset_bottom = 104.0
+[node name="Cell_2_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 36.0
+offset_bottom = 104.0
+[node name="Cell_3_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 96.0
+offset_right = 48.0
+offset_bottom = 104.0
+[node name="Cell_4_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 60.0
+offset_bottom = 104.0
+[node name="Cell_5_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 96.0
+offset_right = 72.0
+offset_bottom = 104.0
+[node name="Cell_6_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 96.0
+offset_right = 84.0
+offset_bottom = 104.0
+[node name="Cell_7_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 104.0
+[node name="Cell_8_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 96.0
+offset_right = 108.0
+offset_bottom = 104.0
+[node name="Cell_9_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 96.0
+offset_right = 120.0
+offset_bottom = 104.0
+[node name="Cell_10_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 96.0
+offset_right = 132.0
+offset_bottom = 104.0
+[node name="Cell_11_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 96.0
+offset_right = 144.0
+offset_bottom = 104.0
+[node name="Cell_12_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 96.0
+offset_right = 156.0
+offset_bottom = 104.0
+[node name="Cell_13_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 96.0
+offset_right = 168.0
+offset_bottom = 104.0
+[node name="Cell_14_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 96.0
+offset_right = 180.0
+offset_bottom = 104.0
+[node name="Cell_15_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 96.0
+offset_right = 192.0
+offset_bottom = 104.0
+[node name="Cell_16_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 204.0
+offset_bottom = 104.0
+[node name="Cell_17_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 96.0
+offset_right = 216.0
+offset_bottom = 104.0
+[node name="Cell_18_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 96.0
+offset_right = 228.0
+offset_bottom = 104.0
+[node name="Cell_19_12" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 96.0
+offset_right = 240.0
+offset_bottom = 104.0
+[node name="Cell_0_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 104.0
+offset_right = 12.0
+offset_bottom = 112.0
+[node name="Cell_1_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 104.0
+offset_right = 24.0
+offset_bottom = 112.0
+[node name="Cell_2_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 36.0
+offset_bottom = 112.0
+[node name="Cell_3_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 104.0
+offset_right = 48.0
+offset_bottom = 112.0
+[node name="Cell_4_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 104.0
+offset_right = 60.0
+offset_bottom = 112.0
+[node name="Cell_5_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 104.0
+offset_right = 72.0
+offset_bottom = 112.0
+[node name="Cell_6_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 104.0
+offset_right = 84.0
+offset_bottom = 112.0
+[node name="Cell_7_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 104.0
+offset_right = 96.0
+offset_bottom = 112.0
+[node name="Cell_8_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 104.0
+offset_right = 108.0
+offset_bottom = 112.0
+[node name="Cell_9_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 104.0
+offset_right = 120.0
+offset_bottom = 112.0
+[node name="Cell_10_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 104.0
+offset_right = 132.0
+offset_bottom = 112.0
+[node name="Cell_11_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 104.0
+offset_right = 144.0
+offset_bottom = 112.0
+[node name="Cell_12_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 104.0
+offset_right = 156.0
+offset_bottom = 112.0
+[node name="Cell_13_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 104.0
+offset_right = 168.0
+offset_bottom = 112.0
+[node name="Cell_14_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 104.0
+offset_right = 180.0
+offset_bottom = 112.0
+[node name="Cell_15_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 104.0
+offset_right = 192.0
+offset_bottom = 112.0
+[node name="Cell_16_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 104.0
+offset_right = 204.0
+offset_bottom = 112.0
+[node name="Cell_17_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 104.0
+offset_right = 216.0
+offset_bottom = 112.0
+[node name="Cell_18_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 104.0
+offset_right = 228.0
+offset_bottom = 112.0
+[node name="Cell_19_13" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 104.0
+offset_right = 240.0
+offset_bottom = 112.0
+[node name="Cell_0_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 112.0
+offset_right = 12.0
+offset_bottom = 120.0
+[node name="Cell_1_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 112.0
+offset_right = 24.0
+offset_bottom = 120.0
+[node name="Cell_2_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 112.0
+offset_right = 36.0
+offset_bottom = 120.0
+[node name="Cell_3_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 112.0
+offset_right = 48.0
+offset_bottom = 120.0
+[node name="Cell_4_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 112.0
+offset_right = 60.0
+offset_bottom = 120.0
+[node name="Cell_5_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 112.0
+offset_right = 72.0
+offset_bottom = 120.0
+[node name="Cell_6_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 112.0
+offset_right = 84.0
+offset_bottom = 120.0
+[node name="Cell_7_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 112.0
+offset_right = 96.0
+offset_bottom = 120.0
+[node name="Cell_8_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 112.0
+offset_right = 108.0
+offset_bottom = 120.0
+[node name="Cell_9_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 112.0
+offset_right = 120.0
+offset_bottom = 120.0
+[node name="Cell_10_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 112.0
+offset_right = 132.0
+offset_bottom = 120.0
+[node name="Cell_11_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 112.0
+offset_right = 144.0
+offset_bottom = 120.0
+[node name="Cell_12_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 112.0
+offset_right = 156.0
+offset_bottom = 120.0
+[node name="Cell_13_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 112.0
+offset_right = 168.0
+offset_bottom = 120.0
+[node name="Cell_14_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 112.0
+offset_right = 180.0
+offset_bottom = 120.0
+[node name="Cell_15_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 112.0
+offset_right = 192.0
+offset_bottom = 120.0
+[node name="Cell_16_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 112.0
+offset_right = 204.0
+offset_bottom = 120.0
+[node name="Cell_17_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 112.0
+offset_right = 216.0
+offset_bottom = 120.0
+[node name="Cell_18_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 112.0
+offset_right = 228.0
+offset_bottom = 120.0
+[node name="Cell_19_14" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 112.0
+offset_right = 240.0
+offset_bottom = 120.0
+[node name="Cell_0_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 120.0
+offset_right = 12.0
+offset_bottom = 128.0
+[node name="Cell_1_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 120.0
+offset_right = 24.0
+offset_bottom = 128.0
+[node name="Cell_2_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 120.0
+offset_right = 36.0
+offset_bottom = 128.0
+[node name="Cell_3_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 120.0
+offset_right = 48.0
+offset_bottom = 128.0
+[node name="Cell_4_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 120.0
+offset_right = 60.0
+offset_bottom = 128.0
+[node name="Cell_5_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 120.0
+offset_right = 72.0
+offset_bottom = 128.0
+[node name="Cell_6_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 120.0
+offset_right = 84.0
+offset_bottom = 128.0
+[node name="Cell_7_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 120.0
+offset_right = 96.0
+offset_bottom = 128.0
+[node name="Cell_8_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 120.0
+offset_right = 108.0
+offset_bottom = 128.0
+[node name="Cell_9_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 120.0
+offset_right = 120.0
+offset_bottom = 128.0
+[node name="Cell_10_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 120.0
+offset_right = 132.0
+offset_bottom = 128.0
+[node name="Cell_11_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 120.0
+offset_right = 144.0
+offset_bottom = 128.0
+[node name="Cell_12_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 120.0
+offset_right = 156.0
+offset_bottom = 128.0
+[node name="Cell_13_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 120.0
+offset_right = 168.0
+offset_bottom = 128.0
+[node name="Cell_14_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 128.0
+[node name="Cell_15_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 120.0
+offset_right = 192.0
+offset_bottom = 128.0
+[node name="Cell_16_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 120.0
+offset_right = 204.0
+offset_bottom = 128.0
+[node name="Cell_17_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 120.0
+offset_right = 216.0
+offset_bottom = 128.0
+[node name="Cell_18_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 120.0
+offset_right = 228.0
+offset_bottom = 128.0
+[node name="Cell_19_15" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 120.0
+offset_right = 240.0
+offset_bottom = 128.0
+[node name="Cell_0_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 128.0
+offset_right = 12.0
+offset_bottom = 136.0
+[node name="Cell_1_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 128.0
+offset_right = 24.0
+offset_bottom = 136.0
+[node name="Cell_2_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 128.0
+offset_right = 36.0
+offset_bottom = 136.0
+[node name="Cell_3_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 128.0
+offset_right = 48.0
+offset_bottom = 136.0
+[node name="Cell_4_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 128.0
+offset_right = 60.0
+offset_bottom = 136.0
+[node name="Cell_5_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 128.0
+offset_right = 72.0
+offset_bottom = 136.0
+[node name="Cell_6_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 128.0
+offset_right = 84.0
+offset_bottom = 136.0
+[node name="Cell_7_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 128.0
+offset_right = 96.0
+offset_bottom = 136.0
+[node name="Cell_8_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 128.0
+offset_right = 108.0
+offset_bottom = 136.0
+[node name="Cell_9_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 128.0
+offset_right = 120.0
+offset_bottom = 136.0
+[node name="Cell_10_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 128.0
+offset_right = 132.0
+offset_bottom = 136.0
+[node name="Cell_11_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 128.0
+offset_right = 144.0
+offset_bottom = 136.0
+[node name="Cell_12_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 128.0
+offset_right = 156.0
+offset_bottom = 136.0
+[node name="Cell_13_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 128.0
+offset_right = 168.0
+offset_bottom = 136.0
+[node name="Cell_14_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 128.0
+offset_right = 180.0
+offset_bottom = 136.0
+[node name="Cell_15_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 136.0
+[node name="Cell_16_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 204.0
+offset_bottom = 136.0
+[node name="Cell_17_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 128.0
+offset_right = 216.0
+offset_bottom = 136.0
+[node name="Cell_18_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 128.0
+offset_right = 228.0
+offset_bottom = 136.0
+[node name="Cell_19_16" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 128.0
+offset_right = 240.0
+offset_bottom = 136.0
+[node name="Cell_0_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 136.0
+offset_right = 12.0
+offset_bottom = 144.0
+[node name="Cell_1_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 136.0
+offset_right = 24.0
+offset_bottom = 144.0
+[node name="Cell_2_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 136.0
+offset_right = 36.0
+offset_bottom = 144.0
+[node name="Cell_3_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 136.0
+offset_right = 48.0
+offset_bottom = 144.0
+[node name="Cell_4_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 136.0
+offset_right = 60.0
+offset_bottom = 144.0
+[node name="Cell_5_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 136.0
+offset_right = 72.0
+offset_bottom = 144.0
+[node name="Cell_6_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 136.0
+offset_right = 84.0
+offset_bottom = 144.0
+[node name="Cell_7_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 136.0
+offset_right = 96.0
+offset_bottom = 144.0
+[node name="Cell_8_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 136.0
+offset_right = 108.0
+offset_bottom = 144.0
+[node name="Cell_9_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 136.0
+offset_right = 120.0
+offset_bottom = 144.0
+[node name="Cell_10_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 136.0
+offset_right = 132.0
+offset_bottom = 144.0
+[node name="Cell_11_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 136.0
+offset_right = 144.0
+offset_bottom = 144.0
+[node name="Cell_12_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 136.0
+offset_right = 156.0
+offset_bottom = 144.0
+[node name="Cell_13_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 136.0
+offset_right = 168.0
+offset_bottom = 144.0
+[node name="Cell_14_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 136.0
+offset_right = 180.0
+offset_bottom = 144.0
+[node name="Cell_15_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 136.0
+offset_right = 192.0
+offset_bottom = 144.0
+[node name="Cell_16_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 136.0
+offset_right = 204.0
+offset_bottom = 144.0
+[node name="Cell_17_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 136.0
+offset_right = 216.0
+offset_bottom = 144.0
+[node name="Cell_18_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 136.0
+offset_right = 228.0
+offset_bottom = 144.0
+[node name="Cell_19_17" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 136.0
+offset_right = 240.0
+offset_bottom = 144.0
+[node name="Cell_0_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 144.0
+offset_right = 12.0
+offset_bottom = 152.0
+[node name="Cell_1_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
 offset_top = 144.0
 offset_right = 24.0
-offset_bottom = 160.0
-[node name="Cell_1_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_2_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 24.0
 offset_top = 144.0
+offset_right = 36.0
+offset_bottom = 152.0
+[node name="Cell_3_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 144.0
 offset_right = 48.0
-offset_bottom = 160.0
-[node name="Cell_2_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_4_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 48.0
 offset_top = 144.0
+offset_right = 60.0
+offset_bottom = 152.0
+[node name="Cell_5_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 144.0
 offset_right = 72.0
-offset_bottom = 160.0
-[node name="Cell_3_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_6_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 72.0
 offset_top = 144.0
+offset_right = 84.0
+offset_bottom = 152.0
+[node name="Cell_7_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 144.0
 offset_right = 96.0
-offset_bottom = 160.0
-[node name="Cell_4_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_8_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 96.0
 offset_top = 144.0
+offset_right = 108.0
+offset_bottom = 152.0
+[node name="Cell_9_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 144.0
 offset_right = 120.0
-offset_bottom = 160.0
-[node name="Cell_5_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_10_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 120.0
 offset_top = 144.0
+offset_right = 132.0
+offset_bottom = 152.0
+[node name="Cell_11_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 144.0
 offset_right = 144.0
-offset_bottom = 160.0
-[node name="Cell_6_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_12_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 144.0
 offset_top = 144.0
+offset_right = 156.0
+offset_bottom = 152.0
+[node name="Cell_13_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 144.0
 offset_right = 168.0
-offset_bottom = 160.0
-[node name="Cell_7_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_14_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 168.0
 offset_top = 144.0
+offset_right = 180.0
+offset_bottom = 152.0
+[node name="Cell_15_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 144.0
 offset_right = 192.0
-offset_bottom = 160.0
-[node name="Cell_8_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_16_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 192.0
 offset_top = 144.0
+offset_right = 204.0
+offset_bottom = 152.0
+[node name="Cell_17_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 144.0
 offset_right = 216.0
-offset_bottom = 160.0
-[node name="Cell_9_9" parent="Cells" instance=ExtResource("2")]
+offset_bottom = 152.0
+[node name="Cell_18_18" parent="Cells" instance=ExtResource("2")]
 offset_left = 216.0
 offset_top = 144.0
+offset_right = 228.0
+offset_bottom = 152.0
+[node name="Cell_19_18" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 144.0
+offset_right = 240.0
+offset_bottom = 152.0
+[node name="Cell_0_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 0.0
+offset_top = 152.0
+offset_right = 12.0
+offset_bottom = 160.0
+[node name="Cell_1_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 12.0
+offset_top = 152.0
+offset_right = 24.0
+offset_bottom = 160.0
+[node name="Cell_2_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 24.0
+offset_top = 152.0
+offset_right = 36.0
+offset_bottom = 160.0
+[node name="Cell_3_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 36.0
+offset_top = 152.0
+offset_right = 48.0
+offset_bottom = 160.0
+[node name="Cell_4_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 48.0
+offset_top = 152.0
+offset_right = 60.0
+offset_bottom = 160.0
+[node name="Cell_5_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 60.0
+offset_top = 152.0
+offset_right = 72.0
+offset_bottom = 160.0
+[node name="Cell_6_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 72.0
+offset_top = 152.0
+offset_right = 84.0
+offset_bottom = 160.0
+[node name="Cell_7_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 84.0
+offset_top = 152.0
+offset_right = 96.0
+offset_bottom = 160.0
+[node name="Cell_8_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 96.0
+offset_top = 152.0
+offset_right = 108.0
+offset_bottom = 160.0
+[node name="Cell_9_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 108.0
+offset_top = 152.0
+offset_right = 120.0
+offset_bottom = 160.0
+[node name="Cell_10_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 120.0
+offset_top = 152.0
+offset_right = 132.0
+offset_bottom = 160.0
+[node name="Cell_11_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 132.0
+offset_top = 152.0
+offset_right = 144.0
+offset_bottom = 160.0
+[node name="Cell_12_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 144.0
+offset_top = 152.0
+offset_right = 156.0
+offset_bottom = 160.0
+[node name="Cell_13_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 156.0
+offset_top = 152.0
+offset_right = 168.0
+offset_bottom = 160.0
+[node name="Cell_14_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 168.0
+offset_top = 152.0
+offset_right = 180.0
+offset_bottom = 160.0
+[node name="Cell_15_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 180.0
+offset_top = 152.0
+offset_right = 192.0
+offset_bottom = 160.0
+[node name="Cell_16_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 192.0
+offset_top = 152.0
+offset_right = 204.0
+offset_bottom = 160.0
+[node name="Cell_17_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 204.0
+offset_top = 152.0
+offset_right = 216.0
+offset_bottom = 160.0
+[node name="Cell_18_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 216.0
+offset_top = 152.0
+offset_right = 228.0
+offset_bottom = 160.0
+[node name="Cell_19_19" parent="Cells" instance=ExtResource("2")]
+offset_left = 228.0
+offset_top = 152.0
 offset_right = 240.0
 offset_bottom = 160.0
+[node name="Readout" type="Label" parent="."]
+offset_top = 171.0
+offset_right = 240.0
+offset_bottom = 191.0
+mouse_filter = 2
+text = "00% LIMPIO"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 11

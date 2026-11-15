@@ -1,4 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 [ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/PipePiece.tscn" id="1"]
+[ext_resource type="Texture2D" path="res://game/challenges/electrical_repair/assets/cross.tres" id="2"]
 [node name="Cross" instance=ExtResource("1")]
 connections = 15
+
+[node name="Artwork" parent="." index="0"]
+texture = ExtResource("2")
+stretch_mode = 0

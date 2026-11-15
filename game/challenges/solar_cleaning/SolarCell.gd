@@ -6,6 +6,7 @@ extends Control
 	set(value):
 		clean = value
 		_refresh()
+@export var show_grid := false
 var reveal_panel_artwork := false
 
 func _ready() -> void:
@@ -18,11 +19,12 @@ func _refresh() -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	if not clean:
+	if not clean and (not has_node("DirtyArtwork") or $DirtyArtwork.texture == null):
 		draw_rect(Rect2(Vector2.ZERO, size), Color("77604b"))
-	elif not reveal_panel_artwork:
+	elif clean and not reveal_panel_artwork:
 		draw_rect(Rect2(Vector2.ZERO, size), Color("347fba"))
-	draw_rect(Rect2(Vector2.ZERO, size), Color("263547"), false, 1.0)
+	if show_grid:
+		draw_rect(Rect2(Vector2.ZERO, size), Color("263547"), false, 1.0)
 
 func touches_circle(world_center: Vector2, radius: float) -> bool:
 	# Exact circle/polygon contact also supports rotated or scaled panels.

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://wus7yt6yhb4r" path="res://game/ui/alerts/alert.gd" id="1_alert"]
 
-<<<<<<< Updated upstream
-[node name="Alert" type="CanvasLayer" unique_id=1316166008]
-layer = 10
-script = ExtResource("1_alert")
+[sub_resource type="SystemFont" id="SystemFont_title"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+font_weight = 700
 
-[node name="Panel" type="PanelContainer" parent="." unique_id=1645306605]
-=======
+[sub_resource type="SystemFont" id="SystemFont_body"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+
 [sub_resource type="StyleBoxFlat" id="StyleBox_card"]
 content_margin_left = 28.0
 content_margin_top = 24.0
@@ -32,13 +32,6 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
-[sub_resource type="SystemFont" id="SystemFont_title"]
-font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
-font_weight = 700
-
-[sub_resource type="SystemFont" id="SystemFont_body"]
-font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
-
 [sub_resource type="StyleBoxFlat" id="StyleBox_bar_bg"]
 bg_color = Color(1, 1, 1, 0.08)
 corner_radius_top_left = 4
@@ -53,60 +46,47 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="Alert" type="CanvasLayer" unique_id=1766030824]
+[node name="Alert" type="CanvasLayer"]
 layer = 10
 script = ExtResource("1_alert")
 
-[node name="Panel" type="PanelContainer" parent="." unique_id=835050900]
->>>>>>> Stashed changes
+[node name="Panel" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -300.0
-offset_top = 40.0
-offset_right = 300.0
-offset_bottom = 160.0
+offset_left = -400.0
+offset_top = 36.0
+offset_right = 400.0
+offset_bottom = 196.0
 grow_horizontal = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
 
-<<<<<<< Updated upstream
-[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1654013772]
-=======
-[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1348711699]
->>>>>>> Stashed changes
+[node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 18
 
-<<<<<<< Updated upstream
-[node name="Artwork" type="TextureRect" parent="Panel/VBox" unique_id=1698722527]
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Title" type="Label" parent="Panel/VBox" unique_id=1523318385]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-=======
-[node name="Content" type="HBoxContainer" parent="Panel/VBox" unique_id=179372273]
+[node name="Content" type="HBoxContainer" parent="Panel/VBox"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 24
 
-[node name="Icon" type="PanelContainer" parent="Panel/VBox/Content" unique_id=1204630443]
+[node name="Icon" type="PanelContainer" parent="Panel/VBox/Content"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_icon")
 
-[node name="Artwork" type="TextureRect" parent="Panel/VBox/Content/Icon" unique_id=256494684]
+[node name="Artwork" type="TextureRect" parent="Panel/VBox/Content/Icon"]
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="IconLabel" type="Label" parent="Panel/VBox/Content/Icon" unique_id=1340371474]
+[node name="IconLabel" type="Label" parent="Panel/VBox/Content/Icon"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_title")
@@ -115,37 +95,30 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Texts" type="VBoxContainer" parent="Panel/VBox/Content" unique_id=509870214]
+[node name="Texts" type="VBoxContainer" parent="Panel/VBox/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Title" type="Label" parent="Panel/VBox/Content/Texts" unique_id=1683930567]
+[node name="Title" type="Label" parent="Panel/VBox/Content/Texts"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_title")
 theme_override_font_sizes/font_size = 40
->>>>>>> Stashed changes
 text = "Evento"
-horizontal_alignment = 1
 
-<<<<<<< Updated upstream
-[node name="Message" type="Label" parent="Panel/VBox" unique_id=1257233400]
-=======
-[node name="Message" type="Label" parent="Panel/VBox/Content/Texts" unique_id=145957993]
+[node name="Message" type="Label" parent="Panel/VBox/Content/Texts"]
 custom_minimum_size = Vector2(600, 0)
->>>>>>> Stashed changes
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.8, 0.84, 0.92, 1)
+theme_override_fonts/font = SubResource("SystemFont_body")
+theme_override_font_sizes/font_size = 30
 text = "Mensaje del evento"
-horizontal_alignment = 1
 autowrap_mode = 3
-<<<<<<< Updated upstream
-=======
 
-[node name="TimeBar" type="ProgressBar" parent="Panel/VBox" unique_id=622535929]
+[node name="TimeBar" type="ProgressBar" parent="Panel/VBox"]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 mouse_filter = 2
@@ -153,4 +126,3 @@ theme_override_styles/background = SubResource("StyleBox_bar_bg")
 theme_override_styles/fill = SubResource("StyleBox_bar_fill")
 value = 100.0
 show_percentage = false
->>>>>>> Stashed changes
