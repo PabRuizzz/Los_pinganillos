@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byv284wegnshq"
-path="res://.godot/imported/greenhouse_ext_limpio.png-127856c6e84ae928594d540dedd26579.ctex"
+uid="uid://bkhhlbem2smwq"
+path="res://.godot/imported/greenhouse_exterior.png-0d07b71d971e3502e4cc407146591ad8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/greenhouse_ext_limpio.png"
-dest_files=["res://.godot/imported/greenhouse_ext_limpio.png-127856c6e84ae928594d540dedd26579.ctex"]
+source_file="res://assets/tilesets/greenhouse_exterior.png"
+dest_files=["res://.godot/imported/greenhouse_exterior.png-0d07b71d971e3502e4cc407146591ad8.ctex"]
 
 [params]
 
