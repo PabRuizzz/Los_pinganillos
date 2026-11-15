@@ -85,12 +85,15 @@ func run_checks() -> void:
 	player.global_position = STATION_POS + Vector2(0, 160)
 	await physics_frames(3)
 	check(not station.is_player_near(), "Detecta al jugador fuera de rango")
+	var cue := station.get_node("InteractCue") as Label
+	check(cue != null and not cue.visible, "El indicador [E] debe estar oculto fuera de rango")
 	await press_interact(6)
 	check(events.requested == 0, "Interactuó fuera de rango")
 
 	player.global_position = STATION_POS + Vector2(0, 20)
 	await physics_frames(3)
 	check(station.is_player_near() and events.entered == 1, "No detecta al jugador dentro del rango")
+	check(cue.visible, "El indicador [E] debe verse dentro del rango")
 	await press_interact(6)  # mantener E varios frames = una sola interacción
 	check(events.requested == 1, "Una pulsación debe interactuar una vez (fueron %d)" % events.requested)
 	await press_interact(2)
@@ -99,6 +102,7 @@ func run_checks() -> void:
 	player.global_position = STATION_POS + Vector2(0, 160)
 	await physics_frames(3)
 	check(not station.is_player_near() and events.exited == 1, "No deja de detectar al salir del rango")
+	check(not cue.visible, "El indicador [E] debe ocultarse al salir del rango")
 	await press_interact(2)
 	check(events.requested == 2, "Interactuó después de salir del rango")
 

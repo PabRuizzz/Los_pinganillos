@@ -19,6 +19,10 @@ signal interaction_requested
 @export var interaction_enabled := true
 
 @onready var interaction_area: Area2D = $InteractionArea
+## Indicador "[E]" sobre la estación: visible solo con el jugador en rango.
+@onready var interact_cue: Label = $InteractCue
+
+const CUE_FLASH_COLOR := Color(0.3, 1.0, 1.0)
 
 var player_near := false
 
@@ -39,17 +43,20 @@ func is_player_near() -> bool:
 
 func set_interaction_enabled(enabled: bool) -> void:
 	interaction_enabled = enabled
+	_update_cue()
 
 
 func interact() -> void:
 	if interaction_requested.get_connections().is_empty():
 		print("Estación del rover: interacción detectada (las expediciones llegarán en una fase futura)")
+	_flash_cue()
 	interaction_requested.emit()
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if _is_player(body) and not player_near:
 		player_near = true
+		_update_cue()
 		player_entered_range.emit()
 
 
@@ -61,8 +68,19 @@ func _on_body_exited(body: Node2D) -> void:
 			return
 	if player_near:
 		player_near = false
+		_update_cue()
 		player_exited_range.emit()
 
 
 func _is_player(body: Node) -> bool:
 	return body is CharacterBody2D and body.is_in_group("player")
+
+
+func _update_cue() -> void:
+	interact_cue.visible = player_near and interaction_enabled
+
+
+## Destello breve del indicador para confirmar que la pulsación se registró.
+func _flash_cue() -> void:
+	interact_cue.modulate = CUE_FLASH_COLOR
+	create_tween().tween_property(interact_cue, "modulate", Color.WHITE, 0.4)
