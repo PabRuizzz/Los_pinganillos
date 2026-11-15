@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b44tfteejx1gj"]
+
+[ext_resource type="Script" uid="uid://wus7yt6yhb4r" path="res://game/ui/alerts/alert.gd" id="1_alert"]
+
+[node name="Alert" type="CanvasLayer" unique_id=1316166008]
+layer = 10
+script = ExtResource("1_alert")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1645306605]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = 40.0
+offset_right = 300.0
+offset_bottom = 160.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1654013772]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Artwork" type="TextureRect" parent="Panel/VBox" unique_id=1698722527]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Panel/VBox" unique_id=1523318385]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Evento"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Panel/VBox" unique_id=1257233400]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Mensaje del evento"
+horizontal_alignment = 1
+autowrap_mode = 3

@@ -71,6 +71,13 @@ func finish_task():
 		finish_day()
 
 
+# Libera la tarea actual sin aplicar efectos (por ejemplo, si el jugador sale con Esc).
+func cancel_task():
+	current_station = ""
+	current_task = ""
+	current_task_time_cost = 0
+
+
 func update_station_state(station: String, task_name: String):
 	var estado_actual = ""
 
