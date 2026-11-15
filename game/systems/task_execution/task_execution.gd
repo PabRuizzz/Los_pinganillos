@@ -68,6 +68,15 @@ func finish_task():
 	var finished_name = current_task
 	var spent = current_task_time_cost
 
+	# Descontamos los recursos que cuesta la tarea (se revisaron en start_task)
+	var costs = StationCost.station_costs[finished_station][finished_name]
+	if costs.has("energy"):
+		Resources.modify_energy(-costs["energy"])
+	if costs.has("water"):
+		Resources.modify_water(-costs["water"])
+	if costs.has("food"):
+		Resources.modify_food(-costs["food"])
+
 	# Cambiamos el estado de la estación según la tarea realizada
 	update_station_state(finished_station, finished_name)
 

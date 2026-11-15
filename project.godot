@@ -28,7 +28,9 @@ HUD="*res://game/ui/hud/hud.tscn"
 EventTracker="*res://game/ui/event_tracker/event_tracker.tscn"
 GameOver="*res://game/ui/game_over/game_over.tscn"
 GameFlow="*res://game/systems/game_flow/game_flow.gd"
-Music="*uid://chuf1vykitk3d"
+DaySummary="*res://game/ui/day_summary/day_summary.tscn"
+Music="*res://musica.gd"
+PauseMenu="*res://game/ui/pause_menu/pause_menu.tscn"
 
 [display]
 
