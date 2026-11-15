@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cr42aqrcwarrc" path="res://assets/tilesets/limitmap.png" id="15_loy4b"]
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" uid="uid://dvttd52a8nbhe" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
+[ext_resource type="Script" path="res://game/stations/station_state_sprite.gd" id="18_state_sprite"]
 [ext_resource type="Texture2D" uid="uid://cxlivr43ahg84" path="res://assets/sprites/mars_walk.png" id="20_c5xh0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e87fy"]
