@@ -20,6 +20,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
+[ext_resource type="Script" path="res://game/stations/station_state_sprite.gd" id="18_state_sprite"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e87fy"]
 texture = ExtResource("1_tm4dk")
 1:0/0 = 0
@@ -632,14 +633,26 @@ texture = ExtResource("12_snyjx")
 [node name="panel3" type="Sprite2D" parent="sprites" unique_id=1443695553]
 position = Vector2(313, 109)
 texture = ExtResource("3_20c82")
+script = ExtResource("18_state_sprite")
+texture_operativo = ExtResource("3_20c82")
+texture_degradado = ExtResource("4_5mmlp")
+texture_averiado = ExtResource("5_8cmg6")
 
 [node name="panel2" type="Sprite2D" parent="sprites" unique_id=1698715775]
 position = Vector2(314, -41)
 texture = ExtResource("3_20c82")
+script = ExtResource("18_state_sprite")
+texture_operativo = ExtResource("3_20c82")
+texture_degradado = ExtResource("4_5mmlp")
+texture_averiado = ExtResource("5_8cmg6")
 
 [node name="panel1" type="Sprite2D" parent="sprites" unique_id=1396547130]
 position = Vector2(317, -180)
 texture = ExtResource("3_20c82")
+script = ExtResource("18_state_sprite")
+texture_operativo = ExtResource("3_20c82")
+texture_degradado = ExtResource("4_5mmlp")
+texture_averiado = ExtResource("5_8cmg6")
 
 [node name="pws2" type="Sprite2D" parent="sprites" unique_id=1610136240]
 position = Vector2(505, 0)
