@@ -1073,6 +1073,7 @@ position = Vector2(127, 32)
 [node name="Minigame" type="Node" parent="PlantsStation" unique_id=1734120529]
 script = ExtResource("8_minigame")
 station_id = "greenhouse"
+maintenance_minigame = ExtResource("10_fungus")
 repair_minigame = ExtResource("10_fungus")
 operational_message = "Las plantas del invernadero están sanas"
 repair_events = Array[int]([5])

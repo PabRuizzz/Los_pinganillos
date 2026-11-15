@@ -81,7 +81,7 @@ func restart_game():
 		_reset_variables(get_node("/root/" + autoload_name))
 
 	root_control.visible = false
-	Alert.panel.visible = false
+	Alert.clear_alerts()  # vacía también las alertas en espera
 	get_tree().paused = false
 	get_tree().change_scene_to_file(ProjectSettings.get_setting("application/run/main_scene"))
 	# Los autoloads no vuelven a ejecutar _ready, así que arrancamos la partida a mano

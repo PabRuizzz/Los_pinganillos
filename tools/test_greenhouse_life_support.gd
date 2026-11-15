@@ -212,12 +212,20 @@ func run_checks() -> void:
 	await frames(2)
 	check(minigames_open(FUNGUS).is_empty() and tasks.current_task == "" and sim.tiempo_jornada == time_before, "Esc debe cerrar sin descontar tiempo")
 
-	# DEGRADADO sin evento: no hay minijuego de mantenimiento (pendiente). OPERATIVO: nada.
+	# DEGRADADO sin evento (p. ej. por la tormenta de arena inicial): los hongos se
+	# abren como mantenimiento y lo dejan OPERATIVO con el costo de mantenimiento.
+	check(plants_launcher.maintenance_minigame != null and plants_launcher.maintenance_minigame.resource_path == FUNGUS, "DEGRADADO también debe abrir el minijuego de hongos")
 	player.set_physics_process(false)
 	await place(plants_pos + Vector2(0, 100))
 	costs.greenhouse_state = "DEGRADADO"
 	await press("interact")
-	check(minigames_open(FUNGUS).is_empty() and tasks.current_task == "" and sim.tiempo_jornada == time_before, "DEGRADADO sin evento: no debe abrir nada ni descontar tiempo")
+	check(minigames_open(FUNGUS).size() == 1 and tasks.current_task == "maintenance", "DEGRADADO: E debe abrir los hongos como mantenimiento")
+	plants_launcher.active_minigame.emit_signal("completed")
+	await frames(3)
+	var maintenance_cost: int = costs.station_costs["greenhouse"]["maintenance"]["time"]
+	check(sim.tiempo_jornada == time_before - maintenance_cost and costs.greenhouse_state == "OPERATIVO", "El mantenimiento debe descontar %d min y dejar el invernadero OPERATIVO (quedan %d, %s)" % [maintenance_cost, sim.tiempo_jornada, costs.greenhouse_state])
+	player.set_physics_process(false)
+	await place(plants_pos + Vector2(0, 100))
 	costs.greenhouse_state = "OPERATIVO"
 	await press("interact")
 	check(minigames_open(FUNGUS).is_empty() and tasks.current_task == "", "OPERATIVO: no debe abrir nada")
