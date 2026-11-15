@@ -3,16 +3,23 @@ extends SceneTree
 func _initialize() -> void:
 	call_deferred("run")
 
+func current_player() -> CharacterBody2D:
+	var players := get_nodes_in_group("player")
+	assert(players.size() == 1, "Expected exactly one player in " + current_scene.scene_file_path)
+	assert(current_scene.is_ancestor_of(players[0]), "Player must belong to the active scene")
+	return players[0] as CharacterBody2D
+
+
 func travel(door_path: String) -> void:
 	var door = current_scene.get_node(door_path)
 	var marker_name: String = door.nombre_spawn
 	var destination: String = door.cuarto_destino
-	door._on_body_entered(current_scene.get_node("player"))
+	door._on_body_entered(current_player())
 	await scene_changed
 	await physics_frame
 	await physics_frame
 	assert(current_scene.scene_file_path == destination)
-	var player = current_scene.get_node("player")
+	var player = current_player()
 	var marker = current_scene.find_child(marker_name, true, false)
 	assert(marker is Marker2D)
 	assert(player.global_position.is_equal_approx(marker.global_position))
