@@ -611,9 +611,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_greenhouse"]
-size = Vector2(140, 50)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
 size = Vector2(230, 80)
 
@@ -982,25 +979,6 @@ station_id = "energy_plant"
 maintenance_minigame = ExtResource("23_solar")
 repair_minigame = ExtResource("24_electrical")
 operational_message = "Los paneles solares funcionan correctamente"
-
-[node name="GreenhouseStation" type="Area2D" parent="." unique_id=1734120511]
-position = Vector2(-85, -190)
-collision_layer = 4
-collision_mask = 3
-script = ExtResource("15_lbft5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GreenhouseStation" unique_id=1734120512]
-shape = SubResource("RectangleShape2D_greenhouse")
-
-[node name="CueAnchor" type="Marker2D" parent="GreenhouseStation" unique_id=1734120513]
-position = Vector2(0, -75)
-
-[node name="InteractCue" parent="GreenhouseStation" unique_id=1734120514 instance=ExtResource("22_cue")]
-
-[node name="Minigame" type="Node" parent="GreenhouseStation" unique_id=1734120515]
-script = ExtResource("21_minigame")
-station_id = "greenhouse"
-operational_message = "El invernadero funciona correctamente"
 
 [node name="WaterStation" type="Area2D" parent="." unique_id=1734120506]
 position = Vector2(909, -393)
