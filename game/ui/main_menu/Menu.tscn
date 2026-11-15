@@ -1,18 +1,68 @@
 [gd_scene format=3 uid="uid://cnmbj6uouof2h"]
 
-[ext_resource type="Texture2D" uid="uid://bae12ccmfddec" path="res://assets/sprites/Fondo_Marte.jpg" id="1_aek0h"]
+[ext_resource type="Texture2D" uid="uid://bae12ccmfddec" path="res://assets/sprites/Fondo_Marte.jpg" id="1_background"]
 [ext_resource type="Script" uid="uid://ct8h2c2plmik1" path="res://game/ui/main_menu/menu_principal.gd" id="2_menu"]
 
-[sub_resource type="SystemFont" id="SystemFont_pqi7x"]
+[sub_resource type="LabelSettings" id="LabelSettings_kicker"]
+font_size = 19
+font_color = Color(0.83, 0.76, 0.59, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_sdtnk"]
-font = SubResource("SystemFont_pqi7x")
-font_size = 64
-shadow_color = Color(0, 0, 0, 0.6)
-shadow_offset = Vector2(3, 3)
+[sub_resource type="SystemFont" id="SystemFont_serif"]
+font_names = PackedStringArray("Georgia", "Times New Roman")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqi7x"]
-bg_color = Color(0, 0, 0, 0.45000002)
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = SubResource("SystemFont_serif")
+font_size = 112
+font_color = Color(0.91, 0.88, 0.8, 1)
+shadow_color = Color(0.04, 0.05, 0.04, 0.75)
+shadow_offset = Vector2(2, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_subtitle"]
+font_size = 22
+font_color = Color(0.78, 0.77, 0.7, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_menu_panel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_menu_normal"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_menu_pressed"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.84, 0.8, 0.69, 0.14)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.91, 0.87, 0.75, 0.95)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_menu_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.84, 0.8, 0.69, 0.08)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.91, 0.87, 0.75, 0.82)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_menu_focus"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.83, 0.71, 0.76)
+
+[sub_resource type="LabelSettings" id="LabelSettings_terminal"]
+font_size = 18
+font_color = Color(0.71, 0.69, 0.62, 1)
 
 [node name="menu_principal" type="Control" unique_id=867806117]
 layout_mode = 3
@@ -24,50 +74,189 @@ grow_vertical = 2
 script = ExtResource("2_menu")
 
 [node name="FondoMarte" type="TextureRect" parent="." unique_id=943289974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_background")
+
+[node name="SombraFondo" type="ColorRect" parent="." unique_id=992002738]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.035, 0.045, 0.04, 0.58)
+
+[node name="MarcoSuperior" type="ColorRect" parent="." unique_id=94501534]
 layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("1_aek0h")
+offset_left = 54.0
+offset_top = 54.0
+offset_right = 1926.0
+offset_bottom = 56.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.72)
+
+[node name="MarcoInferior" type="ColorRect" parent="." unique_id=1189782592]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 1224.0
+offset_right = 1926.0
+offset_bottom = 1226.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.72)
+
+[node name="MarcoIzquierdo" type="ColorRect" parent="." unique_id=33385795]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 54.0
+offset_right = 56.0
+offset_bottom = 1226.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.72)
+
+[node name="MarcoDerecho" type="ColorRect" parent="." unique_id=1957861905]
+layout_mode = 0
+offset_left = 1924.0
+offset_top = 54.0
+offset_right = 1926.0
+offset_bottom = 1226.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.72)
+
+[node name="EtiquetaSuperior" type="Label" parent="." unique_id=1583490645]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 166.0
+offset_right = 720.0
+offset_bottom = 196.0
+text = "M A R S   /   C O L O N Y   A R C H I V E   0 1"
+label_settings = SubResource("LabelSettings_kicker")
 
 [node name="Titulo" type="Label" parent="." unique_id=1432101459]
 layout_mode = 0
-offset_top = 60.0
-offset_right = 153.0
-offset_bottom = 109.0
-text = "Five Night's At Mars
-"
-label_settings = SubResource("LabelSettings_sdtnk")
-horizontal_alignment = 1
+offset_left = 128.0
+offset_top = 232.0
+offset_right = 1120.0
+offset_bottom = 486.0
+text = "FIVE NIGHT'S
+AT MARS"
+label_settings = SubResource("LabelSettings_title")
 vertical_alignment = 1
 
-[node name="PanelBotones" type="PanelContainer" parent="." unique_id=427936076]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 120.04
-offset_top = -1260.0
-offset_right = 243.04001
-offset_bottom = -1260.0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pqi7x")
-
-[node name="Botones" type="VBoxContainer" parent="." unique_id=1760189186]
+[node name="LineaTitulo" type="ColorRect" parent="." unique_id=2069690378]
 layout_mode = 0
-offset_left = 120.04
-offset_top = -81.0
-offset_right = 243.04001
-offset_bottom = 20.0
-alignment = 1
+offset_left = 140.0
+offset_top = 510.0
+offset_right = 750.0
+offset_bottom = 512.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.78)
 
-[node name="startbutton" type="Button" parent="Botones" unique_id=207125901]
-layout_mode = 2
-text = "Iniciar"
+[node name="Subtitulo" type="Label" parent="." unique_id=279486034]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 532.0
+offset_right = 820.0
+offset_bottom = 568.0
+text = "COLONY MANAGEMENT  /  SURVIVAL LOG"
+label_settings = SubResource("LabelSettings_subtitle")
 
-[node name="CollectiblesButton" type="Button" parent="Botones" unique_id=946043935]
-layout_mode = 2
-text = "Coleccionables"
+[node name="MenuPanel" type="PanelContainer" parent="." unique_id=427936076]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 680.0
+offset_right = 588.0
+offset_bottom = 884.0
+theme_override_styles/panel = SubResource("StyleBox_menu_panel")
 
-[node name="ExitButton" type="Button" parent="Botones" unique_id=1335717807]
+[node name="MenuButtons" type="VBoxContainer" parent="MenuPanel" unique_id=1760189186]
 layout_mode = 2
-text = "Salir"
+theme_override_constants/separation = 14
+
+[node name="startbutton" type="Button" parent="MenuPanel/MenuButtons" unique_id=207125901]
+custom_minimum_size = Vector2(450, 82)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.88, 0.8, 1)
+theme_override_colors/font_pressed_color = Color(0.98, 0.95, 0.86, 1)
+theme_override_colors/font_hover_color = Color(0.98, 0.95, 0.86, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBox_menu_normal")
+theme_override_styles/pressed = SubResource("StyleBox_menu_pressed")
+theme_override_styles/hover = SubResource("StyleBox_menu_hover")
+theme_override_styles/focus = SubResource("StyleBox_menu_focus")
+text = "INICIAR"
+
+[node name="ExitButton" type="Button" parent="MenuPanel/MenuButtons" unique_id=1335717807]
+custom_minimum_size = Vector2(450, 82)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.88, 0.8, 1)
+theme_override_colors/font_pressed_color = Color(0.98, 0.95, 0.86, 1)
+theme_override_colors/font_hover_color = Color(0.98, 0.95, 0.86, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBox_menu_normal")
+theme_override_styles/pressed = SubResource("StyleBox_menu_pressed")
+theme_override_styles/hover = SubResource("StyleBox_menu_hover")
+theme_override_styles/focus = SubResource("StyleBox_menu_focus")
+text = "SALIR"
+
+[node name="PanelDerecho" type="ColorRect" parent="." unique_id=163918950]
+layout_mode = 0
+offset_left = 1378.0
+offset_top = 644.0
+offset_right = 1380.0
+offset_bottom = 1030.0
+mouse_filter = 2
+color = Color(0.79, 0.74, 0.63, 0.68)
+
+[node name="InfoSector" type="Label" parent="." unique_id=1723526939]
+layout_mode = 0
+offset_left = 1412.0
+offset_top = 650.0
+offset_right = 1790.0
+offset_bottom = 682.0
+text = "SECTOR   /   07"
+label_settings = SubResource("LabelSettings_kicker")
+
+[node name="InfoArchivo" type="Label" parent="." unique_id=1613203701]
+layout_mode = 0
+offset_left = 1412.0
+offset_top = 706.0
+offset_right = 1790.0
+offset_bottom = 740.0
+text = "ARCHIVE STATUS: ACTIVE"
+label_settings = SubResource("LabelSettings_terminal")
+
+[node name="InfoRegistro" type="Label" parent="." unique_id=1965033481]
+layout_mode = 0
+offset_left = 1412.0
+offset_top = 752.0
+offset_right = 1790.0
+offset_bottom = 786.0
+text = "COLONY RECORD  /  01"
+label_settings = SubResource("LabelSettings_terminal")
+
+[node name="Pie" type="Label" parent="." unique_id=1818585649]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 1150.0
+offset_right = 900.0
+offset_bottom = 1182.0
+text = "MARS COLONY   ·   PERSONNEL ACCESS TERMINAL"
+label_settings = SubResource("LabelSettings_terminal")
+
+[node name="GlitchBandA" type="ColorRect" parent="." unique_id=1788954687]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.91, 0.87, 0.75, 0.48)
+
+[node name="GlitchBandB" type="ColorRect" parent="." unique_id=1480663027]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+color = Color(0.55, 0.63, 0.61, 0.38)
