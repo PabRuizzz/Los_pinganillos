@@ -978,14 +978,14 @@ tile_set = SubResource("TileSet_c7vpv")
 collision_enabled = false
 
 [node name="puerta" parent="." unique_id=1675144440 instance=ExtResource("4_msuh6")]
-position = Vector2(603, 446)
-cuarto_destino = "res://game/stations/mars/mars.tscn"
+position = Vector2(603, 453)
+cuarto_destino = "uid://bu44bv2ir0kb5"
+nombre_spawn = "greenhousespw"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("5_t3d58")]
 position = Vector2(-30, 117)
 
 [node name="hitbox" type="StaticBody2D" parent="." unique_id=487340894]
-visible = false
 
 [node name="top" type="CollisionShape2D" parent="hitbox" unique_id=2030526358]
 position = Vector2(519, 42)

@@ -4,7 +4,7 @@ extends Node2D
 signal cleaning_progress_changed(ratio: float)
 signal cleaning_completed
 
-const REQUIRED_RATIO := 0.9
+const REQUIRED_RATIO := 1.0
 @onready var stage: Node2D = $World
 @onready var content: Control = $Interface/HUD/Content
 @onready var spray: Node2D = $World/WaterSpray
@@ -33,9 +33,9 @@ func reset() -> void:
 
 func _layout() -> void:
 	var viewport_size := get_viewport_rect().size
-	var factor := minf(viewport_size.x / 900.0, viewport_size.y / 610.0)
+	var factor := minf(viewport_size.x / 900.0, viewport_size.y / 650.0)
 	content.scale = Vector2.ONE * factor
-	content.position = (viewport_size - Vector2(800, 520) * factor) / 2.0
+	content.position = (viewport_size - Vector2(800, 570) * factor) / 2.0
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
@@ -90,18 +90,16 @@ func _update_progress() -> void:
 	var total_clean := 0
 	var total_cells := 0
 	var ready_panels := 0
-	var percentages := PackedStringArray()
 	for i in panels.size():
 		var panel = panels[i]
 		total_clean += panel.clean_count
 		total_cells += panel.states.size()
-		percentages.append("P%d: %d%%" % [i + 1, floori(panel.clean_ratio() * 100.0 + 0.001)])
 		if panel.clean_ratio() >= REQUIRED_RATIO:
 			ready_panels += 1
-	status.text = " · ".join(percentages) + "\n%d/6 paneles al 90%% · R: reiniciar" % ready_panels
+	status.text = "%d/6 paneles al 100%% · R: reiniciar" % ready_panels
 	cleaning_progress_changed.emit(float(total_clean) / maxi(total_cells, 1))
 	if ready_panels == 6 and not completed:
 		completed = true
 		_stop_spray()
-		status.text = "¡Limpieza completada! Los 6 paneles están al menos al 90%.\nR: reiniciar"
+		status.text = "¡Limpieza completada! Los 6 paneles están completamente limpios.\nR: reiniciar"
 		cleaning_completed.emit()

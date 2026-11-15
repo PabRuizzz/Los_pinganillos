@@ -17,6 +17,7 @@ func fit_board() -> void:
 	var view_size := get_viewport_rect().size
 	var factor := minf(view_size.x / 940.0, view_size.y / 1180.0)
 	global_position = board.get_global_transform() * (board.size / 2.0)
-	zoom = Vector2.ONE * factor
+	zoom = Vector2.ONE * factor * 0.9 # Leave room for the external power boxes.
 	offset = Vector2.ZERO
 	force_update_scroll()
+
