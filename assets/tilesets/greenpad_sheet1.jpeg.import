@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2p3yapb1wh4k"
-path="res://.godot/imported/PHOTO-2026-11-14-12-12-09.jpg-bf32cf66b6090315bee00ba1f15ee6b1.ctex"
+uid="uid://tk4rtrv76hcy"
+path="res://.godot/imported/greenpad_sheet1.jpeg-d3bb5c962b132e002c53061a28d976cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/PHOTO-2026-11-14-12-12-09.jpg"
-dest_files=["res://.godot/imported/PHOTO-2026-11-14-12-12-09.jpg-bf32cf66b6090315bee00ba1f15ee6b1.ctex"]
+source_file="res://assets/tilesets/greenpad_sheet1.jpeg"
+dest_files=["res://.godot/imported/greenpad_sheet1.jpeg-d3bb5c962b132e002c53061a28d976cb.ctex"]
 
 [params]
 

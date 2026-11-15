@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dsyyx6pe6kvgi" path="res://assets/tilesets/panel1.png" id="3_20c82"]
 [ext_resource type="Texture2D" uid="uid://cd411wvgsy8nr" path="res://assets/tilesets/panel2.png" id="4_5mmlp"]
 [ext_resource type="Texture2D" uid="uid://bi1ggtfiup33y" path="res://assets/tilesets/panel3.png" id="5_8cmg6"]
-[ext_resource type="Texture2D" uid="uid://d2iw6evhwseu2" path="res://assets/tilesets/greenhouse_ext.png" id="6_5mmlp"]
+[ext_resource type="Texture2D" uid="uid://bkhhlbem2smwq" path="res://assets/tilesets/greenhouse_exterior.png" id="7_lbft5"]
 [ext_resource type="PackedScene" uid="uid://b6tv63xxtm0pj" path="res://game/world/rooms/puerta.tscn" id="10_8do8n"]
 [ext_resource type="Texture2D" uid="uid://bic0hgixucwg4" path="res://assets/tilesets/wire.png" id="11_8cmg6"]
 [ext_resource type="Texture2D" uid="uid://b7joy82kg0jkh" path="res://assets/tilesets/crater1.png" id="12_lbft5"]
-[ext_resource type="Texture2D" uid="uid://r2ymmgo5rxqt" path="res://assets/tilesets/waterstation.png" id="12_snyjx"]
+[ext_resource type="Texture2D" uid="uid://dll4sxyuqjh0g" path="res://assets/tilesets/waterstation.png" id="12_snyjx"]
 [ext_resource type="Texture2D" uid="uid://qd67fxri77wa" path="res://assets/tilesets/rock1.png" id="13_7opot"]
 [ext_resource type="Texture2D" uid="uid://dr78xugcyvywo" path="res://assets/tilesets/powergenerator.png" id="13_lbft5"]
 [ext_resource type="Texture2D" uid="uid://c5j6udbtben2u" path="res://assets/tilesets/rock3.png" id="14_8do8n"]
@@ -262,7 +262,6 @@ texture = ExtResource("5_8cmg6")
 11:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8cmg6"]
-texture = ExtResource("6_5mmlp")
 11:2/0 = 0
 12:2/0 = 0
 13:2/0 = 0
@@ -578,7 +577,7 @@ sources/6 = SubResource("TileSetAtlasSource_8cmg6")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_5mmlp")
+"texture": ExtResource("7_lbft5")
 }],
 "loop": 1,
 "name": &"invernadero",
@@ -598,12 +597,13 @@ tile_map_data = PackedByteArray("AAAzABkAAAACAAIAAAAzABoAAAACAAMAAAAzABsAAAACAAA
 tile_set = SubResource("TileSet_c7vpv")
 
 [node name="greenhouse" type="AnimatedSprite2D" parent="." unique_id=1320335096]
-position = Vector2(-25, -331)
+position = Vector2(-42.000004, -393)
+scale = Vector2(0.44921872, 0.5534407)
 sprite_frames = SubResource("SpriteFrames_c7vpv")
 animation = &"invernadero"
 
 [node name="puerta" parent="." unique_id=1675144440 instance=ExtResource("10_8do8n")]
-position = Vector2(70, -283)
+position = Vector2(-21, -293)
 scale = Vector2(0.9, 1.1)
 cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
 
@@ -612,12 +612,13 @@ cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
 [node name="StaticBody2D" type="StaticBody2D" parent="hitbox" unique_id=1961332398]
 
 [node name="greenhs_hit" type="CollisionPolygon2D" parent="hitbox/StaticBody2D" unique_id=527892531]
-position = Vector2(-36.259186, -216.27185)
-polygon = PackedVector2Array(-13.740814, 2.2718506, -144.74081, 3.2718506, -140.74081, -42.72815, -104.740814, -178.72815, -45.740814, -254.72815, 57.259186, -255.72815, 114.259186, -180.72815, 140.25919, -115.72815, 156.25919, -113.72815, 172.25919, -79.72815, 109.259186, -77.72815, 109.259186, 1.2718506)
+position = Vector2(-41, -265)
+polygon = PackedVector2Array(22, 43, -83, 39, -121, 24, -186, -54, -182, -93, -172, -154, -126, -243, -52, -310, 23, -313, 69, -298, 91, -278, 131, -220, 168, -144, 184, -47, 100, 44, 96, -63, 18, -59)
 
 [node name="waterstation" type="CollisionPolygon2D" parent="hitbox/StaticBody2D" unique_id=403090268]
-position = Vector2(667, -278)
-polygon = PackedVector2Array(4, 28, -37, 37, -123, -24, -104.740814, -178.72815, -98, -318, 4, -320, 39, -271, 57, -179, 61, -138, 66, -65, 58, 14)
+position = Vector2(661, -318)
+scale = Vector2(0.8521826, 0.91053915)
+polygon = PackedVector2Array(35.203735, -30.751007, -19.948792, -29.65274, -82.14203, -64.79675, -76.27478, -139.47778, -65.71362, -248.20462, 30.509888, -249.30283, 51.63214, -210.8641, 63.3667, -146.06729, 72.75433, -121.90579, 78.62164, -97.74429, 77.44818, -46.126526)
 
 [node name="panel" type="CollisionPolygon2D" parent="hitbox/StaticBody2D" unique_id=881761295]
 position = Vector2(238.74081, -137.27185)
@@ -658,7 +659,8 @@ position = Vector2(383, -139)
 texture = ExtResource("11_8cmg6")
 
 [node name="h2o" type="Sprite2D" parent="sprites" unique_id=671716511]
-position = Vector2(641, -430)
+position = Vector2(662, -447.5)
+scale = Vector2(0.7208673, 0.5562599)
 texture = ExtResource("12_snyjx")
 
 [node name="panel3" type="Sprite2D" parent="sprites" unique_id=1443695553]
@@ -693,28 +695,33 @@ scale = Vector2(0.9687493, 0.9765626)
 texture = ExtResource("12_lbft5")
 
 [node name="crater2" type="Sprite2D" parent="sprites/enviroment" unique_id=396540589]
-position = Vector2(687.00006, 192)
-scale = Vector2(0.9687493, 0.9765626)
+position = Vector2(697.5, 201.125)
+scale = Vector2(0.64062625, 0.6914063)
 texture = ExtResource("12_lbft5")
 
 [node name="rock1" type="Sprite2D" parent="sprites/enviroment" unique_id=1276317799]
-position = Vector2(-152, -48)
+position = Vector2(-209, -180)
 scale = Vector2(1, 1.0625)
 texture = ExtResource("13_7opot")
 
 [node name="rock2" type="Sprite2D" parent="sprites/enviroment" unique_id=1548091864]
-position = Vector2(-187, 182)
+position = Vector2(-147, 42)
 scale = Vector2(1, 1.0625)
 texture = ExtResource("13_7opot")
 
 [node name="crater1" type="Sprite2D" parent="sprites/enviroment" unique_id=1906123059]
-position = Vector2(908, -150.25)
-scale = Vector2(0.9687493, 0.9765626)
+position = Vector2(912.5, -140.5)
+scale = Vector2(0.828125, 0.67187506)
 texture = ExtResource("12_lbft5")
 
 [node name="rock3" type="Sprite2D" parent="sprites/enviroment" unique_id=1030095759]
-position = Vector2(965, 215.00002)
-scale = Vector2(1.9687501, 1.8124999)
+position = Vector2(998.5, 240.5)
+scale = Vector2(0.92187434, 1.0156251)
+texture = ExtResource("14_8do8n")
+
+[node name="rock5" type="Sprite2D" parent="sprites/enviroment" unique_id=381664422]
+position = Vector2(638.9999, -55)
+scale = Vector2(0.92187434, 1.0156251)
 texture = ExtResource("14_8do8n")
 
 [node name="rock4" type="Sprite2D" parent="sprites/enviroment" unique_id=1343451277]
@@ -723,4 +730,4 @@ scale = Vector2(1.0625, 1.1406252)
 texture = ExtResource("14_8do8n")
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_74yx0")]
-position = Vector2(-519, -497)
+position = Vector2(-551, -506)
