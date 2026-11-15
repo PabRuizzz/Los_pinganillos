@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://qd67fxri77wa" path="res://assets/tilesets/rock1.png" id="13_7opot"]
 [ext_resource type="Texture2D" uid="uid://dr78xugcyvywo" path="res://assets/tilesets/powergenerator.png" id="13_lbft5"]
 [ext_resource type="Texture2D" uid="uid://c5j6udbtben2u" path="res://assets/tilesets/rock3.png" id="14_8do8n"]
+[ext_resource type="Script" uid="uid://whmt50nsb5j4" path="res://game/stations/mars/energy_station.gd" id="15_lbft5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e87fy"]
 texture = ExtResource("1_tm4dk")
@@ -590,6 +591,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88uyf"]
+size = Vector2(196, 126)
+
 [node name="Mars" type="Node2D" unique_id=556579645]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2038045617]
@@ -610,6 +614,7 @@ cuarto_destino = "uid://djnjchenqclp2"
 [node name="hitbox" type="Node2D" parent="." unique_id=1489311480]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="hitbox" unique_id=1961332398]
+collision_mask = 3
 
 [node name="greenhs_hit" type="CollisionPolygon2D" parent="hitbox/StaticBody2D" unique_id=527892531]
 position = Vector2(-36.259186, -216.27185)
@@ -724,3 +729,21 @@ texture = ExtResource("14_8do8n")
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("2_74yx0")]
 position = Vector2(-519, -497)
+
+[node name="EnergyStation" type="Area2D" parent="." unique_id=862025961]
+position = Vector2(26, 45)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("15_lbft5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnergyStation" unique_id=1139647948]
+position = Vector2(288.5, -221.5)
+shape = SubResource("RectangleShape2D_88uyf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="EnergyStation" unique_id=825643024]
+position = Vector2(286.5, -80.5)
+shape = SubResource("RectangleShape2D_88uyf")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="EnergyStation" unique_id=1402259012]
+position = Vector2(283.5, 67.5)
+shape = SubResource("RectangleShape2D_88uyf")

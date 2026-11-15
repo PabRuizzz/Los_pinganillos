@@ -209,7 +209,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0qa1"]
 size = Vector2(24.5, 31)
 
-[node name="player" type="CharacterBody2D" unique_id=1998034301]
+[node name="player" type="CharacterBody2D" unique_id=1998034301 groups=["player"]]
+collision_layer = 3
 script = ExtResource("1_i3pqv")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1454398674]

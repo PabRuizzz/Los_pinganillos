@@ -1,6 +1,6 @@
 extends Node
 
-var energy_plant_state = "OPERATIVO"
+var energy_plant_state = "AVERIADO"
 var life_support_state = "OPERATIVO"
 var water_station_state = "OPERATIVO"
 var greenhouse_state = "OPERATIVO"
