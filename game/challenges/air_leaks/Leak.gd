@@ -24,6 +24,4 @@ func patch() -> bool:
 	return true
 
 func _refresh() -> void:
-	$Visual.visible = state != State.HIDDEN
-	$Visual/Placeholder.color = Color.ORANGE if state == State.FOUND else Color.SEA_GREEN
-	$Visual/Symbol.text = "!" if state == State.FOUND else "OK"
+	$Visual.visible = state == State.FOUND
