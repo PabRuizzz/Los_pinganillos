@@ -371,4 +371,4 @@ position = Vector2(632, 29)
 cuarto_destino = "res://game/stations/mars/mars.tscn"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("5_t3d58")]
-position = Vector2(-83, -156)
+position = Vector2(542, 157)

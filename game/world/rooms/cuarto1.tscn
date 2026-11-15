@@ -53,4 +53,4 @@ position = Vector2(567, 585)
 cuarto_destino = "res://game/stations/greenhouse/greenhouse.tscn"
 
 [node name="player" parent="." unique_id=1998034301 instance=ExtResource("6_71gpl")]
-position = Vector2(-17, 58)
+position = Vector2(608, 371)

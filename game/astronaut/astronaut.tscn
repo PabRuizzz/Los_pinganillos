@@ -214,17 +214,17 @@ collision_layer = 3
 script = ExtResource("1_i3pqv")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1454398674]
-position = Vector2(624, 290)
+position = Vector2(-1, -23)
 zoom = Vector2(3.5, 3.5)
 limit_enabled = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=223779147]
-position = Vector2(625, 280)
+position = Vector2(0, -33)
 sprite_frames = SubResource("SpriteFrames_rjuk8")
 animation = &"idle_right"
 frame_progress = 0.29053426
 speed_scale = 2.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=743296494]
-position = Vector2(625.75, 297.5)
+position = Vector2(0.75, -15.5)
 shape = SubResource("RectangleShape2D_l0qa1")
