@@ -15,4 +15,4 @@ La transición se bloquea mientras se cambia de escena para evitar llamadas dupl
 Prueba breve de las rutas existentes, posición y colisiones:
 `godot --headless --path . --script res://game/world/rooms/tests/test_door_spawns.gd`
 
-La escena del campamento actualmente muestra errores de su TileSet al cargar; son independientes del posicionamiento del jugador.
+La partida empieza junto a la cama del campamento. La posición inicial es la de la instancia player en campament.tscn. SpawnFromMars se usa al volver desde el exterior.
