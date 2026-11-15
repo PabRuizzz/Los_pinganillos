@@ -3,12 +3,15 @@ extends Control
 signal completed
 enum Difficulty { FACIL, NORMAL }
 @export var difficulty: Difficulty = Difficulty.NORMAL
-const MIN_SEPARATION := 160.0
 var click_radius := 24.0
 var dragged: Control
 var drag_pointer := -2 # -2: none, -1: mouse, >= 0: touch.
 var finished := false
 var touch_id := -1
+const PANEL_DESIGN_SIZE := Vector2(900, 400)
+var leak_locations: Array[Vector2] = []
+var installed_patches: Dictionary = {}
+@onready var content: Control = $Content
 @onready var patches := [$Content/Patch1, $Content/Patch2, $Content/Patch3]
 @onready var habitat: Control = $Content/Habitat
 @onready var detector = $Content/Habitat/Detector
@@ -22,23 +25,36 @@ func _ready() -> void:
 	detector.targets = leaks
 	detector.reading_changed.connect(_show_reading)
 	habitat.gui_input.connect(_habitat_input)
+	habitat.mouse_exited.connect(_hide_detector)
 	$ReactionTimer.timeout.connect(_clear_reaction)
 	# Six separated regions, shuffled without replacement, with random local jitter.
-	# Minimum possible spacing is 180, greater than MIN_SEPARATION.
 	var positions: Array[Vector2] = []
-	for y in [100.0, 300.0]:
-		for x in [150.0, 450.0, 750.0]:
-			positions.append(Vector2(x, y) + Vector2(randf_range(-10, 10), randf_range(-10, 10)))
+	for panel: Control in $Content/Habitat/Panels.get_children():
+		var center := panel.get_rect().get_center()
+		var jitter := Vector2(randf_range(-10, 10), randf_range(-10, 10))
+		positions.append((center + jitter) / PANEL_DESIGN_SIZE)
 	positions.shuffle()
 	for i in leaks.size():
-		leaks[i].position = positions[i]
+		leak_locations.append(positions[i])
+		leaks[i].position = positions[i] * habitat.size
 		leaks[i].state_changed.connect(_update_status)
 	_update_status()
 
 func _layout() -> void:
-	var factor := minf(size.x / 1000.0, size.y / 680.0)
-	$Content.scale = Vector2.ONE * factor
-	$Content.position = (size - Vector2(960, 640) * factor) / 2.0
+	if size.x <= 0.0 or size.y <= 0.0:
+		return
+	var factor := minf(size.x / 960.0, size.y / 640.0)
+	content.scale = Vector2.ONE * factor
+	content.size = size / factor
+	for patch in patches:
+		var home: Vector2 = patch.tray_offset + Vector2(content.size.x / 2.0, content.size.y - 640.0)
+		patch.set_home(home, patch != dragged)
+	for i in leak_locations.size():
+		var leak = leaks[i]
+		leak.position = leak_locations[i] * habitat.size
+		if installed_patches.has(leak):
+			installed_patches[leak].attach_to(leak.get_global_transform_with_canvas().origin)
+
 
 func _habitat_input(event: InputEvent) -> void:
 	if finished or is_instance_valid(dragged) or event.device == -1:
@@ -58,7 +74,12 @@ func _habitat_input(event: InputEvent) -> void:
 
 func _move_detector(point: Vector2) -> void:
 	detector.position = point.clamp(Vector2.ZERO, habitat.size)
+	detector.show()
 	detector.scanning = true
+
+func _hide_detector() -> void:
+	detector.stop()
+	detector.hide()
 
 func _search(point: Vector2) -> void:
 	if finished:
@@ -72,7 +93,9 @@ func _search(point: Vector2) -> void:
 			candidate = leak
 			distance = separation
 	if candidate != null:
-		candidate.discover()
+		if candidate.discover():
+			# Reveal the X immediately instead of covering it with the sensor.
+			_hide_detector()
 		_update_status()
 		$Content/Reaction.text = "Fuga encontrada. Arrastra un parche sobre ella."
 	else:
@@ -87,7 +110,7 @@ func _update_status() -> void:
 	$Content/Counter.text = "Fugas reparadas: %d/3" % repaired
 	if repaired == 3 and not finished:
 		finished = true
-		detector.stop()
+		_hide_detector()
 		$ReactionTimer.stop()
 		$Content/Reaction.text = "¡Hábitat sellado!"
 		completed.emit()
@@ -130,7 +153,7 @@ func _begin_patch(point: Vector2, pointer: int) -> void:
 		if not patch.used and patch.contains_point(point):
 			dragged = patch
 			drag_pointer = pointer
-			detector.stop()
+			_hide_detector()
 			patch.begin_drag(point)
 			return
 
@@ -145,6 +168,7 @@ func _drop_patch(point: Vector2, cancel := false) -> void:
 		for leak in leaks:
 			if leak.state == leak.State.FOUND and local_point.distance_to(leak.position) <= click_radius:
 				patch.attach_to(leak.get_global_transform_with_canvas().origin)
+				installed_patches[leak] = patch
 				leak.patch()
 				get_viewport().set_input_as_handled()
 				return

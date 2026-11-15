@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d1lpk2a2310uk" path="res://game/challenges/electrical_repair/PuzzleManager.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/Board.tscn" id="2"]
 [ext_resource type="Script" uid="uid://om8eks2i4k7q" path="res://game/challenges/electrical_repair/PuzzleCamera.gd" id="3_camera"]
+[ext_resource type="Texture2D" uid="uid://b1q0q2poahf4c" path="res://game/challenges/electrical_repair/assets/greenhouse_background.png" id="4_0qbsr"]
 
 [node name="ElectricalRepair" type="Node2D" unique_id=331987606]
 script = ExtResource("1")
@@ -11,18 +12,6 @@ script = ExtResource("1")
 position = Vector2(1293, 706)
 zoom = Vector2(1.2, 1.2)
 script = ExtResource("3_camera")
-
-[node name="Backdrop" type="CanvasLayer" parent="." unique_id=176863361]
-layer = -1
-
-[node name="Background" type="ColorRect" parent="Backdrop" unique_id=1739277090]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.051, 0.082, 0.129, 1)
 
 [node name="Board" parent="." unique_id=888232065 instance=ExtResource("2")]
 layout_mode = 3
@@ -376,5 +365,13 @@ offset_right = 770.0
 offset_bottom = 1054.0
 theme_override_font_sizes/font_size = 20
 text = "Ver hitboxes"
+
+[node name="Backdrop" type="CanvasLayer" parent="." unique_id=176863361]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Backdrop" unique_id=1551687551]
+offset_right = 2301.0
+offset_bottom = 1283.0
+texture = ExtResource("4_0qbsr")
 
 [editable path="Board"]

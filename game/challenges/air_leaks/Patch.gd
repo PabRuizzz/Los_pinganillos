@@ -2,11 +2,20 @@ extends Control
 
 var used := false
 var home := Vector2.ZERO
+var tray_offset := Vector2.ZERO
 var drag_offset := Vector2.ZERO
 var animation: Tween
 
 func _ready() -> void:
+	tray_offset = position
 	home = position
+
+func set_home(point: Vector2, move_now: bool) -> void:
+	home = point
+	if move_now and not used:
+		if is_instance_valid(animation):
+			animation.kill()
+		position = home
 
 func contains_point(point: Vector2) -> bool:
 	return Rect2(Vector2.ZERO, size).has_point(get_global_transform_with_canvas().affine_inverse() * point)
@@ -29,5 +38,5 @@ func attach_to(point: Vector2) -> void:
 	used = true
 	z_index = 1
 	position = get_parent().get_global_transform_with_canvas().affine_inverse() * point - size / 2.0
-	$Placeholder.color = Color.SEA_GREEN
-	$Symbol.text = "OK"
+	$LoosePlate.hide()
+	$SealedPlate.show()
