@@ -22,7 +22,7 @@ extends CanvasLayer
 @onready var counter_value: Label = $Card/VBox/Counter/CounterRow/CounterValue
 @onready var counter_bar: ProgressBar = $Card/VBox/Counter/CounterBar
 
-var _card_style: StyleBoxFlat
+var _card_style: StyleBox
 var _icon_style: StyleBoxFlat
 var _bar_style: StyleBoxFlat
 var _rest_x := 0.0
@@ -42,8 +42,8 @@ func _ready():
 	card.visible = false
 	_rest_x = card.offset_left
 	_card_style = _own_style(card, "panel")
-	_icon_style = _own_style(icon, "panel")
-	_bar_style = _own_style(counter_bar, "fill")
+	_icon_style = _own_style(icon, "panel") as StyleBoxFlat
+	_bar_style = _own_style(counter_bar, "fill") as StyleBoxFlat
 
 
 func _process(delta):
@@ -126,7 +126,9 @@ func _apply_urgency(ratio: float, delta: float):
 	var urgent = ratio >= 0.0 and ratio < danger_threshold
 	var color = danger_color if urgent else warning_color
 
-	_card_style.border_color = color
+	# El marco es una textura fija; el color del tipo va en el ícono, el texto y la barra
+	if _card_style is StyleBoxFlat:
+		(_card_style as StyleBoxFlat).border_color = color
 	_icon_style.bg_color = Color(color, 0.18)
 	_bar_style.bg_color = color
 	icon_label.add_theme_color_override("font_color", color)
@@ -168,7 +170,7 @@ func _hide_card():
 	_tween.tween_callback(func(): card.visible = false)
 
 
-func _own_style(node: Control, style_name: String) -> StyleBoxFlat:
-	var style: StyleBoxFlat = node.get_theme_stylebox(style_name).duplicate()
+func _own_style(node: Control, style_name: String) -> StyleBox:
+	var style: StyleBox = node.get_theme_stylebox(style_name).duplicate()
 	node.add_theme_stylebox_override(style_name, style)
 	return style

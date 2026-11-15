@@ -20,7 +20,7 @@ enum Kind { WARNING, DANGER, SUCCESS, INFO }
 @onready var message: Label = $Panel/VBox/Content/Texts/Message
 @onready var time_bar: ProgressBar = $Panel/VBox/TimeBar
 
-var _card_style: StyleBoxFlat
+var _card_style: StyleBox
 var _icon_style: StyleBoxFlat
 var _bar_style: StyleBoxFlat
 var _rest_y := 0.0
@@ -33,8 +33,8 @@ func _ready():
 
 	# Copias propias de los estilos para poder cambiarles el color sin tocar el recurso original
 	_card_style = _own_style(panel, "panel")
-	_icon_style = _own_style(icon, "panel")
-	_bar_style = _own_style(time_bar, "fill")
+	_icon_style = _own_style(icon, "panel") as StyleBoxFlat
+	_bar_style = _own_style(time_bar, "fill") as StyleBoxFlat
 
 	Events.event_started.connect(_on_event_started)
 	Events.event_resolved.connect(_on_event_resolved)
@@ -95,7 +95,9 @@ func _apply_kind(kind: Kind):
 			color = warning_color
 			glyph = "!"
 
-	_card_style.border_color = color
+	# El marco es una textura fija; el color del tipo va en el ícono, el texto y la barra
+	if _card_style is StyleBoxFlat:
+		(_card_style as StyleBoxFlat).border_color = color
 	_icon_style.bg_color = Color(color, 0.18)
 	_bar_style.bg_color = color
 	icon_label.add_theme_color_override("font_color", color)
@@ -104,7 +106,7 @@ func _apply_kind(kind: Kind):
 	icon_label.visible = artwork.texture == null
 
 
-func _own_style(node: Control, style_name: String) -> StyleBoxFlat:
-	var style: StyleBoxFlat = node.get_theme_stylebox(style_name).duplicate()
+func _own_style(node: Control, style_name: String) -> StyleBox:
+	var style: StyleBox = node.get_theme_stylebox(style_name).duplicate()
 	node.add_theme_stylebox_override(style_name, style)
 	return style
