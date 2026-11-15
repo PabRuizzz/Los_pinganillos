@@ -25,6 +25,7 @@ Events="*uid://cvhnrdjeius14"
 Oxygen="*res://game/systems/oxygen/oxygen.gd"
 Alert="*res://game/ui/alerts/alert.tscn"
 HUD="*res://game/ui/hud/hud.tscn"
+EventTracker="*res://game/ui/event_tracker/event_tracker.tscn"
 GameOver="*res://game/ui/game_over/game_over.tscn"
 
 [display]
