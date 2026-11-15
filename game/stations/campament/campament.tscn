@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://dbwefg5xhoq1b" path="res://assets/tilesets/cpint.jpeg" id="1_i4bcs"]
 [ext_resource type="PackedScene" uid="uid://b6tv63xxtm0pj" path="res://game/world/rooms/puerta.tscn" id="2_cv6nd"]
 [ext_resource type="PackedScene" uid="uid://c04p72g88ofht" path="res://game/astronaut/astronaut.tscn" id="3_12nqk"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_interaction.gd" id="4_interaction"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_minigame.gd" id="5_minigame"]
+[ext_resource type="PackedScene" path="res://game/systems/station_interaction/interact_cue.tscn" id="6_cue"]
+[ext_resource type="PackedScene" path="res://game/challenges/air_leaks/air_leaks.tscn" id="7_air_leaks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8ylx"]
 texture = ExtResource("1_i4bcs")
@@ -1059,6 +1063,12 @@ size = Vector2(241.5, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3ohn"]
 size = Vector2(551, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_life_support"]
+size = Vector2(112, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_life_support_range"]
+size = Vector2(125, 60)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44doc"]
 size = Vector2(20, 267)
 
@@ -1116,6 +1126,30 @@ shape = SubResource("RectangleShape2D_44doc")
 
 [node name="SpawnFromMars" type="Marker2D" parent="."]
 position = Vector2(316.5, 295)
+
+[node name="life_support" type="CollisionShape2D" parent="hitbox" unique_id=1734120516]
+position = Vector2(528, 195)
+shape = SubResource("RectangleShape2D_life_support")
+
+[node name="LifeSupportStation" type="Area2D" parent="." unique_id=1734120517]
+position = Vector2(522, 255)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("4_interaction")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LifeSupportStation" unique_id=1734120518]
+shape = SubResource("RectangleShape2D_life_support_range")
+
+[node name="CueAnchor" type="Marker2D" parent="LifeSupportStation" unique_id=1734120519]
+position = Vector2(0, -105)
+
+[node name="InteractCue" parent="LifeSupportStation" unique_id=1734120520 instance=ExtResource("6_cue")]
+
+[node name="Minigame" type="Node" parent="LifeSupportStation" unique_id=1734120521]
+script = ExtResource("5_minigame")
+station_id = "life_support"
+repair_minigame = ExtResource("7_air_leaks")
+operational_message = "El soporte vital funciona correctamente"
 
 [node name="Camera2D" parent="player" index="0"]
 limit_enabled = true

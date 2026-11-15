@@ -10,6 +10,7 @@ const MAIN := "res://game/main/main.tscn"
 const MARS := "res://game/stations/mars/mars.tscn"
 const GREENHOUSE := "res://game/stations/greenhouse/greenhouse.tscn"
 
+const TEST_DISCOVERY_SAVE := "user://test_isolated_sample_discovery.cfg"
 var failures := 0
 var sim: Node
 var tasks: Node
@@ -81,6 +82,13 @@ func resources() -> Array:
 
 
 func run_checks() -> void:
+	# Aislamiento: desde la Fase 5 el regreso del rover descubre una muestra. Cualquier
+	# SampleDiscovery que entre al árbol (antes de su _ready) usa un archivo de prueba,
+	# nunca el progreso real del jugador.
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
+	node_added.connect(func(node: Node):
+		if node is SampleDiscovery:
+			node.save_path = TEST_DISCOVERY_SAVE)
 	sim = root.get_node("SimulationTime")
 	tasks = root.get_node("TaskExecution")
 	res = root.get_node("Resources")
@@ -107,13 +115,20 @@ func run_checks() -> void:
 	check(end_button.focus_mode == Control.FOCUS_NONE and yes_button.focus_mode == Control.FOCUS_NONE, "Los botones no deben tomar el foco del teclado (las flechas mueven al jugador)")
 
 	# --- Sin día activo: botón apagado y petición rechazada.
+	# El autoload GameFlow inicia el día 1 al arrancar; se desactiva a mano para
+	# probar el estado "sin día" (como antes de arrancar o tras el fin de partida).
+	await frames(2)
+	tasks.day_active = false
+	started_days.clear()
 	await frames(2)
 	check(not tasks.day_active and end_button.disabled, "Sin día activo el botón debe estar apagado")
 	check(not tasks.can_end_day() and not tasks.request_end_day(), "request_end_day debe rechazarse sin día activo")
 	check(sim.day == 1 and finished_count == 0, "Una petición rechazada no debe cambiar el día")
 
 	# --- Partida nueva, sin azar: base operativa y recursos conocidos.
+	# main.gd ya no inicia el día (lo hace GameFlow al arrancar), así que se inicia aquí.
 	await go_to(MAIN)
+	tasks.start_day()
 	events.day_start_event_chance = 0.0
 	clear_events()
 	res.energy = 50
@@ -231,4 +246,5 @@ func run_checks() -> void:
 	paused = false
 
 	print("END DAY CHECKS: failures: %d" % failures)
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
 	quit(0 if failures == 0 else 1)

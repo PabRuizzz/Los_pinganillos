@@ -67,10 +67,18 @@ func run_checks() -> void:
 	player.set_physics_process(false)  # sin entrada de teclado: lo movemos desde la prueba
 
 	# Colisión: la plataforma bloquea, lo decorativo no.
+	# Se mide el borde del colisionador del jugador, no su origen: así la prueba no
+	# depende de dónde esté la raíz del astronauta (hoy, en el centro del colisionador).
+	var player_shape := player.get_node("CollisionShape2D") as CollisionShape2D
+	var half := (player_shape.shape as RectangleShape2D).size / 2.0
+	var shape_offset := player_shape.position
 	var stop := await walk(STATION_POS + Vector2(0, 80), Vector2(0, -200), 60)
-	check(stop.y > STATION_POS.y + 20, "El jugador atravesó la plataforma desde abajo (y=%.1f)" % stop.y)
+	var collider_top := stop.y + shape_offset.y - half.y
+	check(collider_top >= STATION_POS.y - 1.0, "El jugador atravesó la plataforma desde abajo (borde superior y=%.1f)" % collider_top)
+	check(collider_top <= STATION_POS.y + 2.0, "El jugador se detuvo antes de llegar a la plataforma (borde superior y=%.1f)" % collider_top)
 	stop = await walk(STATION_POS + Vector2(-120, -10), Vector2(200, 0), 60)
-	check(stop.x < STATION_POS.x - 50, "El jugador atravesó la plataforma desde un lado (x=%.1f)" % stop.x)
+	var collider_right := stop.x + shape_offset.x + half.x
+	check(collider_right <= STATION_POS.x - 46.0, "El jugador atravesó la plataforma desde un lado (borde derecho x=%.1f)" % collider_right)
 	stop = await walk(STATION_POS + Vector2(-120, -40), Vector2(200, 0), 60)
 	check(stop.x > STATION_POS.x + 60, "Algo decorativo bloquea el paso por detrás de la plataforma (x=%.1f)" % stop.x)
 	stop = await walk(STATION_POS + Vector2(-90, 50), Vector2(0, -200), 60)
@@ -85,7 +93,7 @@ func run_checks() -> void:
 	player.global_position = STATION_POS + Vector2(0, 160)
 	await physics_frames(3)
 	check(not station.is_player_near(), "Detecta al jugador fuera de rango")
-	var cue := station.get_node("InteractCue") as Label
+	var cue := station.get_node("InteractionArea/InteractCue") as Label
 	check(cue != null and not cue.visible, "El indicador [E] debe estar oculto fuera de rango")
 	await press_interact(6)
 	check(events.requested == 0, "Interactuó fuera de rango")

@@ -13,6 +13,7 @@ const MARS := "res://game/stations/mars/mars.tscn"
 const ROOM := "res://game/world/rooms/cuarto1.tscn"
 const GREENHOUSE := "res://game/stations/greenhouse/greenhouse.tscn"
 
+const TEST_DISCOVERY_SAVE := "user://test_isolated_sample_discovery.cfg"
 var failures := 0
 var sim: Node        # SimulationTime
 var tasks: Node      # TaskExecution
@@ -86,6 +87,13 @@ func do_maintenance() -> bool:
 
 
 func run_checks() -> void:
+	# Aislamiento: desde la Fase 5 el regreso del rover descubre una muestra. Cualquier
+	# SampleDiscovery que entre al árbol (antes de su _ready) usa un archivo de prueba,
+	# nunca el progreso real del jugador.
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
+	node_added.connect(func(node: Node):
+		if node is SampleDiscovery:
+			node.save_path = TEST_DISCOVERY_SAVE)
 	sim = root.get_node("SimulationTime")
 	tasks = root.get_node("TaskExecution")
 	res = root.get_node("Resources")
@@ -153,6 +161,8 @@ func run_checks() -> void:
 
 	# --- 13. La estación de energía sigue funcionando con E y Esc.
 	var energy_station: Area2D = mars.get_node("EnergyStation")
+	# Sin tipo: StationMinigame usa autoloads, que no existen al compilar este script.
+	var energy_minigame: Node = energy_station.get_node("Minigame")
 	costs.energy_plant_state = "DEGRADADO"
 	player.global_position = energy_station.to_global(energy_station.get_node("CollisionShape2D").position)
 	await frames(3)
@@ -160,12 +170,12 @@ func run_checks() -> void:
 	await frames(3)
 	Input.action_release("interact")
 	await frames(2)
-	check(energy_station.active_minigame != null and tasks.current_task == "maintenance", "E en la estación de energía debe abrir el minijuego de mantenimiento")
+	check(energy_minigame.active_minigame != null and tasks.current_task == "maintenance", "E en la estación de energía debe abrir el minijuego de mantenimiento")
 	Input.action_press("ui_cancel")
 	await frames(3)
 	Input.action_release("ui_cancel")
 	await frames(3)
-	check(energy_station.active_minigame == null and tasks.current_task == "", "Esc debe cerrar el minijuego y liberar la tarea")
+	check(energy_minigame.active_minigame == null and tasks.current_task == "", "Esc debe cerrar el minijuego y liberar la tarea")
 	check(sim.tiempo_jornada == 360, "Salir del minijuego con Esc no debe consumir tiempo")
 	clear_events()
 
@@ -232,4 +242,5 @@ func run_checks() -> void:
 	check(events_started == 1, "No debe empezar otro evento mientras hay uno activo")
 
 	print("DAILY CYCLE CHECKS: failures: %d" % failures)
+	SampleDiscoverySave.new(TEST_DISCOVERY_SAVE).clear()
 	quit(0 if failures == 0 else 1)

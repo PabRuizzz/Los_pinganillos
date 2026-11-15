@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://tk4rtrv76hcy" path="res://assets/tilesets/greenpad_sheet1.jpeg" id="5_mra38"]
 [ext_resource type="PackedScene" uid="uid://c04p72g88ofht" path="res://game/astronaut/astronaut.tscn" id="5_t3d58"]
 [ext_resource type="Texture2D" uid="uid://bmsf3qkqn8fx8" path="res://assets/tilesets/mars.JPG" id="6_ah57b"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_interaction.gd" id="7_interaction"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_minigame.gd" id="8_minigame"]
+[ext_resource type="PackedScene" path="res://game/systems/station_interaction/interact_cue.tscn" id="9_cue"]
+[ext_resource type="PackedScene" path="res://game/challenges/greenhouse_fungus/greenhouse_fungus.tscn" id="10_fungus"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mra38"]
 texture = ExtResource("2_em344")
@@ -962,6 +966,9 @@ sources/3 = SubResource("TileSetAtlasSource_pba0h")
 sources/4 = SubResource("TileSetAtlasSource_wl5tb")
 sources/5 = SubResource("TileSetAtlasSource_083i3")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plants"]
+size = Vector2(360, 250)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfdue"]
 size = Vector2(452.5, 20)
 
@@ -1009,3 +1016,64 @@ shape = SubResource("RectangleShape2D_h3ohn")
 
 [node name="SpawnFromMars" type="Marker2D" parent="."]
 position = Vector2(643.5, 405)
+
+[node name="PlantsStation" type="Area2D" parent="." unique_id=1734120522]
+position = Vector2(516, 240)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("7_interaction")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlantsStation" unique_id=1734120523]
+shape = SubResource("RectangleShape2D_plants")
+
+[node name="CueRow1Plant1" type="Marker2D" parent="PlantsStation" unique_id=1734120530]
+position = Vector2(-127, -158)
+
+[node name="CueRow1Plant2" type="Marker2D" parent="PlantsStation" unique_id=1734120531]
+position = Vector2(-64, -158)
+
+[node name="CueRow1Plant3" type="Marker2D" parent="PlantsStation" unique_id=1734120532]
+position = Vector2(0, -158)
+
+[node name="CueRow1Plant4" type="Marker2D" parent="PlantsStation" unique_id=1734120533]
+position = Vector2(64, -158)
+
+[node name="CueRow1Plant5" type="Marker2D" parent="PlantsStation" unique_id=1734120534]
+position = Vector2(127, -158)
+
+[node name="CueRow2Plant1" type="Marker2D" parent="PlantsStation" unique_id=1734120535]
+position = Vector2(64, -94)
+
+[node name="CueRow2Plant2" type="Marker2D" parent="PlantsStation" unique_id=1734120536]
+position = Vector2(127, -94)
+
+[node name="CueRow3Plant1" type="Marker2D" parent="PlantsStation" unique_id=1734120537]
+position = Vector2(-127, -29)
+
+[node name="CueRow3Plant2" type="Marker2D" parent="PlantsStation" unique_id=1734120538]
+position = Vector2(-64, -29)
+
+[node name="CueRow4Plant1" type="Marker2D" parent="PlantsStation" unique_id=1734120539]
+position = Vector2(-127, 32)
+
+[node name="CueRow4Plant2" type="Marker2D" parent="PlantsStation" unique_id=1734120540]
+position = Vector2(-64, 32)
+
+[node name="CueRow4Plant3" type="Marker2D" parent="PlantsStation" unique_id=1734120541]
+position = Vector2(0, 32)
+
+[node name="CueRow4Plant4" type="Marker2D" parent="PlantsStation" unique_id=1734120542]
+position = Vector2(64, 32)
+
+[node name="CueRow4Plant5" type="Marker2D" parent="PlantsStation" unique_id=1734120543]
+position = Vector2(127, 32)
+
+[node name="InteractCue" parent="PlantsStation" unique_id=1734120528 instance=ExtResource("9_cue")]
+
+[node name="Minigame" type="Node" parent="PlantsStation" unique_id=1734120529]
+script = ExtResource("8_minigame")
+station_id = "greenhouse"
+maintenance_minigame = ExtResource("10_fungus")
+repair_minigame = ExtResource("10_fungus")
+operational_message = "Las plantas del invernadero están sanas"
+repair_events = Array[int]([5])

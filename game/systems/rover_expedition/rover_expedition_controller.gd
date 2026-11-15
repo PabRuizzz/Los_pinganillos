@@ -13,8 +13,9 @@ extends Node
 ## que el jugador cruza una puerta, el estado se guarda en variables estáticas para que
 ## sobreviva a los cambios de escena. Es estado en memoria: se pierde al cerrar el juego.
 ##
-## Fase 5: conectarse a expedition_returned y llamar ahí a
-## SampleDiscovery.complete_expedition(). Este script no descubre muestras.
+## Fase 5: RoverSampleDiscoveryBridge (nodo hermano en mars.tscn) escucha
+## expedition_returned y llama a SampleDiscovery.complete_expedition().
+## Este script no descubre muestras.
 
 enum State { AVAILABLE, ON_EXPEDITION }
 

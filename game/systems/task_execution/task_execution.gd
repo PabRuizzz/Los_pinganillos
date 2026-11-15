@@ -2,6 +2,14 @@ extends Node
 
 signal task_started(station, task_name)
 signal task_finished(station, task_name, time_spent)
+# Se intentó iniciar una tarea sin tiempo suficiente en la jornada. La tarea NO
+# empieza y no se descuenta nada. required y available están en minutos simulados
+# (StationCost y SimulationTime.tiempo_jornada). Alert lo muestra al jugador.
+signal insufficient_time(station, task_name, required, available)
+# Igual que insufficient_time, pero por energía: required es el costo "energy" de la
+# tarea en StationCost y available es Resources.energy. Hoy ninguna tarea tiene costo
+# de energía, así que solo se emite si alguna lo define.
+signal insufficient_energy(station, task_name, required, available)
 # Empezó un día: la jornada está completa y ya se pueden iniciar tareas.
 # day es el número del día que empieza (SimulationTime.day).
 signal day_started(day)
@@ -44,12 +52,16 @@ func start_task(station: String, task_name: String) -> bool:
 	var costs = StationCost.station_costs[station][task_name]
 	var time_cost = costs["time"]
 
-	# 1. Revisamos si alcanza el tiempo en SimulationTime
+	# 1. Revisamos si alcanza el tiempo en SimulationTime (con el tiempo justo sí alcanza)
 	if time_cost > SimulationTime.tiempo_jornada:
+		insufficient_time.emit(station, task_name, time_cost, SimulationTime.tiempo_jornada)
 		return false
 
 	# 2. Revisamos si alcanzan los recursos en el Autoload Resources
-	if Resources.energy < costs.get("energy", 0) or Resources.water < costs.get("water", 0) or Resources.food < costs.get("food", 0):
+	if Resources.energy < costs.get("energy", 0):
+		insufficient_energy.emit(station, task_name, costs.get("energy", 0), Resources.energy)
+		return false
+	if Resources.water < costs.get("water", 0) or Resources.food < costs.get("food", 0):
 		return false
 
 	current_station = station

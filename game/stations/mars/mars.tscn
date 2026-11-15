@@ -21,8 +21,18 @@
 [ext_resource type="Texture2D" uid="uid://qd67fxri77wa" path="res://assets/tilesets/rock1.png" id="13_7opot"]
 [ext_resource type="Texture2D" uid="uid://dr78xugcyvywo" path="res://assets/tilesets/powergenerator.png" id="13_lbft5"]
 [ext_resource type="Texture2D" uid="uid://c5j6udbtben2u" path="res://assets/tilesets/rock3.png" id="14_8do8n"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_interaction.gd" id="15_lbft5"]
+[ext_resource type="Script" path="res://game/systems/station_interaction/station_minigame.gd" id="21_minigame"]
+[ext_resource type="PackedScene" path="res://game/systems/station_interaction/interact_cue.tscn" id="22_cue"]
+[ext_resource type="PackedScene" path="res://game/challenges/solar_cleaning/solar_cleaning.tscn" id="23_solar"]
+[ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/electrical_repair.tscn" id="24_electrical"]
+[ext_resource type="PackedScene" path="res://game/challenges/water_pumping/water_pumping.tscn" id="25_pumping"]
+[ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/frozen_pipe.tscn" id="26_pipe"]
+[ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
+[ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
+[ext_resource type="Script" path="res://game/systems/sample_discovery/sample_discovery.gd" id="18_discovery"]
+[ext_resource type="Script" path="res://game/systems/rover_expedition/rover_sample_discovery_bridge.gd" id="19_bridge"]
 [ext_resource type="Texture2D" uid="uid://if2mqjpee47d" path="res://assets/tilesets/limitmapver.png" id="15_fnhve"]
-[ext_resource type="Script" uid="uid://whmt50nsb5j4" path="res://game/stations/mars/energy_station.gd" id="15_lbft5"]
 [ext_resource type="Texture2D" uid="uid://cr42aqrcwarrc" path="res://assets/tilesets/limitmap.png" id="15_loy4b"]
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" uid="uid://dvttd52a8nbhe" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
@@ -604,6 +614,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
+size = Vector2(230, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ibt6"]
 size = Vector2(1376, 20)
 
@@ -871,7 +884,7 @@ texture = ExtResource("15_loy4b")
 y_sort_enabled = true
 
 [node name="player" parent="YSortObjects" unique_id=1998034301 instance=ExtResource("2_74yx0")]
-position = Vector2(106, -184)
+position = Vector2(391, -528)
 
 [node name="RoverStation" parent="YSortObjects" unique_id=1184268611 instance=ExtResource("16_rover")]
 position = Vector2(40, 230)
@@ -947,7 +960,6 @@ position = Vector2(-331, -292)
 shape = SubResource("RectangleShape2D_dfdue")
 
 [node name="EnergyStation" type="Area2D" parent="." unique_id=862025961]
-visible = false
 position = Vector2(26, 45)
 collision_layer = 4
 collision_mask = 3
@@ -965,9 +977,58 @@ shape = SubResource("RectangleShape2D_88uyf")
 position = Vector2(283.5, 67.5)
 shape = SubResource("RectangleShape2D_88uyf")
 
+[node name="CueAnchor1" type="Marker2D" parent="EnergyStation" unique_id=1734120501]
+position = Vector2(288.5, -284.5)
+
+[node name="CueAnchor2" type="Marker2D" parent="EnergyStation" unique_id=1734120502]
+position = Vector2(286.5, -143.5)
+
+[node name="CueAnchor3" type="Marker2D" parent="EnergyStation" unique_id=1734120503]
+position = Vector2(283.5, 4.5)
+
+[node name="InteractCue" parent="EnergyStation" unique_id=1734120504 instance=ExtResource("22_cue")]
+
+[node name="Minigame" type="Node" parent="EnergyStation" unique_id=1734120505]
+script = ExtResource("21_minigame")
+station_id = "energy_plant"
+maintenance_minigame = ExtResource("23_solar")
+repair_minigame = ExtResource("24_electrical")
+operational_message = "Los paneles solares funcionan correctamente"
+
+[node name="WaterStation" type="Area2D" parent="." unique_id=1734120506]
+position = Vector2(909, -393)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("15_lbft5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterStation" unique_id=1734120507]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_water")
+
+[node name="CueAnchor" type="Marker2D" parent="WaterStation" unique_id=1734120508]
+position = Vector2(0, -60)
+
+[node name="InteractCue" parent="WaterStation" unique_id=1734120509 instance=ExtResource("22_cue")]
+
+[node name="Minigame" type="Node" parent="WaterStation" unique_id=1734120510]
+script = ExtResource("21_minigame")
+station_id = "water_station"
+maintenance_minigame = ExtResource("25_pumping")
+repair_minigame = ExtResource("26_pipe")
+operational_message = "La estación de agua funciona correctamente"
+repair_events = Array[int]([4])
+
 [node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
 script = ExtResource("17_expedition")
 station = NodePath("../YSortObjects/RoverStation")
+
+[node name="SampleDiscovery" type="Node" parent="." unique_id=1406671829]
+script = ExtResource("18_discovery")
+
+[node name="RoverSampleDiscoveryBridge" type="Node" parent="." unique_id=1172904356 node_paths=PackedStringArray("expedition_controller", "sample_discovery")]
+script = ExtResource("19_bridge")
+expedition_controller = NodePath("../RoverExpeditionController")
+sample_discovery = NodePath("../SampleDiscovery")
 
 [node name="spawpoints" type="Node2D" parent="." unique_id=700062660]
 position = Vector2(60, -138)
