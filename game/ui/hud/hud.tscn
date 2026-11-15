@@ -2,42 +2,19 @@
 
 [ext_resource type="Script" uid="uid://d3fup4pxab741" path="res://game/ui/hud/hud.gd" id="1_hud"]
 
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/energy.tres" id="2"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/water.tres" id="3"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/food.tres" id="4"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/oxygen.tres" id="5"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/power_plant.tres" id="6"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/life_support.tres" id="7"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/water_station.tres" id="8"]
-[ext_resource type="Texture2D" path="res://game/ui/hud/assets/greenhouse.tres" id="9"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_energy.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_water.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_food.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/icon_oxygen.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_energy_plant.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_life_support.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_water_station.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/ui/day_summary/station_greenhouse.png" id="9"]
+[ext_resource type="Theme" path="res://game/ui/ui_theme.tres" id="10_theme"]
 
-[sub_resource type="SystemFont" id="InterfaceFont"]
-font_names = PackedStringArray("Bahnschrift", "Segoe UI", "Noto Sans")
-font_weight = 500
-font_stretch = 90
-
-[sub_resource type="Theme" id="HudTheme"]
-default_font = SubResource("InterfaceFont")
-default_font_size = 22
-
-[sub_resource type="StyleBoxFlat" id="Card"]
-content_margin_left = 18.0
-content_margin_top = 13.0
-content_margin_right = 18.0
-content_margin_bottom = 13.0
-bg_color = Color(0.071, 0.085, 0.12, 0.94)
-border_width_left = 3
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.66, 0.43, 0.29, 0.86)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.025, 0.02, 0.035, 0.37)
-shadow_size = 5
-shadow_offset = Vector2(0, 3)
+[sub_resource type="SystemFont" id="SystemFont_bold"]
+font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
+font_weight = 700
 
 [node name="HUD" type="CanvasLayer" unique_id=881011932]
 process_mode = 3
@@ -52,10 +29,9 @@ theme_override_constants/separation = 10
 
 [node name="Clock" type="PanelContainer" parent="Top"]
 layout_mode = 2
-custom_minimum_size = Vector2(315, 0)
+custom_minimum_size = Vector2(340, 0)
 mouse_filter = 2
-theme = SubResource("HudTheme")
-theme_override_styles/panel = SubResource("Card")
+theme = ExtResource("10_theme")
 
 [node name="Rows" type="VBoxContainer" parent="Top/Clock"]
 layout_mode = 2
@@ -66,7 +42,8 @@ theme_override_constants/separation = 5
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-theme_override_colors/font_color = Color(1, 0.83, 0.68, 1)
+theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
 text = "Día 1"
 
 [node name="TimeLabel" type="Label" parent="Top/Clock/Rows"]
@@ -78,10 +55,9 @@ text = "Tiempo restante: 8:00 h"
 
 [node name="Resources" type="PanelContainer" parent="Top"]
 layout_mode = 2
-custom_minimum_size = Vector2(315, 0)
+custom_minimum_size = Vector2(340, 0)
 mouse_filter = 2
-theme = SubResource("HudTheme")
-theme_override_styles/panel = SubResource("Card")
+theme = ExtResource("10_theme")
 
 [node name="Rows" type="VBoxContainer" parent="Top/Resources"]
 layout_mode = 2
@@ -90,8 +66,9 @@ theme_override_constants/separation = 5
 
 [node name="ResourcesTitle" type="Label" parent="Top/Resources/Rows"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.83, 0.72, 0.64, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
 text = "RECURSOS"
 
 [node name="EnergyRow" type="HBoxContainer" parent="Top/Resources/Rows"]
@@ -100,7 +77,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/EnergyRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2")
@@ -120,7 +97,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/WaterRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3")
@@ -140,7 +117,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/FoodRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4")
@@ -160,7 +137,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/OxygenRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5")
@@ -178,13 +155,12 @@ text = "Oxígeno: 0"
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 22.0
-offset_top = -205.0
+offset_top = -260.0
 offset_bottom = -20.0
 grow_vertical = 0
-custom_minimum_size = Vector2(355, 0)
+custom_minimum_size = Vector2(440, 0)
 mouse_filter = 2
-theme = SubResource("HudTheme")
-theme_override_styles/panel = SubResource("Card")
+theme = ExtResource("10_theme")
 
 [node name="Rows" type="VBoxContainer" parent="Systems"]
 layout_mode = 2
@@ -193,8 +169,9 @@ theme_override_constants/separation = 5
 
 [node name="SystemsTitle" type="Label" parent="Systems/Rows"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.83, 0.72, 0.64, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
 text = "SISTEMAS"
 
 [node name="EnergyPlantRow" type="HBoxContainer" parent="Systems/Rows"]
@@ -203,7 +180,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/EnergyPlantRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6")
@@ -223,7 +200,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/LifeSupportRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("7")
@@ -243,7 +220,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/WaterStationRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("8")
@@ -263,7 +240,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/GreenhouseRow"]
-custom_minimum_size = Vector2(35, 35)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("9")
@@ -282,15 +259,14 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -310.0
-offset_top = -96.0
+offset_left = -342.0
+offset_top = -150.0
 offset_right = -22.0
 offset_bottom = -20.0
 grow_vertical = 0
-custom_minimum_size = Vector2(288, 0)
+custom_minimum_size = Vector2(320, 0)
 mouse_filter = 2
-theme = SubResource("HudTheme")
-theme_override_styles/panel = SubResource("Card")
+theme = ExtResource("10_theme")
 
 [node name="Rows" type="VBoxContainer" parent="DayActions"]
 layout_mode = 2
@@ -299,7 +275,7 @@ theme_override_constants/separation = 5
 
 [node name="EndDayButton" type="Button" parent="DayActions/Rows"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 22
@@ -333,7 +309,7 @@ theme_override_constants/separation = 12
 
 [node name="ConfirmEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -342,7 +318,7 @@ text = "Sí"
 
 [node name="CancelEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0

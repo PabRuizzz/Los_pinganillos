@@ -5,7 +5,7 @@ signal resources_changed
 const MAX_RESOURCE = 100
 #Recursos base
 var energy = 60
-var water = 60
+var water = 50
 var food = 50
 var oxygen = 100
 #Este script es autoload, esta disponible golbalmente siempre 

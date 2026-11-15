@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # Tarjeta en la esquina superior derecha con el evento activo:
-# que hay que reparar y su contador (bateria, tiempo restante u oxigeno).
+# que hay que arreglar y su contador (bateria, tiempo restante u oxigeno).
 # Se muestra sola cuando hay un evento y se oculta al resolverlo.
 # Los estilos estan en la escena; aqui solo se cambian textos y colores.
 
@@ -22,11 +22,18 @@ extends CanvasLayer
 @onready var counter_value: Label = $Card/VBox/Counter/CounterRow/CounterValue
 @onready var counter_bar: ProgressBar = $Card/VBox/Counter/CounterBar
 
-var _card_style: StyleBoxFlat
+var _card_style: StyleBox
 var _icon_style: StyleBoxFlat
 var _bar_style: StyleBoxFlat
 var _rest_x := 0.0
 var _shown_event = Events.EventTypes.NONE
+
+const STATION_NAMES = {
+	"energy_plant": "planta de energía",
+	"life_support": "soporte vital",
+	"water_station": "estación de agua",
+	"greenhouse": "invernadero",
+}
 var _tween: Tween
 var _pulse_time := 0.0
 
@@ -35,8 +42,8 @@ func _ready():
 	card.visible = false
 	_rest_x = card.offset_left
 	_card_style = _own_style(card, "panel")
-	_icon_style = _own_style(icon, "panel")
-	_bar_style = _own_style(counter_bar, "fill")
+	_icon_style = _own_style(icon, "panel") as StyleBoxFlat
+	_bar_style = _own_style(counter_bar, "fill") as StyleBoxFlat
 
 
 func _process(delta):
@@ -60,9 +67,10 @@ func _update_card(type, delta):
 
 	# ratio = cuanto le queda al contador (1 = lleno, 0 = vacio). -1 = sin contador.
 	var ratio := -1.0
+	objective.text = _objective_text()
+
 	match type:
 		Events.EventTypes.TORMENTA_ARENA:
-			objective.text = "Repara la planta de energía"
 			if Events.battery_active:
 				ratio = Events.emergency_battery / 100.0
 				_set_counter("Batería de emergencia", "%d %%" % ceili(Events.emergency_battery), ratio)
@@ -71,27 +79,33 @@ func _update_card(type, delta):
 				_set_counter("Batería agotada · Oxígeno", "%d %%" % int(Resources.oxygen), ratio)
 
 		Events.EventTypes.PERDIDA_PRESION:
-			objective.text = "Repara el soporte vital"
 			ratio = float(Resources.oxygen) / Resources.MAX_RESOURCE
 			_set_counter("Oxígeno", "%d %%" % int(Resources.oxygen), ratio)
 
-		Events.EventTypes.FALTA_ENERGIA:
-			objective.text = "Repara la planta de energía para recuperar el invernadero"
-
 		Events.EventTypes.CONGELAMIENTO_TUBERIAS:
-			objective.text = "Repara la estación de agua"
-			ratio = Events.pipe_timer / Events.PIPE_TIME_LIMIT
-			var label = "Congelamiento total en" if Events.pipe_timer_active else "Tuberías congeladas"
-			_set_counter(label, _format_time(Events.pipe_timer), ratio)
+			if Events.pipe_timer_active:
+				ratio = Events.pipe_timer / Events.PIPE_TIME_LIMIT
+				_set_counter("El invernadero se congela en", _format_time(Events.pipe_timer), ratio)
 
 		Events.EventTypes.HONGOS_INVERNADERO:
-			objective.text = "Repara el invernadero"
-			ratio = Events.fungus_timer / Events.FUNGUS_TIME_LIMIT
-			var label = "La plaga se extiende en" if Events.fungus_timer_active else "Plaga extendida"
-			_set_counter(label, _format_time(Events.fungus_timer), ratio)
+			if Events.fungus_timer_active:
+				ratio = Events.fungus_timer / Events.FUNGUS_TIME_LIMIT
+				_set_counter("La plaga se extiende en", _format_time(Events.fungus_timer), ratio)
 
 	counter.visible = ratio >= 0.0
 	_apply_urgency(ratio, delta)
+
+
+# Lista lo que falta para resolver el evento: "Mantenimiento: invernadero", etc.
+func _objective_text() -> String:
+	var lines = []
+	for station in Events.key_stations:
+		var state = StationCost.get_state(station)
+		if state == "DEGRADADO":
+			lines.append("Mantenimiento: %s" % STATION_NAMES[station])
+		elif state == "AVERIADO":
+			lines.append("Reparar: %s" % STATION_NAMES[station])
+	return "\n".join(lines)
 
 
 func _set_counter(label: String, value: String, ratio: float):
@@ -112,7 +126,9 @@ func _apply_urgency(ratio: float, delta: float):
 	var urgent = ratio >= 0.0 and ratio < danger_threshold
 	var color = danger_color if urgent else warning_color
 
-	_card_style.border_color = color
+	# El marco es una textura fija; el color del tipo va en el ícono, el texto y la barra
+	if _card_style is StyleBoxFlat:
+		(_card_style as StyleBoxFlat).border_color = color
 	_icon_style.bg_color = Color(color, 0.18)
 	_bar_style.bg_color = color
 	icon_label.add_theme_color_override("font_color", color)
@@ -154,7 +170,7 @@ func _hide_card():
 	_tween.tween_callback(func(): card.visible = false)
 
 
-func _own_style(node: Control, style_name: String) -> StyleBoxFlat:
-	var style: StyleBoxFlat = node.get_theme_stylebox(style_name).duplicate()
+func _own_style(node: Control, style_name: String) -> StyleBox:
+	var style: StyleBox = node.get_theme_stylebox(style_name).duplicate()
 	node.add_theme_stylebox_override(style_name, style)
 	return style

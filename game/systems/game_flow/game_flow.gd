@@ -1,6 +1,7 @@
 extends Node
 
-# Arranque de la partida: inicia el día y lanza el primer evento.
+# Arranque de la partida: inicia el día 1. Los eventos los lanza Events
+# al empezar cada día, siguiendo su PLAN (game/systems/events/events.gd).
 # Es autoload para que funcione sin importar cuál sea la escena principal
 # (las puertas recargan las escenas, así que esto no puede vivir en una de ellas).
 

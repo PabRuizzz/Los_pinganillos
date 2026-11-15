@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dl8dxr2hyfmi6"]
+[gd_scene format=3 uid="uid://bqm8gcys0lbtg"]
 
 [ext_resource type="Script" uid="uid://bdfp1t0trwgyt" path="res://game/challenges/water_pumping/WaterPumping.gd" id="1"]
 [ext_resource type="Script" uid="uid://ctr0l0ayfht6s" path="res://game/challenges/water_pumping/PumpPhase.gd" id="2"]
