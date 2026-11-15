@@ -32,6 +32,7 @@ func _ready():
 
 # Muestra "antes -> después" y el cambio con color. El número cuenta hacia arriba/abajo.
 func set_values(before: int, after: int, count_time := 0.6) -> Tween:
+	delta_label.visible = true
 	var delta = after - before
 	delta_label.text = "%+d" % delta if delta != 0 else "±0"
 	delta_label.add_theme_color_override("font_color", up_color if delta > 0 else (down_color if delta < 0 else same_color))
@@ -40,3 +41,9 @@ func set_values(before: int, after: int, count_time := 0.6) -> Tween:
 	var tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_method(func(v: float): value_label.text = str(roundi(v)), float(before), float(after), count_time)
 	return tween
+
+
+# Solo el valor, sin el cambio del día (pantalla final)
+func set_value(value: int):
+	value_label.text = str(value)
+	delta_label.visible = false

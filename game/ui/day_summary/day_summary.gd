@@ -55,6 +55,9 @@ signal summary_closed
 @onready var footer_hint: Label = %FooterHint
 @onready var next_button: Button = %NextButton
 
+# Muestras descubiertas en esta partida (la pantalla final las muestra). GameOver la vacía al reiniciar.
+var samples_this_run: Array[RockSampleData] = []
+
 var _day_start := {}
 var _discovery: SampleDiscovery
 var _tween: Tween
@@ -79,14 +82,17 @@ func _on_day_started(_day):
 
 
 func _on_day_finished():
-	# Si el día terminó en victoria o derrota, manda la pantalla final
-	if GameOver.root_control.visible:
-		return
-
 	var finished_day = SimulationTime.day - 1
 	var sample: RockSampleData = null
 	if discover_sample_each_day:
 		sample = _pick_sample()
+		if sample != null:
+			samples_this_run.append(sample)
+
+	# Si el día terminó en victoria o derrota, manda la pantalla final
+	# (la muestra de ese día igual cuenta y aparece en su galería)
+	if GameOver.root_control.visible:
+		return
 	# Se leen ahora porque start_day() (justo después) vuelve a llenar el oxígeno
 	show_summary(finished_day, sample, _day_start, _read_resources())
 
