@@ -87,6 +87,12 @@ func area_rect(shape: CollisionShape2D) -> Rect2:
 
 func clear_events() -> void:
 	events.actual_EventType = 0
+	# Estado del sistema de eventos planeados (main): cola, estaciones clave y espera
+	events.queue.clear()
+	events.key_stations.clear()
+	events.damaged_stations.clear()
+	events.escalated = false
+	events._next_event_token += 1  # anula un "siguiente evento" que estuviera esperando
 	events.battery_active = false
 	events.pipe_timer_active = false
 	events.fungus_timer_active = false
@@ -154,7 +160,7 @@ func run_checks() -> void:
 	var plants_launcher: Node = plants.get_node("Minigame")
 	var plants_pos := plants.global_position
 	check(plants_launcher.repair_minigame != null and plants_launcher.repair_minigame.resource_path == FUNGUS, "Las plantas deben abrir el minijuego de hongos")
-	check(plants_launcher.repair_events == [events.EventTypes.HONGOS_INVERNADERO], "Las plantas deben atender el evento de hongos")
+	check(plants_launcher.repair_events.is_empty(), "Las plantas siguen su estado (sin repair_events), como pide el sistema de eventos de main")
 	var door_shape: CollisionShape2D = greenhouse.get_node("puerta/CollisionShape2D")
 	check(not area_rect(plants.get_node("CollisionShape2D")).intersects(area_rect(door_shape)), "El rango de las plantas no debe tocar la puerta")
 
@@ -176,7 +182,8 @@ func run_checks() -> void:
 	check(nearest != null and Vector2(cue_rect.get_center().x, cue_rect.end.y).distance_to(nearest.global_position) < 1.0, "Plantas: [E] debe salir sobre la maceta más cercana")
 	check(absf(cue_rect.get_center().x - player.global_position.x) < 40.0, "Plantas: [E] debe quedar cerca del astronauta (dx=%.0f)" % (cue_rect.get_center().x - player.global_position.x))
 
-	# 7-10. Evento de hongos: E abre UNA vez el minijuego como reparación y al terminar lo resuelve.
+	# 7-10. Evento de hongos (reglas de main): deja el invernadero DEGRADADO, así que E abre
+	# UNA vez el minijuego como MANTENIMIENTO; dejarlo OPERATIVO resuelve el evento.
 	sim.reset_daily_time()
 	var fungus_event: int = events.EventTypes.HONGOS_INVERNADERO
 	var resolved := []
@@ -187,16 +194,15 @@ func run_checks() -> void:
 	await press("interact", 8)
 	check(presses[0] == 1, "Plantas: mantener E debe interactuar una vez (fueron %d)" % presses[0])
 	check(minigames_open(FUNGUS).size() == 1, "Debe abrirse un solo minijuego de hongos")
-	check(tasks.current_station == "greenhouse" and tasks.current_task == "repair", "Debe iniciar la reparación del invernadero")
+	check(tasks.current_station == "greenhouse" and tasks.current_task == "maintenance", "Debe iniciar el mantenimiento del invernadero")
 	check(sim.tiempo_jornada == time_before, "Abrir el minijuego no descuenta tiempo")
 	await press("interact", 4)
 	check(minigames_open(FUNGUS).size() == 1, "E con el minijuego abierto no debe abrir otro")
-	suppress_follow_up_event()
 	plants_launcher.active_minigame.emit_signal("completed")
 	plants_launcher.active_minigame.emit_signal("completed") if plants_launcher.active_minigame else null
 	await frames(3)
-	var gh_cost: int = costs.station_costs["greenhouse"]["repair"]["time"]
-	check(sim.tiempo_jornada == time_before - gh_cost, "La reparación debe descontar %d min una vez (quedan %d)" % [gh_cost, sim.tiempo_jornada])
+	var gh_cost: int = costs.station_costs["greenhouse"]["maintenance"]["time"]
+	check(sim.tiempo_jornada == time_before - gh_cost, "El mantenimiento debe descontar %d min una vez (quedan %d)" % [gh_cost, sim.tiempo_jornada])
 	check(resolved == [fungus_event] and events.actual_EventType == 0 and not events.fungus_timer_active, "Terminar el minijuego debe resolver el evento de hongos: %s" % str(resolved))
 	check(costs.greenhouse_state == "OPERATIVO", "El invernadero debe quedar OPERATIVO")
 	check(current_scene == greenhouse and minigames_open(FUNGUS).is_empty() and player.is_physics_processing(), "Debe volver al invernadero con el jugador libre")

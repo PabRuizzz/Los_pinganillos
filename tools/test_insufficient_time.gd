@@ -55,6 +55,12 @@ func press(action: String, hold := 2) -> void:
 
 func clear_events() -> void:
 	events.actual_EventType = 0
+	# Estado del sistema de eventos planeados (main): cola, estaciones clave y espera
+	events.queue.clear()
+	events.key_stations.clear()
+	events.damaged_stations.clear()
+	events.escalated = false
+	events._next_event_token += 1  # anula un "siguiente evento" que estuviera esperando
 	events.battery_active = false
 	events.pipe_timer_active = false
 	events.fungus_timer_active = false

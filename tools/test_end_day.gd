@@ -29,6 +29,7 @@ var started_days: Array = []
 var finished_count := 0
 var log: Array = []
 var events_started := 0
+var planned_events := true
 
 
 func _initialize() -> void:
@@ -70,6 +71,12 @@ func click(control: Control) -> void:
 
 func clear_events() -> void:
 	events.actual_EventType = 0
+	# Estado del sistema de eventos planeados (main): cola, estaciones clave y espera
+	events.queue.clear()
+	events.key_stations.clear()
+	events.damaged_stations.clear()
+	events.escalated = false
+	events._next_event_token += 1  # anula un "siguiente evento" que estuviera esperando
 	events.battery_active = false
 	events.pipe_timer_active = false
 	events.fungus_timer_active = false
@@ -79,6 +86,29 @@ func clear_events() -> void:
 
 func resources() -> Array:
 	return [res.energy, res.water, res.food]
+
+## Cambio de recursos al terminar el día con los estados actuales (valores de StationCost,
+## así la prueba sigue valiendo si el equipo reajusta el balance).
+func daily_delta() -> Array:
+	var c: Dictionary = costs.station_costs
+	return [
+		c["energy_plant"][costs.energy_plant_state].get("energy", 0) + c["life_support"][costs.life_support_state].get("energy", 0),
+		c["water_station"][costs.water_station_state].get("water", 0),
+		c["greenhouse"][costs.greenhouse_state].get("food", 0),
+	]
+
+
+## Energía que cuesta una tarea (StationCost); se descuenta al terminarla.
+func task_energy(station: String, task: String) -> int:
+	return costs.station_costs[station][task].get("energy", 0)
+
+
+## Suma por recurso respetando los límites de Resources (0..MAX_RESOURCE).
+func plus(a: Array, b: Array) -> Array:
+	var out := []
+	for i in a.size():
+		out.append(clampi(a[i] + b[i], 0, res.MAX_RESOURCE))
+	return out
 
 
 func run_checks() -> void:
@@ -100,6 +130,18 @@ func run_checks() -> void:
 	tasks.day_finished.connect(func(): finished_count += 1; log.append("day_finished"))
 	sim.day_advanced.connect(func(_day): log.append("day_advanced"))
 	events.event_started.connect(func(_t, _title, _msg): events_started += 1)
+	# DaySummary pausa el juego al terminar cada día hasta pulsar "Siguiente día":
+	# en las pruebas se cierra solo en el siguiente frame.
+	process_frame.connect(func():
+		var summary = root.get_node_or_null("DaySummary")
+		if summary != null and summary.root_control.visible:
+			summary.root_control.visible = false
+			paused = false)
+	# Los eventos planeados de cada día (Events.PLAN) cambian las estaciones: mientras
+	# planned_events sea false, se anulan justo después de empezar el día.
+	tasks.day_started.connect(func(_d):
+		if not planned_events:
+			clear_events())
 
 	# --- 1. El HUD existente tiene el botón (y la confirmación, oculta).
 	end_button = hud.get_node_or_null("%EndDayButton")
@@ -129,7 +171,7 @@ func run_checks() -> void:
 	# main.gd ya no inicia el día (lo hace GameFlow al arrancar), así que se inicia aquí.
 	await go_to(MAIN)
 	tasks.start_day()
-	events.day_start_event_chance = 0.0
+	planned_events = false
 	clear_events()
 	res.energy = 50
 	res.water = 50
@@ -154,11 +196,12 @@ func run_checks() -> void:
 	check(rover.start_expedition(), "El rover debe poder salir el día 1")
 	check(sim.tiempo_jornada == 480, "La jornada debe estar completa")
 	log.clear()
+	var expected := plus(resources(), daily_delta())
 	await click(end_button)
 	await click(yes_button)
 	check(sim.day == 2 and finished_count == 1, "Confirmar debe pasar al día 2 una sola vez (día %d, day_finished=%d)" % [sim.day, finished_count])
 	check(log == ["day_advanced", "day_finished", "day_started"], "Debe usar la misma secuencia de fin de día: %s" % str(log))
-	check(resources() == [51, 49, 51], "Los recursos diarios deben aplicarse una vez: %s" % str(resources()))
+	check(resources() == expected, "Los recursos diarios deben aplicarse una vez: %s (esperado %s)" % [str(resources()), str(expected)])
 	check(sim.tiempo_jornada == 480 and tasks.day_active and started_days == [1, 2], "El día 2 debe empezar con la jornada completa")
 	check(not confirm_box.visible and end_button.visible and not end_button.disabled, "El HUD debe volver al botón normal")
 	check(hud.get_node("%DayLabel").text == "Día 2" and hud.get_node("%TimeLabel").text == "Tiempo restante: 8:00 h", "El HUD debe mostrar el día nuevo y la jornada completa")
@@ -169,12 +212,13 @@ func run_checks() -> void:
 	# --- 10. Clics repetidos no avanzan más días.
 	await click(end_button)
 	var before := finished_count
+	expected = plus(resources(), daily_delta())
 	yes_button.pressed.emit()
 	yes_button.pressed.emit()
 	yes_button.pressed.emit()
 	await frames(2)
 	check(sim.day == 3 and finished_count == before + 1, "Tres clics en 'Sí' deben terminar un solo día (día %d)" % sim.day)
-	check(resources() == [52, 48, 52], "Los recursos no deben aplicarse dos veces: %s" % str(resources()))
+	check(resources() == expected, "Los recursos no deben aplicarse dos veces: %s (esperado %s)" % [str(resources()), str(expected)])
 
 	# --- 9. Con una tarea en curso no se puede terminar el día.
 	check(tasks.start_task("energy_plant", "maintenance"), "Debe poder iniciar una tarea")
@@ -202,12 +246,15 @@ func run_checks() -> void:
 	tasks.start_task("energy_plant", "maintenance"); tasks.finish_task()
 	check(sim.tiempo_jornada == 120 and sim.day == 3, "Deberían quedar 120 minutos del día 3")
 	await frames(2)
+	expected = plus(resources(), daily_delta())
 	await click(end_button)
 	await click(yes_button)
-	check(sim.day == 4 and sim.tiempo_jornada == 480 and resources() == [53, 47, 53], "Terminar con 120 minutos restantes debe pasar al día 4: %s" % str(resources()))
+	check(sim.day == 4 and sim.tiempo_jornada == 480 and resources() == expected, "Terminar con 120 minutos restantes debe pasar al día 4: %s (esperado %s)" % [str(resources()), str(expected)])
 
 	# --- 11. El fin automático al agotar la jornada sigue funcionando...
 	before = finished_count
+	# Cuatro mantenimientos (cada uno cobra su energía) y luego los recursos del día.
+	expected = plus(plus(resources(), [-4 * task_energy("energy_plant", "maintenance"), 0, 0]), daily_delta())
 	for i in 3:
 		tasks.start_task("energy_plant", "maintenance"); tasks.finish_task()
 	await frames(2)
@@ -221,23 +268,27 @@ func run_checks() -> void:
 	yes_button.pressed.emit()
 	await frames(2)
 	check(sim.day == 5 and finished_count == before + 1, "El fin automático y el botón no deben sumar dos días")
-	check(resources() == [54, 46, 54], "Recursos tras el día 4: %s" % str(resources()))
+	check(resources() == expected, "Recursos tras el día 4: %s (esperado %s)" % [str(resources()), str(expected)])
 
 	# --- 12. Cambiar de escena no repite transiciones ni altera el botón.
 	var days_before := started_days.duplicate()
 	await go_to(GREENHOUSE)
 	await go_to(MARS)
-	check(sim.day == 5 and started_days == days_before and resources() == [54, 46, 54], "Cambiar de escena repitió una transición de día")
+	check(sim.day == 5 and started_days == days_before and resources() == expected, "Cambiar de escena repitió una transición de día")
 	check(not end_button.disabled and end_button.visible, "El botón debe seguir disponible tras cambiar de escena")
 	check(current_scene.get_node("RoverExpeditionController").is_available() and rover_returns.size() == 1, "El rover no debe volver dos veces")
 
-	# --- 7. Los eventos de inicio de día siguen funcionando al terminar con el botón.
+	# --- 7. Terminar el día con el botón también arranca los eventos pendientes del día
+	# siguiente (Events.queue: lo pendiente pasa a mañana, antes de lo planeado).
 	clear_events()
-	events.day_start_event_chance = 1.0
+	planned_events = true
+	events.queue.append(events.EventTypes.HONGOS_INVERNADERO)
 	events_started = 0
 	await click(end_button)
 	await click(yes_button)
-	check(sim.day == 6 and events_started == 1 and events.actual_EventType != 0, "Terminar el día con el botón debe lanzar el evento del día siguiente")
+	check(sim.day == 6 and events_started == 1 and events.actual_EventType == events.EventTypes.HONGOS_INVERNADERO, "Terminar el día con el botón debe arrancar el evento pendiente del día siguiente")
+	planned_events = false
+	clear_events()
 
 	# --- Con el juego en pausa (fin de partida) el botón se apaga.
 	paused = true
