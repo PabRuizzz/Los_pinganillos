@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 [ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/Screw.tscn" id="1"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/pipe_frozen.png" id="2"]
 [node name="PipeSlot" type="Control"]
 offset_right = 960.0
 offset_bottom = 190.0
@@ -10,12 +11,14 @@ offset_top = 45.0
 offset_right = 400.0
 offset_bottom = 135.0
 mouse_filter = 2
-color = Color(0.26, 0.52, 0.7, 1)
+color = Color(0.26, 0.52, 0.7, 0)
 [node name="Artwork" type="TextureRect" parent="PipeLeft"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 5
 [node name="PipeRight" type="ColorRect" parent="."]
@@ -24,15 +27,19 @@ offset_top = 45.0
 offset_right = 860.0
 offset_bottom = 135.0
 mouse_filter = 2
-color = Color(0.26, 0.52, 0.7, 1)
+color = Color(0.26, 0.52, 0.7, 0)
 [node name="Artwork" type="TextureRect" parent="PipeRight"]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 5
+flip_h = true
 [node name="Ice" type="Label" parent="."]
+visible = false
 offset_left = 100.0
 offset_top = 0.0
 offset_right = 860.0
