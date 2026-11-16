@@ -93,6 +93,14 @@ func reset() -> void:
 	_set_state(State.AVAILABLE)
 
 
+## Deja el rover en la base sin necesitar la escena de Marte (partida nueva).
+## Las instancias cargadas después leen este estado en su _ready().
+static func reset_run_state() -> void:
+	_state = State.AVAILABLE
+	_departure_day = NO_DAY
+	_return_day = NO_DAY
+
+
 func _on_station_interaction_requested() -> void:
 	start_expedition()
 

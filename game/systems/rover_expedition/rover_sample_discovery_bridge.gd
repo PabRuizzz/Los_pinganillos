@@ -37,6 +37,11 @@ static func take_unreported_samples() -> Array[RockSampleData]:
 	return samples
 
 
+## Olvida las muestras pendientes de mostrar (partida nueva).
+static func clear_unreported() -> void:
+	_unreported.clear()
+
+
 func _ready() -> void:
 	if expedition_controller == null or sample_discovery == null:
 		push_error("RoverSampleDiscoveryBridge: falta asignar expedition_controller o sample_discovery")
