@@ -107,5 +107,5 @@ func clean_world_circle(center: Vector2, radius: float) -> int:
 
 func _update_readout() -> void:
 	if has_node("Readout"):
-		$Readout.text = "%02d%% LIMPIO" % floori(clean_ratio() * 100.0 + 0.001)
+		$Readout.text = "%02d%% CLEAN" % floori(clean_ratio() * 100.0 + 0.001)
 		$Readout.modulate = Color("78e4d0") if clean_count == states.size() else Color("d4e1ec")

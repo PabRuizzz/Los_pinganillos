@@ -162,7 +162,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 44
-text = "DÍA 1 COMPLETADO"
+text = "DAY 1 COMPLETE"
 
 [node name="Subtitle" type="Label" parent="Root/Monitor/Screen/Content/Header"]
 unique_name_in_owner = true
@@ -171,7 +171,7 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 22
-text = "REPORTE DE LA BASE · MARTE"
+text = "BASE REPORT · MARS"
 
 [node name="HeaderLine" type="ColorRect" parent="Root/Monitor/Screen/Content"]
 custom_minimum_size = Vector2(0, 2)
@@ -197,31 +197,31 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "RECURSOS"
+text = "RESOURCES"
 
 [node name="EnergyRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("7_icon_energy")
-display_name = "Energía"
+display_name = "Energy"
 
 [node name="WaterRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("8_icon_water")
-display_name = "Agua"
+display_name = "Water"
 
 [node name="FoodRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("9_icon_food")
-display_name = "Comida"
+display_name = "Food"
 
 [node name="OxygenRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("10_icon_oxygen")
-display_name = "Oxígeno"
+display_name = "Oxygen"
 
 [node name="SectionGap" type="Control" parent="Root/Monitor/Screen/Content/Columns/Left"]
 custom_minimum_size = Vector2(0, 8)
@@ -233,31 +233,31 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "ESTACIONES"
+text = "STATIONS"
 
 [node name="EnergyPlantRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("11_st_energy")
-display_name = "Planta de energía"
+display_name = "Power Plant"
 
 [node name="LifeSupportRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("12_st_life")
-display_name = "Soporte vital"
+display_name = "Life Support"
 
 [node name="WaterStationRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("13_st_water")
-display_name = "Estación de agua"
+display_name = "Water Station"
 
 [node name="GreenhouseRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("14_st_green")
-display_name = "Invernadero"
+display_name = "Greenhouse"
 
 [node name="Divider" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns"]
 custom_minimum_size = Vector2(2, 0)
@@ -283,7 +283,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "MUESTRA DEL ROVER"
+text = "ROVER SAMPLE"
 
 [node name="ScanStatus" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right/RoverHeader"]
 unique_name_in_owner = true
@@ -291,7 +291,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 18
-text = "ANALIZANDO MUESTRA..."
+text = "ANALYZING SAMPLE..."
 
 [node name="PhotoFrame" type="PanelContainer" parent="Root/Monitor/Screen/Content/Columns/Right"]
 custom_minimum_size = Vector2(0, 260)
@@ -328,7 +328,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 24
-text = "SIN MUESTRA"
+text = "NO SAMPLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -360,7 +360,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 32
-text = "Nombre de la muestra"
+text = "Sample Name"
 text_overrun_behavior = 3
 
 [node name="SampleMeta" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
@@ -369,7 +369,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 18
-text = "Tipo de roca · Ubicación · Rover"
+text = "Rock type · Location · Rover"
 text_overrun_behavior = 3
 
 [node name="Description" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
@@ -378,7 +378,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.86, 0.94, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 18
-text = "Descripción de la muestra."
+text = "Sample description."
 autowrap_mode = 3
 max_lines_visible = 4
 text_overrun_behavior = 3
@@ -389,7 +389,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 18
-text = "DATO CURIOSO"
+text = "DID YOU KNOW?"
 
 [node name="Fact" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
 unique_name_in_owner = true
@@ -397,7 +397,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.86, 0.94, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 18
-text = "Dato curioso de la muestra."
+text = "Sample fact."
 autowrap_mode = 3
 max_lines_visible = 3
 text_overrun_behavior = 3
@@ -414,7 +414,7 @@ size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 20
-text = "Mañana te esperan nuevos eventos."
+text = "New events await tomorrow."
 
 [node name="NextButton" type="Button" parent="Root/Monitor/Screen/Content/Footer"]
 unique_name_in_owner = true
@@ -431,4 +431,4 @@ theme_override_styles/disabled = SubResource("StyleBox_btn_disabled")
 theme_override_styles/hover = SubResource("StyleBox_btn_hover")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_normal")
-text = "SIGUIENTE DÍA"
+text = "NEXT DAY"

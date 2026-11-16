@@ -20,13 +20,13 @@ const SAMPLE_CARD = preload("res://game/ui/game_over/sample_card.tscn")
 @export_group("Éxito")
 @export var color_exito := Color(0.4, 1.0, 0.5)
 @export var imagen_exito: Texture2D
-@export var boton_exito := "JUGAR DE NUEVO"
-@export var etiqueta_exito := "TRANSMISIÓN FINAL · MISIÓN COMPLETADA"
+@export var boton_exito := "PLAY AGAIN"
+@export var etiqueta_exito := "FINAL TRANSMISSION · MISSION COMPLETE"
 @export_group("Derrota")
 @export var color_derrota := Color(1.0, 0.35, 0.35)
 @export var imagen_derrota: Texture2D
-@export var boton_derrota := "REINTENTAR"
-@export var etiqueta_derrota := "SEÑAL PERDIDA · BASE MARTE"
+@export var boton_derrota := "TRY AGAIN"
+@export var etiqueta_derrota := "SIGNAL LOST · MARS BASE"
 
 @onready var root_control: Control = $Root
 @onready var background: ColorRect = $Root/Background
@@ -74,7 +74,7 @@ func _ready():
 
 
 func _on_oxygen_depleted():
-	show_defeat("Sin oxígeno", "El oxígeno se agotó durante el día %d." % SimulationTime.day)
+	show_defeat("Out of oxygen", "Oxygen ran out on day %d." % SimulationTime.day)
 
 
 # Al terminar el día, SimulationTime.day ya avanzó al siguiente,
@@ -84,9 +84,9 @@ func _on_day_finished():
 
 	# Primero la derrota: si te quedas sin recursos el último día, no ganas.
 	if Resources.energy <= 0 or Resources.food <= 0 or Resources.water <= 0:
-		show_defeat("Sin recursos", "La base se quedó sin %s al terminar el día %d." % [_depleted_resource(), dias_completados])
+		show_defeat("Out of resources", "The base ran out of %s at the end of day %d." % [_depleted_resource(), dias_completados])
 	elif dias_completados >= dias_para_ganar:
-		show_victory("¡Misión cumplida!", "La tripulación sobrevivió %d días en Marte." % dias_completados)
+		show_victory("Mission accomplished!", "The crew survived %d days on Mars." % dias_completados)
 
 
 func show_victory(t: String, m: String):
@@ -113,7 +113,7 @@ func _show(victory: bool, t: String, m: String):
 	header_line.color = Color(color, 0.6)
 	message.text = m
 	restart_button.text = boton_exito if victory else boton_derrota
-	footer_hint.text = "Gracias por jugar." if victory else "Cada evento sin resolver empeora de noche."
+	footer_hint.text = "Thanks for playing." if victory else "Unresolved events worsen overnight."
 
 	var imagen = imagen_exito if victory else imagen_derrota
 	outcome_artwork.texture = imagen
@@ -162,10 +162,10 @@ func _fill_samples():
 
 func _depleted_resource() -> String:
 	if Resources.energy <= 0:
-		return "energía"
+		return "energy"
 	if Resources.water <= 0:
-		return "agua"
-	return "comida"
+		return "water"
+	return "food"
 
 
 # ---------- Animación ----------
@@ -242,9 +242,9 @@ func restart_game():
 	root_control.visible = false
 	Alert.clear_alerts()  # vacía también las alertas en espera
 	get_tree().paused = false
-	get_tree().change_scene_to_file(ProjectSettings.get_setting("application/run/main_scene"))
-	# Los autoloads no vuelven a ejecutar _ready, así que arrancamos la partida a mano
-	GameFlow.start_game.call_deferred()
+	var error := GameFlow.enter_game()
+	if error != OK:
+		push_error("No se pudo abrir el campamento: %s" % error)
 
 
 # Copia los valores iniciales del script (los que estan en "var x = ...")

@@ -7,7 +7,7 @@ signal completed
 var remaining := 0
 
 func _ready() -> void:
-	$Title.text = "Tratamiento de la maceta %d" % plant_number
+	$Title.text = "Treating Plant %d" % plant_number
 	remaining = spots.size()
 	for spot: Button in spots:
 		spot.pressed.connect(_remove_spot.bind(spot))
@@ -24,4 +24,4 @@ func _remove_spot(spot: Button) -> void:
 		completed.emit()
 
 func _update_counter() -> void:
-	$Counter.text = "Hongos restantes: %d" % remaining
+	$Counter.text = "Fungal spots left: %d" % remaining

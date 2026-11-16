@@ -50,7 +50,7 @@ offset_right = 1120.0
 offset_bottom = 60.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 31
-text = "Tratamiento de la maceta"
+text = "Plant Treatment"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -61,7 +61,7 @@ offset_right = 1120.0
 offset_bottom = 102.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 23
-text = "Hongos restantes: 5"
+text = "Fungal spots left: 5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -120,6 +120,6 @@ offset_right = 1120.0
 offset_bottom = 597.0
 mouse_filter = 2
 theme_override_font_sizes/font_size = 22
-text = "Pulsa cada mancha para aplicar fungicida."
+text = "Click each spot to apply fungicide."
 horizontal_alignment = 1
 vertical_alignment = 1

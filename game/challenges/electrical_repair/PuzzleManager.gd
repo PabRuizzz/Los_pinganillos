@@ -37,7 +37,7 @@ func start_new_puzzle() -> void:
 	current_seed = rng.seed
 	puzzle = generator.generate(rng, 8, 8)
 	if puzzle.is_empty():
-		status_label.text = "No se pudo generar el circuito."
+		status_label.text = "Could not generate a circuit."
 		return
 	board.build(puzzle)
 	_layout()
@@ -53,16 +53,16 @@ func _on_piece_placed() -> void:
 func _validate() -> void:
 	var result: Dictionary = validator.validate(board.get_masks(), puzzle.source, puzzle.targets, puzzle.minimum_pieces)
 	board.show_connections(result.energized)
-	detail_label.text = "%d/%d salida · %d piezas conectadas (mín. 10) · %d movimientos" % [result.reached, puzzle.targets.size(), result.energized.size(), moves]
+	detail_label.text = "%d/%d output · %d cables connected (min. 10) · %d moves" % [result.reached, puzzle.targets.size(), result.energized.size(), moves]
 	if result.complete:
-		status_label.text = "¡Circuito completo!"
+		status_label.text = "Circuit complete!"
 		status_label.modulate = Color("56e0b5")
 		board.locked = true
 		if not completed:
 			completed = true
 			puzzle_completed.emit(moves, current_seed)
 	else:
-		status_label.text = "Conecta I con la salida del lado opuesto"
+		status_label.text = "Connect I to the output on the opposite side"
 		status_label.modulate = Color("e4edf6")
 
 func _layout() -> void:

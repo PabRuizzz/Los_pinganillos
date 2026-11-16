@@ -117,9 +117,9 @@ func show_summary(day: int, sample: RockSampleData, before := {}, after := {}):
 	if before.is_empty():
 		before = after
 
-	day_title.text = "DÍA %d COMPLETADO" % day
-	subtitle.text = "REPORTE DE LA BASE · SOL %d" % day
-	footer_hint.text = "Mañana es el día %d." % (day + 1)
+	day_title.text = "DAY %d COMPLETE" % day
+	subtitle.text = "BASE REPORT · SOL %d" % day
+	footer_hint.text = "Tomorrow is day %d." % (day + 1)
 
 	energy_plant_row.set_state(StationCost.energy_plant_state)
 	life_support_row.set_state(StationCost.life_support_state)
@@ -177,7 +177,7 @@ func _fill_sample(sample: RockSampleData):
 
 	if not has_sample:
 		photo.texture = null
-		sample_name.text = "El rover no trajo muestras"
+		sample_name.text = "The rover returned without a sample"
 		sample_meta.text = ""
 		description.text = ""
 		fact.text = ""
@@ -185,7 +185,7 @@ func _fill_sample(sample: RockSampleData):
 
 	photo.texture = sample.sample_image
 	sample_name.text = sample.sample_name
-	var origin = "Recolectada" if sample.is_collected() else "Observada"
+	var origin = "Collected" if sample.is_collected() else "Observed"
 	sample_meta.text = "%s · %s · %s · %s" % [sample.rock_type, sample.location, sample.rover, origin]
 	description.text = sample.description
 	fact.text = sample.interesting_fact
@@ -214,7 +214,7 @@ func _play_animation(before: Dictionary, after: Dictionary, has_sample: bool):
 	next_button.modulate.a = 0.0
 	for node in [day_title, subtitle] + left_column.get_children() + _sample_texts():
 		node.modulate.a = 0.0
-	scan_status.text = "ANALIZANDO MUESTRA..." if has_sample else "SIN EXPEDICIÓN"
+	scan_status.text = "ANALYZING SAMPLE..." if has_sample else "NO EXPEDITION"
 	_set_scan(0.0)
 	scan_line.visible = has_sample
 
@@ -254,7 +254,7 @@ func _play_scan(has_sample: bool):
 		_scan_tween.tween_method(_set_scan, 0.0, 1.0, scan_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		_scan_tween.tween_callback(func():
 			scan_line.visible = false
-			scan_status.text = "NUEVO DESCUBRIMIENTO"
+			scan_status.text = "NEW DISCOVERY"
 		)
 	else:
 		_scan_tween.tween_method(_set_scan, 0.0, 1.0, 0.3)

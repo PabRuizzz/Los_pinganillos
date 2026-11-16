@@ -60,6 +60,17 @@ func get_state(station: String) -> String:
 	return ""
 
 
+func get_state_label(state: String) -> String:
+	match state:
+		"OPERATIVO":
+			return "OPERATIONAL"
+		"DEGRADADO":
+			return "DEGRADED"
+		"AVERIADO":
+			return "OFFLINE"
+	return state
+
+
 func set_state(station: String, state: String):
 	match station:
 		"energy_plant":

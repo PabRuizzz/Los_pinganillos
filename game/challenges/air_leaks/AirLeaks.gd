@@ -99,9 +99,9 @@ func _search(point: Vector2) -> void:
 			# Reveal the X immediately instead of covering it with the sensor.
 			_hide_detector()
 		_update_status()
-		$Content/Reaction.text = "Fuga encontrada. Arrastra un parche sobre ella."
+		$Content/Reaction.text = "Leak found. Drag a patch onto it."
 	else:
-		$Content/Reaction.text = "Aquí no hay ninguna fuga sin reparar."
+		$Content/Reaction.text = "No unsealed leak here."
 	$ReactionTimer.start()
 
 func _update_status() -> void:
@@ -109,20 +109,20 @@ func _update_status() -> void:
 	for leak in leaks:
 		if leak.state == leak.State.REPAIRED:
 			repaired += 1
-	$Content/Counter.text = "Fugas selladas · %d/3" % repaired
+	$Content/Counter.text = "Leaks sealed · %d/3" % repaired
 	if repaired == 3 and not finished:
 		finished = true
 		_hide_detector()
 		$ReactionTimer.stop()
-		$Content/Reaction.text = "Hábitat sellado"
+		$Content/Reaction.text = "Habitat sealed"
 		completed.emit()
 
 func _show_reading(strength: float) -> void:
-	$Content/Reading.text = "Señal del detector: %d%%" % roundi(strength * 100.0)
+	$Content/Reading.text = "Detector signal: %d%%" % roundi(strength * 100.0)
 
 func _clear_reaction() -> void:
 	if not finished:
-		$Content/Reaction.text = "Explora la pared y pulsa donde sospeches una fuga."
+		$Content/Reaction.text = "Scan the wall and click where you suspect a leak."
 
 # Input positions are viewport coordinates; transform them through the canvas
 # so moving/scaling Content never changes the hitboxes.
@@ -194,7 +194,7 @@ func _drop_patch(point: Vector2, cancel := false) -> void:
 		get_viewport().set_input_as_handled()
 		return
 	patch.return_home()
-	$Content/Reaction.text = "Coloca el parche sobre una fuga descubierta."
+	$Content/Reaction.text = "Place the patch over a marked leak."
 	$ReactionTimer.start()
 	get_viewport().set_input_as_handled()
 

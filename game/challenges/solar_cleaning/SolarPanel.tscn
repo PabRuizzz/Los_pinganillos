@@ -2045,6 +2045,6 @@ offset_top = 171.0
 offset_right = 240.0
 offset_bottom = 191.0
 mouse_filter = 2
-text = "00% LIMPIO"
+text = "00% CLEAN"
 horizontal_alignment = 2
 theme_override_font_sizes/font_size = 11

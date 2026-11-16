@@ -164,7 +164,7 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 44
-text = "SISTEMA EN PAUSA"
+text = "SYSTEM PAUSED"
 
 [node name="Subtitle" type="Label" parent="Root/Monitor/Screen/Content/Header"]
 unique_name_in_owner = true
@@ -173,7 +173,7 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 22
-text = "DÍA 1 · 8:00 H RESTANTES"
+text = "DAY 1 · 8:00 H LEFT"
 
 [node name="HeaderLine" type="ColorRect" parent="Root/Monitor/Screen/Content"]
 custom_minimum_size = Vector2(0, 2)
@@ -187,7 +187,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "EVENTO ACTIVO"
+text = "ACTIVE EVENT"
 
 [node name="Columns" type="HBoxContainer" parent="Root/Monitor/Screen/Content"]
 layout_mode = 2
@@ -206,31 +206,31 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "RECURSOS"
+text = "RESOURCES"
 
 [node name="EnergyRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("7_icon_energy")
-display_name = "Energía"
+display_name = "Energy"
 
 [node name="WaterRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("8_icon_water")
-display_name = "Agua"
+display_name = "Water"
 
 [node name="FoodRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("9_icon_food")
-display_name = "Comida"
+display_name = "Food"
 
 [node name="OxygenRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("10_icon_oxygen")
-display_name = "Oxígeno"
+display_name = "Oxygen"
 
 [node name="SectionGap" type="Control" parent="Root/Monitor/Screen/Content/Columns/Left"]
 custom_minimum_size = Vector2(0, 8)
@@ -242,31 +242,31 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "ESTACIONES"
+text = "STATIONS"
 
 [node name="EnergyPlantRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("11_st_energy")
-display_name = "Planta de energía"
+display_name = "Power Plant"
 
 [node name="LifeSupportRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("12_st_life")
-display_name = "Soporte vital"
+display_name = "Life Support"
 
 [node name="WaterStationRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("13_st_water")
-display_name = "Estación de agua"
+display_name = "Water Station"
 
 [node name="GreenhouseRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_station_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("14_st_green")
-display_name = "Invernadero"
+display_name = "Greenhouse"
 
 [node name="Divider" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns"]
 custom_minimum_size = Vector2(2, 0)
@@ -285,7 +285,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "MENÚ"
+text = "MENU"
 
 [node name="Buttons" type="VBoxContainer" parent="Root/Monitor/Screen/Content/Columns/Right"]
 layout_mode = 2
@@ -306,7 +306,7 @@ theme_override_styles/focus = SubResource("StyleBox_focus")
 theme_override_styles/hover = SubResource("StyleBox_btn_hover")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_normal")
-text = "CONTINUAR"
+text = "RESUME"
 
 [node name="RestartButton" type="Button" parent="Root/Monitor/Screen/Content/Columns/Right/Buttons"]
 unique_name_in_owner = true
@@ -322,7 +322,7 @@ theme_override_styles/focus = SubResource("StyleBox_focus")
 theme_override_styles/hover = SubResource("StyleBox_btn_secondary_hover")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_secondary")
-text = "REINICIAR"
+text = "RESTART"
 
 [node name="QuitButton" type="Button" parent="Root/Monitor/Screen/Content/Columns/Right/Buttons"]
 unique_name_in_owner = true
@@ -338,7 +338,7 @@ theme_override_styles/focus = SubResource("StyleBox_focus")
 theme_override_styles/hover = SubResource("StyleBox_btn_secondary_hover")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_secondary")
-text = "SALIR DEL JUEGO"
+text = "QUIT GAME"
 
 [node name="Spacer" type="Control" parent="Root/Monitor/Screen/Content/Columns/Right"]
 layout_mode = 2
@@ -350,7 +350,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 20
-text = "CONTROLES"
+text = "CONTROLS"
 
 [node name="ControlsLabel" type="Label" parent="Root/Monitor/Screen/Content/Columns/Right"]
 unique_name_in_owner = true
@@ -358,6 +358,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.84, 0.95, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 20
-text = "Flechas: moverse
-E: interactuar con una estación
-ESC: pausar / continuar"
+text = "Arrow keys: move
+E: interact with a station
+Esc: pause / resume"

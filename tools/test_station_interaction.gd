@@ -19,7 +19,7 @@ const STATIONS := {
 	"WaterStation": {
 		"state": "water_station_state",
 		"maintenance": "res://game/challenges/water_pumping/water_pumping.tscn",
-		"repair": "res://game/challenges/frozen_pipe/frozen_pipe.tscn",
+		"repair": "res://game/challenges/water_pumping/water_pumping.tscn",
 	},
 }
 
@@ -82,7 +82,8 @@ func open_minigames() -> Array:
 		for station in STATIONS.values():
 			for node in mars.find_children("*", "", true, false):
 				if node.scene_file_path == station[path] and not node.is_queued_for_deletion():
-					found.append(node)
+					if node not in found:
+						found.append(node)
 	return found
 
 
@@ -240,7 +241,7 @@ func run_checks() -> void:
 	await place(water.to_global(water.get_node("CollisionShape2D").position))
 	await press("interact")
 	var event_open := open_minigames()
-	check(event_open.size() == 1 and event_open[0].scene_file_path == STATIONS.WaterStation.repair, "Con tuberías congeladas, E debe abrir la reparación de tuberías")
+	check(event_open.size() == 1 and event_open[0].scene_file_path == STATIONS.WaterStation.repair, "Con tuberías congeladas, E debe abrir el bombeo de agua")
 	check(tasks.current_task == "repair", "Debe iniciar la tarea de reparación (no la de mantenimiento)")
 	complete(water_launcher.active_minigame)
 	await frames(3)

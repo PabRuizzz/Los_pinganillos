@@ -23,7 +23,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.78, 0.84, 0.95, 1)
 theme_override_font_sizes/font_size = 22
-text = "Estación"
+text = "Station"
 vertical_alignment = 1
 
 [node name="StateLight" type="ColorRect" parent="."]
@@ -38,5 +38,5 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 1, 0.4, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "OPERATIVO"
+text = "OPERATIONAL"
 vertical_alignment = 1

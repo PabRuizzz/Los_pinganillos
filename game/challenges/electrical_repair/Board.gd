@@ -48,7 +48,7 @@ func build(puzzle: Dictionary) -> void:
 			cell.configure(coordinate, cell_size)
 			cell.blocked = puzzle.get("blocked", {}).has(coordinate)
 			if cell.blocked:
-				cell.tooltip_text = "Casilla bloqueada: no admite cables"
+				cell.tooltip_text = "Blocked tile: cannot hold cables"
 			cell.debug_hitbox = debug_hitboxes
 			cell.queue_redraw()
 			cells[coordinate] = cell

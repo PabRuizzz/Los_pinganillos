@@ -29,10 +29,10 @@ var _rest_x := 0.0
 var _shown_event = Events.EventTypes.NONE
 
 const STATION_NAMES = {
-	"energy_plant": "planta de energía",
-	"life_support": "soporte vital",
-	"water_station": "estación de agua",
-	"greenhouse": "invernadero",
+	"energy_plant": "power plant",
+	"life_support": "life support",
+	"water_station": "water station",
+	"greenhouse": "greenhouse",
 }
 var _tween: Tween
 var _pulse_time := 0.0
@@ -73,24 +73,24 @@ func _update_card(type, delta):
 		Events.EventTypes.TORMENTA_ARENA:
 			if Events.battery_active:
 				ratio = Events.emergency_battery / 100.0
-				_set_counter("Batería de emergencia", "%d %%" % ceili(Events.emergency_battery), ratio)
+				_set_counter("Emergency Battery", "%d %%" % ceili(Events.emergency_battery), ratio)
 			else:
 				ratio = float(Resources.oxygen) / Resources.MAX_RESOURCE
-				_set_counter("Batería agotada · Oxígeno", "%d %%" % int(Resources.oxygen), ratio)
+				_set_counter("Battery depleted · Oxygen", "%d %%" % int(Resources.oxygen), ratio)
 
 		Events.EventTypes.PERDIDA_PRESION:
 			ratio = float(Resources.oxygen) / Resources.MAX_RESOURCE
-			_set_counter("Oxígeno", "%d %%" % int(Resources.oxygen), ratio)
+			_set_counter("Oxygen", "%d %%" % int(Resources.oxygen), ratio)
 
 		Events.EventTypes.CONGELAMIENTO_TUBERIAS:
 			if Events.pipe_timer_active:
 				ratio = Events.pipe_timer / Events.PIPE_TIME_LIMIT
-				_set_counter("El invernadero se congela en", _format_time(Events.pipe_timer), ratio)
+				_set_counter("Greenhouse freezes in", _format_time(Events.pipe_timer), ratio)
 
 		Events.EventTypes.HONGOS_INVERNADERO:
 			if Events.fungus_timer_active:
 				ratio = Events.fungus_timer / Events.FUNGUS_TIME_LIMIT
-				_set_counter("La plaga se extiende en", _format_time(Events.fungus_timer), ratio)
+				_set_counter("Fungus spreads in", _format_time(Events.fungus_timer), ratio)
 
 	counter.visible = ratio >= 0.0
 	_apply_urgency(ratio, delta)
@@ -102,9 +102,9 @@ func _objective_text() -> String:
 	for station in Events.key_stations:
 		var state = StationCost.get_state(station)
 		if state == "DEGRADADO":
-			lines.append("Mantenimiento: %s" % STATION_NAMES[station])
+			lines.append("Service: %s" % STATION_NAMES[station])
 		elif state == "AVERIADO":
-			lines.append("Reparar: %s" % STATION_NAMES[station])
+			lines.append("Repair: %s" % STATION_NAMES[station])
 	return "\n".join(lines)
 
 
@@ -133,7 +133,7 @@ func _apply_urgency(ratio: float, delta: float):
 	_bar_style.bg_color = color
 	icon_label.add_theme_color_override("font_color", color)
 	caption.add_theme_color_override("font_color", color)
-	caption.text = "¡URGENTE!" if urgent else "EVENTO ACTIVO"
+	caption.text = "URGENT!" if urgent else "ACTIVE EVENT"
 
 	if urgent:
 		_pulse_time += delta

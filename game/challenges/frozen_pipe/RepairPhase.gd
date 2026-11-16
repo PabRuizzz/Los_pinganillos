@@ -45,7 +45,7 @@ func start(piece_count: int) -> void:
 	for screw in screws:
 		screw.get_node("Progress").value = 0
 		screw.get_node("Symbol").text = "+"
-	$Hint.text = "Encaja las dos piezas indicadas y mantén pulsados sus 3 tornillos."
+	$Hint.text = "Fit the two matching pieces and hold each screw to tighten it."
 
 func _contains(node: Control, point: Vector2) -> bool:
 	return Rect2(Vector2.ZERO, node.size).has_point(
@@ -114,7 +114,7 @@ func _release(point: Vector2, cancel := false) -> void:
 			animation.tween_property(piece, "modulate", Color.WHITE, 0.12)
 			animation.tween_callback(func():
 				slots[target].get_node("Screws").show()
-				$Hint.text = "Mantén pulsado cada tornillo. Si sueltas antes, pierde progreso.")
+				$Hint.text = "Hold each screw. Releasing early loses progress.")
 		else:
 			animation.tween_property(piece, "position", homes[piece], 0.22).set_trans(Tween.TRANS_SINE)
 			animation.tween_property(piece, "position:x", homes[piece].x + 6, 0.05)

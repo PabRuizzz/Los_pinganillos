@@ -64,7 +64,9 @@ func is_open() -> bool:
 func can_pause() -> bool:
 	return not get_tree().paused \
 		and TaskExecution.current_task == "" \
-		and get_tree().current_scene != null
+		and get_tree().current_scene != null \
+		and not get_tree().has_group("main_menu") \
+		and not get_tree().has_group("minigame")
 
 
 func open():
@@ -107,13 +109,13 @@ func resume():
 
 func _fill():
 	var minutes = SimulationTime.tiempo_jornada
-	subtitle.text = "DÍA %d · %d:%02d H RESTANTES" % [SimulationTime.day, floori(minutes / 60.0), minutes % 60]
+	subtitle.text = "DAY %d · %d:%02d H LEFT" % [SimulationTime.day, floori(minutes / 60.0), minutes % 60]
 
 	if Events.actual_EventType != Events.EventTypes.NONE:
-		event_label.text = "EVENTO ACTIVO: %s" % Events.EVENT_INFO[Events.actual_EventType][0].to_upper()
+		event_label.text = "ACTIVE EVENT: %s" % Events.EVENT_INFO[Events.actual_EventType][0].to_upper()
 		event_label.add_theme_color_override("font_color", Color(1, 0.62, 0.2))
 	else:
-		event_label.text = "SIN EVENTOS ACTIVOS"
+		event_label.text = "NO ACTIVE EVENTS"
 		event_label.add_theme_color_override("font_color", Color(0.4, 1, 0.5))
 
 	energy_row.set_value(Resources.energy)
@@ -132,7 +134,7 @@ func _fill():
 func _on_restart_pressed():
 	if not _confirming_restart:
 		_confirming_restart = true
-		restart_button.text = "¿SEGURO? SE PIERDE EL PROGRESO"
+		restart_button.text = "RESTART? PROGRESS WILL BE LOST"
 		return
 	root_control.visible = false
 	GameOver.restart_game()
@@ -140,7 +142,7 @@ func _on_restart_pressed():
 
 func _reset_restart_button():
 	_confirming_restart = false
-	restart_button.text = "REINICIAR"
+	restart_button.text = "RESTART"
 
 
 func _new_tween() -> Tween:

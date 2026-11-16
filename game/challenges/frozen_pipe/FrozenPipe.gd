@@ -23,6 +23,6 @@ func _complete() -> void:
 	if finished:
 		return
 	finished = true
-	$Content/Result.text = "¡Las dos tuberías están reparadas!"
+	$Content/Result.text = "Both pipes are repaired!"
 	$Content/Result.show()
 	completed.emit()

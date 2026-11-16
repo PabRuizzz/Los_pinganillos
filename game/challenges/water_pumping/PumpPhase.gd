@@ -29,7 +29,7 @@ func start(marker_speed: float, zone_width: float) -> void:
 	speed = marker_speed
 	green_width = zone_width
 	$PumpButton.disabled = false
-	$Hint.text = "Pulsa cuando la aguja cruce la zona verde."
+	$Hint.text = "Press when the marker crosses the green zone."
 	_refresh()
 
 func _process(delta: float) -> void:
@@ -52,21 +52,21 @@ func pump() -> void:
 	cooldown = 0.18 # Prevent duplicate input and unrestricted button spam.
 	if _inside_zone():
 		water = minf(1.0, water + gain)
-		$Hint.text = "Pulso correcto. El nivel sube."
+		$Hint.text = "Good timing. The water level rises."
 		$Hint.modulate = Color("8ce6f5")
 		_send_water_pulse()
 	else:
 		water = maxf(0.0, water - loss)
-		$Hint.text = "Fuera de ritmo. El nivel baja."
+		$Hint.text = "Missed the zone. The water level drops."
 		$Hint.modulate = Color("ffc187")
 		_flash_button()
 	_refresh()
 	if water >= 1.0:
 		active = false
 		$PumpButton.disabled = true
-		$Ready.text = "ESTABLE"
+		$Ready.text = "STABLE"
 		$Ready.modulate = Color("9eeac7")
-		$Hint.text = "Circulación restablecida"
+		$Hint.text = "Water flow restored"
 		$Hint.modulate = Color("9eeac7")
 		filled.emit()
 
@@ -80,7 +80,7 @@ func _refresh() -> void:
 
 	var in_zone := _inside_zone()
 	var ready_now := in_zone and cooldown <= 0.0
-	$Ready.text = "LISTO" if ready_now else ("RECARGA" if in_zone else "ESPERA")
+	$Ready.text = "READY" if ready_now else ("RECHARGING" if in_zone else "WAIT")
 	$Ready.modulate = Color("9eeac7") if ready_now else Color.WHITE
 
 func _inside_zone() -> bool:

@@ -166,7 +166,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 20
-text = "TRANSMISIÓN FINAL · BASE MARTE"
+text = "FINAL TRANSMISSION · MARS BASE"
 
 [node name="Title" type="Label" parent="Root/Monitor/Screen/Content"]
 unique_name_in_owner = true
@@ -174,7 +174,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 1, 0.5, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 64
-text = "¡MISIÓN CUMPLIDA!"
+text = "MISSION ACCOMPLISHED!"
 
 [node name="Message" type="Label" parent="Root/Monitor/Screen/Content"]
 unique_name_in_owner = true
@@ -182,7 +182,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.82, 0.86, 0.94, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 26
-text = "Mensaje"
+text = "Message"
 autowrap_mode = 3
 
 [node name="HeaderLine" type="ColorRect" parent="Root/Monitor/Screen/Content"]
@@ -210,22 +210,22 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "RESUMEN DE LA MISIÓN"
+text = "MISSION SUMMARY"
 
 [node name="DaysStat" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_stat_row")]
 unique_name_in_owner = true
 layout_mode = 2
-display_name = "Días sobrevividos"
+display_name = "Days Survived"
 
 [node name="EventsStat" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_stat_row")]
 unique_name_in_owner = true
 layout_mode = 2
-display_name = "Eventos resueltos"
+display_name = "Events Resolved"
 
 [node name="SamplesStat" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("5_stat_row")]
 unique_name_in_owner = true
 layout_mode = 2
-display_name = "Muestras descubiertas"
+display_name = "Samples Discovered"
 
 [node name="SectionGap" type="Control" parent="Root/Monitor/Screen/Content/Columns/Left"]
 custom_minimum_size = Vector2(0, 10)
@@ -237,25 +237,25 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "RECURSOS FINALES"
+text = "FINAL RESOURCES"
 
 [node name="EnergyRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("7_icon_energy")
-display_name = "Energía"
+display_name = "Energy"
 
 [node name="WaterRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("8_icon_water")
-display_name = "Agua"
+display_name = "Water"
 
 [node name="FoodRow" parent="Root/Monitor/Screen/Content/Columns/Left" instance=ExtResource("6_resource_row")]
 unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("9_icon_food")
-display_name = "Comida"
+display_name = "Food"
 
 [node name="Divider" type="ColorRect" parent="Root/Monitor/Screen/Content/Columns"]
 custom_minimum_size = Vector2(2, 0)
@@ -291,7 +291,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 22
-text = "MUESTRAS DEL ROVER"
+text = "ROVER SAMPLES"
 
 [node name="SamplesGrid" type="GridContainer" parent="Root/Monitor/Screen/Content/Columns/Right"]
 unique_name_in_owner = true
@@ -308,7 +308,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 22
-text = "El rover no alcanzó a traer muestras."
+text = "The rover did not return with any samples."
 
 [node name="Footer" type="HBoxContainer" parent="Root/Monitor/Screen/Content"]
 layout_mode = 2
@@ -323,7 +323,7 @@ size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.55, 0.62, 0.75, 1)
 theme_override_fonts/font = SubResource("SystemFont_body")
 theme_override_font_sizes/font_size = 20
-text = "Fin de la transmisión."
+text = "End of transmission."
 
 [node name="QuitButton" type="Button" parent="Root/Monitor/Screen/Content/Footer"]
 unique_name_in_owner = true
@@ -338,7 +338,7 @@ theme_override_styles/focus = SubResource("StyleBox_focus")
 theme_override_styles/hover = SubResource("StyleBox_btn_secondary")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_secondary")
-text = "SALIR"
+text = "EXIT"
 
 [node name="RestartButton" type="Button" parent="Root/Monitor/Screen/Content/Footer"]
 unique_name_in_owner = true
@@ -355,7 +355,7 @@ theme_override_styles/disabled = SubResource("StyleBox_btn_disabled")
 theme_override_styles/hover = SubResource("StyleBox_btn_hover")
 theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
 theme_override_styles/normal = SubResource("StyleBox_btn_normal")
-text = "REINICIAR"
+text = "RESTART"
 
 [node name="Flicker" type="ColorRect" parent="Root/Monitor"]
 unique_name_in_owner = true

@@ -9,11 +9,11 @@ const EAST := 2
 const SOUTH := 4
 const WEST := 8
 const TYPES := {
-	10: "Recta horizontal", 5: "Recta vertical",
-	3: "Curva arriba-derecha", 9: "Curva arriba-izquierda",
-	6: "Curva abajo-derecha", 12: "Curva abajo-izquierda",
-	7: "T derecha", 11: "T arriba", 13: "T izquierda", 14: "T abajo",
-	15: "Cruz"
+	10: "Horizontal cable", 5: "Vertical cable",
+	3: "Up-right bend", 9: "Up-left bend",
+	6: "Down-right bend", 12: "Down-left bend",
+	7: "Right-facing T", 11: "Up-facing T", 13: "Left-facing T", 14: "Down-facing T",
+	15: "Cross"
 }
 
 @export_flags("Norte", "Este", "Sur", "Oeste") var connections := 10:

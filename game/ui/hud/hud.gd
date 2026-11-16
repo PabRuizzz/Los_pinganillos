@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # HUD de jornada, recursos y estado de los sistemas.
-# Tambien tiene el boton "Terminar día": pide confirmacion y llama a
+# Tambien tiene el boton "End Day": pide confirmacion y llama a
 # TaskExecution.request_end_day(). El HUD no cambia el dia ni los recursos.
 # Cada valor es un Label propio para que frontend pueda moverlo o cambiarle estilo.
 
@@ -11,6 +11,7 @@ extends CanvasLayer
 @export var color_averiado := Color(1.0, 0.35, 0.35)
 
 var compact_mode := false
+var menu_mode := false
 
 @onready var day_label: Label = %DayLabel
 @onready var time_label: Label = %TimeLabel
@@ -44,37 +45,42 @@ func _ready():
 
 # Los estados y el oxigeno cambian sin señal, asi que actualizamos cada frame.
 func _process(_delta):
-	day_label.text = "Día %d" % SimulationTime.day
-	time_label.text = "Tiempo restante: %s" % _format_hours(SimulationTime.tiempo_jornada)
+	day_label.text = "Day %d" % SimulationTime.day
+	time_label.text = "Time left: %s" % _format_hours(SimulationTime.tiempo_jornada)
 
 	_update_minigame_mode()
-	if compact_mode:
+	if compact_mode or menu_mode:
 		return
 
-	energy_label.text = "Energía: %d" % Resources.energy
-	water_label.text = "Agua: %d" % Resources.water
-	food_label.text = "Comida: %d" % Resources.food
-	oxygen_label.text = "Oxígeno: %d" % int(Resources.oxygen)
+	energy_label.text = "Energy: %d" % Resources.energy
+	water_label.text = "Water: %d" % Resources.water
+	food_label.text = "Food: %d" % Resources.food
+	oxygen_label.text = "Oxygen: %d" % int(Resources.oxygen)
 
-	_show_state(energy_plant_label, "Planta de energía", StationCost.energy_plant_state)
-	_show_state(life_support_label, "Soporte vital", StationCost.life_support_state)
-	_show_state(water_station_label, "Estación de agua", StationCost.water_station_state)
-	_show_state(greenhouse_label, "Invernadero", StationCost.greenhouse_state)
+	_show_state(energy_plant_label, "Power Plant", StationCost.energy_plant_state)
+	_show_state(life_support_label, "Life Support", StationCost.life_support_state)
+	_show_state(water_station_label, "Water Station", StationCost.water_station_state)
+	_show_state(greenhouse_label, "Greenhouse", StationCost.greenhouse_state)
 
 	_update_end_day()
 
 
-# La etiqueta de grupo también cubre escenas abiertas directamente con F6.
+# También cubre los minijuegos abiertos directamente con F6.
 func _update_minigame_mode() -> void:
-	var active := get_tree().has_group("minigame")
-	if active == compact_mode:
+	var tree := get_tree()
+	var in_minigame := tree.has_group("minigame")
+	var in_menu := tree.has_group("main_menu")
+	if in_minigame == compact_mode and in_menu == menu_mode:
 		return
-	compact_mode = active
-	$Top/Resources.visible = not active
-	$Systems.visible = not active
-	$DayActions.visible = not active
-	EventTracker.visible = not active
-	Alert.visible = not active
+	compact_mode = in_minigame
+	menu_mode = in_menu
+	var show_details := not (compact_mode or menu_mode)
+	visible = not menu_mode
+	$Top/Resources.visible = show_details
+	$Systems.visible = show_details
+	$DayActions.visible = show_details
+	EventTracker.visible = show_details
+	Alert.visible = show_details
 	_close_end_day_confirm()
 
 
@@ -92,7 +98,7 @@ func _update_end_day():
 func _on_end_day_pressed():
 	if not TaskExecution.can_end_day():
 		return
-	confirm_label.text = "¿Terminar el día %d?" % SimulationTime.day
+	confirm_label.text = "End day %d?" % SimulationTime.day
 	end_day_confirm.visible = true
 	end_day_button.visible = false
 
@@ -116,7 +122,7 @@ func _format_hours(minutes: int) -> String:
 
 
 func _show_state(label: Label, station_name: String, state: String):
-	label.text = "%s: %s" % [station_name, state]
+	label.text = "%s: %s" % [station_name, StationCost.get_state_label(state)]
 	match state:
 		"OPERATIVO":
 			label.modulate = color_operativo

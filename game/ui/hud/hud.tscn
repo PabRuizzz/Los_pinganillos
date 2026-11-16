@@ -16,6 +16,23 @@
 font_names = PackedStringArray("Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Sans-Serif")
 font_weight = 700
 
+[sub_resource type="StyleBoxFlat" id="LightHud"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+bg_color = Color(0.055, 0.067, 0.09, 0.43)
+
+[sub_resource type="StyleBoxFlat" id="HudButton"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.07, 0.10, 0.14, 0.40)
+
+[sub_resource type="StyleBoxFlat" id="HudButtonHover"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.27, 0.35, 0.43, 0.58)
+
 [node name="HUD" type="CanvasLayer" unique_id=881011932]
 process_mode = 3
 layer = 5
@@ -29,47 +46,49 @@ theme_override_constants/separation = 10
 
 [node name="Clock" type="PanelContainer" parent="Top"]
 layout_mode = 2
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(252, 0)
 mouse_filter = 2
 theme = ExtResource("10_theme")
+theme_override_styles/panel = SubResource("LightHud")
 
 [node name="Rows" type="VBoxContainer" parent="Top/Clock"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="DayLabel" type="Label" parent="Top/Clock/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 30
 theme_override_colors/font_color = Color(0.5, 0.92, 1, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-text = "Día 1"
+text = "Day 1"
 
 [node name="TimeLabel" type="Label" parent="Top/Clock/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Tiempo restante: 8:00 h"
+text = "Time left: 8:00 h"
 
 [node name="Resources" type="PanelContainer" parent="Top"]
 layout_mode = 2
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(252, 0)
 mouse_filter = 2
 theme = ExtResource("10_theme")
+theme_override_styles/panel = SubResource("LightHud")
 
 [node name="Rows" type="VBoxContainer" parent="Top/Resources"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="ResourcesTitle" type="Label" parent="Top/Resources/Rows"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-text = "RECURSOS"
+text = "RESOURCES"
 
 [node name="EnergyRow" type="HBoxContainer" parent="Top/Resources/Rows"]
 layout_mode = 2
@@ -77,7 +96,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/EnergyRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2")
@@ -89,7 +108,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Energía: 0"
+text = "Energy: 0"
 
 [node name="WaterRow" type="HBoxContainer" parent="Top/Resources/Rows"]
 layout_mode = 2
@@ -97,7 +116,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/WaterRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3")
@@ -109,7 +128,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Agua: 0"
+text = "Water: 0"
 
 [node name="FoodRow" type="HBoxContainer" parent="Top/Resources/Rows"]
 layout_mode = 2
@@ -117,7 +136,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/FoodRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4")
@@ -129,7 +148,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Comida: 0"
+text = "Food: 0"
 
 [node name="OxygenRow" type="HBoxContainer" parent="Top/Resources/Rows"]
 layout_mode = 2
@@ -137,7 +156,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Top/Resources/Rows/OxygenRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5")
@@ -149,30 +168,31 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Oxígeno: 0"
+text = "Oxygen: 0"
 
 [node name="Systems" type="PanelContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 22.0
-offset_top = -260.0
+offset_top = -169.0
 offset_bottom = -20.0
 grow_vertical = 0
-custom_minimum_size = Vector2(440, 0)
+custom_minimum_size = Vector2(310, 0)
 mouse_filter = 2
 theme = ExtResource("10_theme")
+theme_override_styles/panel = SubResource("LightHud")
 
 [node name="Rows" type="VBoxContainer" parent="Systems"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="SystemsTitle" type="Label" parent="Systems/Rows"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 theme_override_colors/font_color = Color(1, 0.62, 0.2, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-text = "SISTEMAS"
+text = "SYSTEMS"
 
 [node name="EnergyPlantRow" type="HBoxContainer" parent="Systems/Rows"]
 layout_mode = 2
@@ -180,7 +200,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/EnergyPlantRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6")
@@ -192,7 +212,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Planta de energía: OPERATIVO"
+text = "Power Plant: OPERATIONAL"
 
 [node name="LifeSupportRow" type="HBoxContainer" parent="Systems/Rows"]
 layout_mode = 2
@@ -200,7 +220,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/LifeSupportRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("7")
@@ -212,7 +232,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Soporte vital: OPERATIVO"
+text = "Life Support: OPERATIONAL"
 
 [node name="WaterStationRow" type="HBoxContainer" parent="Systems/Rows"]
 layout_mode = 2
@@ -220,7 +240,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/WaterStationRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("8")
@@ -232,7 +252,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Estación de agua: OPERATIVO"
+text = "Water Station: OPERATIONAL"
 
 [node name="GreenhouseRow" type="HBoxContainer" parent="Systems/Rows"]
 layout_mode = 2
@@ -240,7 +260,7 @@ mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="Icon" type="TextureRect" parent="Systems/Rows/GreenhouseRow"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("9")
@@ -252,41 +272,46 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 21
 theme_override_colors/font_color = Color(0.94, 0.94, 0.93, 1)
-text = "Invernadero: OPERATIVO"
+text = "Greenhouse: OPERATIONAL"
 
 [node name="DayActions" type="PanelContainer" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -342.0
-offset_top = -150.0
+offset_left = -242.0
+offset_top = -67.0
 offset_right = -22.0
 offset_bottom = -20.0
 grow_vertical = 0
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(220, 0)
 mouse_filter = 2
 theme = ExtResource("10_theme")
+theme_override_styles/panel = SubResource("LightHud")
 
 [node name="Rows" type="VBoxContainer" parent="DayActions"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="EndDayButton" type="Button" parent="DayActions/Rows"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 42)
+theme_override_styles/normal = SubResource("HudButton")
+theme_override_styles/hover = SubResource("HudButtonHover")
+theme_override_styles/pressed = SubResource("HudButtonHover")
+theme_override_styles/disabled = SubResource("HudButton")
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 22
-text = "Terminar día"
+theme_override_font_sizes/font_size = 20
+text = "End Day"
 
 [node name="EndDayHint" type="Label" parent="DayActions/Rows"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "Termina tu tarea primero."
+text = "Finish your task first."
 horizontal_alignment = 1
 
 [node name="EndDayConfirm" type="VBoxContainer" parent="DayActions/Rows"]
@@ -299,7 +324,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "¿Terminar el día 1?"
+text = "End day 1?"
 horizontal_alignment = 1
 
 [node name="Buttons" type="HBoxContainer" parent="DayActions/Rows/EndDayConfirm"]
@@ -309,18 +334,26 @@ theme_override_constants/separation = 12
 
 [node name="ConfirmEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 42)
+theme_override_styles/normal = SubResource("HudButton")
+theme_override_styles/hover = SubResource("HudButtonHover")
+theme_override_styles/pressed = SubResource("HudButtonHover")
+theme_override_styles/disabled = SubResource("HudButton")
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_font_sizes/font_size = 22
-text = "Sí"
+theme_override_font_sizes/font_size = 20
+text = "Yes"
 
 [node name="CancelEndDayButton" type="Button" parent="DayActions/Rows/EndDayConfirm/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 42)
+theme_override_styles/normal = SubResource("HudButton")
+theme_override_styles/hover = SubResource("HudButtonHover")
+theme_override_styles/pressed = SubResource("HudButtonHover")
+theme_override_styles/disabled = SubResource("HudButton")
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "No"

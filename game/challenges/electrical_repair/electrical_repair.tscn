@@ -291,7 +291,7 @@ offset_top = 32.0
 offset_right = 900.0
 offset_bottom = 72.0
 theme_override_font_sizes/font_size = 18
-text = "REPARACIÓN ELÉCTRICA"
+text = "ELECTRICAL REPAIR"
 horizontal_alignment = 1
 
 [node name="Title" type="Label" parent="Interface/HUD/Content" unique_id=751591816]
@@ -300,7 +300,7 @@ offset_top = 68.0
 offset_right = 900.0
 offset_bottom = 108.0
 theme_override_font_sizes/font_size = 38
-text = "Conecta el circuito"
+text = "Complete the Circuit"
 horizontal_alignment = 1
 
 [node name="Instructions" type="Label" parent="Interface/HUD/Content" unique_id=273738213]
@@ -309,7 +309,7 @@ offset_top = 124.0
 offset_right = 900.0
 offset_bottom = 164.0
 theme_override_font_sizes/font_size = 20
-text = "Arrastra los cables. Suelta sobre otro para intercambiarlos."
+text = "Drag the cables. Drop one onto another to swap them."
 horizontal_alignment = 1
 
 [node name="Legend" type="Label" parent="Interface/HUD/Content" unique_id=1668128901]
@@ -318,7 +318,7 @@ offset_top = 156.0
 offset_right = 900.0
 offset_bottom = 196.0
 theme_override_font_sizes/font_size = 18
-text = "Sin límite de tiempo · Verde: inicio / corriente · Ámbar: salida"
+text = "No time limit · Green: power input / live · Amber: output"
 horizontal_alignment = 1
 
 [node name="Rules" type="Label" parent="Interface/HUD/Content" unique_id=131728869]
@@ -327,7 +327,7 @@ offset_top = 186.0
 offset_right = 900.0
 offset_bottom = 226.0
 theme_override_font_sizes/font_size = 16
-text = "Placa elevada: casilla bloqueada · Conecta al menos 10 piezas"
+text = "Raised tiles are blocked · Connect at least 10 cables"
 horizontal_alignment = 1
 
 [node name="Status" type="Label" parent="Interface/HUD/Content" unique_id=1638148991]
@@ -336,7 +336,7 @@ offset_top = 930.0
 offset_right = 900.0
 offset_bottom = 970.0
 theme_override_font_sizes/font_size = 25
-text = "Conecta I con la salida del lado opuesto"
+text = "Connect I to the output on the opposite side"
 horizontal_alignment = 1
 
 [node name="Details" type="Label" parent="Interface/HUD/Content" unique_id=1660250717]
@@ -345,7 +345,7 @@ offset_top = 968.0
 offset_right = 900.0
 offset_bottom = 1008.0
 theme_override_font_sizes/font_size = 18
-text = "0/1 salida · 0 piezas conectadas (mín. 10) · 0 movimientos"
+text = "0/1 output · 0 cables connected (min. 10) · 0 moves"
 horizontal_alignment = 1
 
 [node name="DebugHitboxes" type="CheckButton" parent="Interface/HUD/Content" unique_id=132823625]
@@ -355,7 +355,7 @@ offset_top = 1010.0
 offset_right = 770.0
 offset_bottom = 1054.0
 theme_override_font_sizes/font_size = 20
-text = "Ver hitboxes"
+text = "Show hitboxes"
 
 [node name="Backdrop" type="CanvasLayer" parent="." unique_id=176863361]
 layer = -1
