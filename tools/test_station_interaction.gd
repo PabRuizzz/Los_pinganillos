@@ -19,7 +19,7 @@ const STATIONS := {
 	"WaterStation": {
 		"state": "water_station_state",
 		"maintenance": "res://game/challenges/water_pumping/water_pumping.tscn",
-		"repair": "res://game/challenges/frozen_pipe/frozen_pipe.tscn",
+		"repair": "res://game/challenges/water_pumping/water_pumping.tscn",
 	},
 }
 
@@ -76,7 +76,8 @@ func open_minigames() -> Array:
 		for station in STATIONS.values():
 			for node in mars.find_children("*", "", true, false):
 				if node.scene_file_path == station[path] and not node.is_queued_for_deletion():
-					found.append(node)
+					if node not in found:
+						found.append(node)
 	return found
 
 
@@ -216,19 +217,18 @@ func run_checks() -> void:
 		check(open_minigames().is_empty() and tasks.current_task == "", "%s: OPERATIVO no debe abrir minijuego" % station_name)
 		await place(far)
 
-	# --- Tuberías congeladas: la estación de agua abre la reparación aunque esté
-	# DEGRADADO, y completarla resuelve el evento (Events espera la tarea "repair").
+	# --- Tuberías congeladas: la estación queda AVERIADO y abre el bombeo como
+	# reparación; completarlo resuelve el evento.
 	clear_events()
 	var frozen: int = events.EventTypes.CONGELAMIENTO_TUBERIAS
 	var water: Area2D = mars.get_node("WaterStation")
 	var water_launcher: Node = water.get_node("Minigame")
-	check(water_launcher.repair_events == [frozen], "La estación de agua debe abrir la reparación durante las tuberías congeladas")
 	# (Al resolver un evento, Events puede lanzar otro al azar con un 30 %: se comprueba
 	# la señal event_resolved y no que no quede ningún evento activo.)
 	var resolved := []
 	events.event_resolved.connect(func(type): resolved.append(type))
 	events.trigger_event(frozen)
-	check(events.actual_EventType == frozen and costs.water_station_state == "DEGRADADO", "El evento debe dejar la estación de agua DEGRADADO")
+	check(events.actual_EventType == frozen and costs.water_station_state == "AVERIADO", "El evento debe dejar la estación de agua AVERIADO")
 	# Las pruebas anteriores gastaron 240 min; con jornada completa la reparación (240)
 	# no agota el día y se puede comprobar el descuento exacto.
 	sim.reset_daily_time()
@@ -236,7 +236,7 @@ func run_checks() -> void:
 	await place(water.to_global(water.get_node("CollisionShape2D").position))
 	await press("interact")
 	var event_open := open_minigames()
-	check(event_open.size() == 1 and event_open[0].scene_file_path == STATIONS.WaterStation.repair, "Con tuberías congeladas, E debe abrir la reparación de tuberías")
+	check(event_open.size() == 1 and event_open[0].scene_file_path == STATIONS.WaterStation.repair, "Con tuberías congeladas, E debe abrir el bombeo de agua")
 	check(tasks.current_task == "repair", "Debe iniciar la tarea de reparación (no la de mantenimiento)")
 	suppress_follow_up_event()
 	complete(water_launcher.active_minigame)

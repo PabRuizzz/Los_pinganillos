@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" path="res://game/challenges/solar_cleaning/solar_cleaning.tscn" id="23_solar"]
 [ext_resource type="PackedScene" path="res://game/challenges/electrical_repair/electrical_repair.tscn" id="24_electrical"]
 [ext_resource type="PackedScene" path="res://game/challenges/water_pumping/water_pumping.tscn" id="25_pumping"]
-[ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/frozen_pipe.tscn" id="26_pipe"]
 [ext_resource type="PackedScene" uid="uid://dgaob13rt0kwt" path="res://game/stations/rover_exploration/rover_station.tscn" id="16_rover"]
 [ext_resource type="Script" path="res://game/systems/rover_expedition/rover_expedition_controller.gd" id="17_expedition"]
 [ext_resource type="Script" path="res://game/systems/sample_discovery/sample_discovery.gd" id="18_discovery"]
@@ -1012,7 +1011,7 @@ position = Vector2(0, -60)
 script = ExtResource("21_minigame")
 station_id = "water_station"
 maintenance_minigame = ExtResource("25_pumping")
-repair_minigame = ExtResource("26_pipe")
+repair_minigame = ExtResource("25_pumping")
 operational_message = "La estación de agua funciona correctamente"
 
 [node name="RoverExpeditionController" type="Node" parent="." unique_id=1857203346 node_paths=PackedStringArray("station")]
