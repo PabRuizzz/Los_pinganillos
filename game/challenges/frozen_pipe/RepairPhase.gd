@@ -40,7 +40,8 @@ func start(piece_count: int) -> void:
 		piece.modulate = Color.WHITE
 	for i in slots.size():
 		slots[i].get_node("Screws").hide()
-		slots[i].get_node("Gap/Symbol").text = "GAP\n" + pieces[requirements[i]].get_node("Symbol").text.get_slice("\n", 0)
+		slots[i].get_node("Gap/Symbol").text = "HUECO\n" + pieces[requirements[i]].get_node("Symbol").text.get_slice("\n", 0)
+		slots[i].get_node("Gap/Symbol").show()
 	for screw in screws:
 		screw.get_node("Progress").value = 0
 		screw.get_node("Symbol").text = "+"
@@ -103,6 +104,8 @@ func _release(point: Vector2, cancel := false) -> void:
 		if target >= 0:
 			installed[target] = true
 			used_pieces.append(piece)
+			# El arte de la pieza es transparente: se oculta el texto del hueco que tapa.
+			slots[target].get_node("Gap/Symbol").hide()
 			var gap: Control = slots[target].get_node("Gap")
 			var center: Vector2 = gap.get_global_transform_with_canvas() * (gap.size / 2.0)
 			var destination: Vector2 = $Pieces.get_global_transform_with_canvas().affine_inverse() * center - piece.size / 2.0

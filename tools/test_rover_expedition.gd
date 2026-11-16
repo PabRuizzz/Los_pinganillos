@@ -73,6 +73,13 @@ func stand_at_station() -> void:
 
 
 func run_checks() -> void:
+	# DaySummary pausa el juego al terminar cada día hasta pulsar "Siguiente día":
+	# en las pruebas se cierra solo en el siguiente frame.
+	process_frame.connect(func():
+		var summary = root.get_node_or_null("DaySummary")
+		if summary != null and summary.root_control.visible:
+			summary.root_control.visible = false
+			paused = false)
 	# Aislamiento: desde la Fase 5 el regreso del rover descubre una muestra. Cualquier
 	# SampleDiscovery que entre al árbol (antes de su _ready) usa un archivo de prueba,
 	# nunca el progreso real del jugador.

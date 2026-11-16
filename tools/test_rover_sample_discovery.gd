@@ -95,7 +95,13 @@ func hash_dir(dir: String) -> Dictionary:
 func run_checks() -> void:
 	sim = root.get_node("SimulationTime")
 	tasks = root.get_node("TaskExecution")
-	root.get_node("Events").day_start_event_chance = 0.0
+	# DaySummary pausa el juego al terminar cada día hasta pulsar "Siguiente día":
+	# en las pruebas se cierra solo en el siguiente frame.
+	process_frame.connect(func():
+		var summary = root.get_node_or_null("DaySummary")
+		if summary != null and summary.root_control.visible:
+			summary.root_control.visible = false
+			paused = false)
 
 	var real_save := SampleDiscoverySave.DEFAULT_PATH
 	var real_before := FileAccess.get_md5(real_save) if FileAccess.file_exists(real_save) else ""
@@ -129,6 +135,13 @@ func run_checks() -> void:
 		check(first.sample_image is Texture2D and first.sample_image.get_width() > 0, "La foto debe estar disponible para los oyentes")
 	check(controller.is_available() and station.interaction_enabled, "El rover debe quedar disponible y la estación activa")
 	check(empty_returns.is_empty(), "No debe avisar de catálogo completo")
+	# El resumen del día muestra la muestra que trajo el rover (y no descubre otra por su cuenta).
+	var summary: Node = root.get_node("DaySummary")
+	check(summary._discovery == null and not summary.discover_sample_each_day, "El resumen del día no debe descubrir muestras propias")
+	if discovered.size() >= 1:
+		check(summary.samples_this_run == [discovered[0]], "El resumen debe registrar solo la muestra del rover: %s" % str(summary.samples_this_run.map(func(x): return x.sample_id)))
+		check(summary.sample_name.text == discovered[0].sample_name, "El resumen debe mostrar la muestra del rover ('%s')" % summary.sample_name.text)
+	check(saved_ids().size() == 1, "Solo el rover debe haber guardado una muestra (%d)" % saved_ids().size())
 
 	# --- 10. Recrear Marte el mismo día no repite el descubrimiento.
 	await load_mars()

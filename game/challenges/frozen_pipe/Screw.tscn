@@ -1,9 +1,11 @@
 [gd_scene format=3]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/screw.png" id="1"]
 [node name="Screw" type="Control"]
 offset_right = 64.0
 offset_bottom = 60.0
 mouse_filter = 2
 [node name="Placeholder" type="ColorRect" parent="."]
+visible = false
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 64.0
@@ -11,10 +13,13 @@ offset_bottom = 42.0
 mouse_filter = 2
 color = Color(0.2, 0.28, 0.32, 1)
 [node name="Artwork" type="TextureRect" parent="."]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -18.0
 mouse_filter = 2
+texture = ExtResource("1")
 expand_mode = 1
 stretch_mode = 5
 [node name="Symbol" type="Label" parent="."]
@@ -26,6 +31,8 @@ mouse_filter = 2
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_colors/font_outline_color = Color(0.1, 0.06, 0.12, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 22
 [node name="Progress" type="ProgressBar" parent="."]
 offset_left = 0.0

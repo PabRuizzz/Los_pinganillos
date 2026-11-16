@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3]
 [ext_resource type="Script" path="res://game/challenges/frozen_pipe/FrozenPipe.gd" id="1"]
 [ext_resource type="Script" path="res://game/challenges/frozen_pipe/RepairPhase.gd" id="2"]
 [ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/SparePiece.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://game/challenges/frozen_pipe/PipeSlot.tscn" id="5"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/spare_straight.png" id="art_straight"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/spare_curve.png" id="art_curve"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/spare_valve.png" id="art_valve"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/spare_joint.png" id="art_joint"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/spare_elbow.png" id="art_elbow"]
+[ext_resource type="Texture2D" path="res://game/challenges/frozen_pipe/assets/frozen_pipe_background.png" id="art_background"]
 [node name="FrozenPipe" type="Control" groups=["minigame"]]
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +22,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0.05, 0.08, 0.12, 1)
+[node name="BackgroundArt" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("art_background")
+expand_mode = 1
+stretch_mode = 6
 [node name="Content" type="Control" parent="."]
 offset_right = 960.0
 offset_bottom = 640.0
@@ -67,41 +82,46 @@ offset_left = 60.0
 offset_top = 440.0
 offset_right = 190.0
 offset_bottom = 510.0
+[node name="Artwork" parent="Content/RepairPhase/Pieces/Straight" index="1"]
+texture = ExtResource("art_straight")
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Straight" index="2"]
-text = "STRAIGHT
---"
+text = "RECTA"
 [node name="Curve" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 235.0
 offset_top = 440.0
 offset_right = 365.0
 offset_bottom = 510.0
+[node name="Artwork" parent="Content/RepairPhase/Pieces/Curve" index="1"]
+texture = ExtResource("art_curve")
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Curve" index="2"]
-text = "BEND
-L"
+text = "CURVA"
 [node name="Valve" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 410.0
 offset_top = 440.0
 offset_right = 540.0
 offset_bottom = 510.0
+[node name="Artwork" parent="Content/RepairPhase/Pieces/Valve" index="1"]
+texture = ExtResource("art_valve")
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Valve" index="2"]
-text = "VALVE
-(X)"
+text = "VÁLVULA"
 [node name="Joint" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 585.0
 offset_top = 440.0
 offset_right = 715.0
 offset_bottom = 510.0
+[node name="Artwork" parent="Content/RepairPhase/Pieces/Joint" index="1"]
+texture = ExtResource("art_joint")
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Joint" index="2"]
-text = "COUPLING
-[ ]"
+text = "JUNTA"
 [node name="Elbow" parent="Content/RepairPhase/Pieces" instance=ExtResource("4")]
 offset_left = 760.0
 offset_top = 440.0
 offset_right = 890.0
 offset_bottom = 510.0
+[node name="Artwork" parent="Content/RepairPhase/Pieces/Elbow" index="1"]
+texture = ExtResource("art_elbow")
 [node name="Symbol" parent="Content/RepairPhase/Pieces/Elbow" index="2"]
-text = "ELBOW
-J"
+text = "CODO"
 [node name="Result" type="Label" parent="Content"]
 offset_left = 0.0
 offset_top = 560.0
